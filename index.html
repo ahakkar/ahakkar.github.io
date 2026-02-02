@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Generated with Gemini 3 Fast -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Name | Portfolio</title>
+    <style>
+        /* --- BAREBONES STYLING --- */
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+            background-color: #fff;
+        }
+
+        header {
+            border-bottom: 1px solid #eee;
+            margin-bottom: 3rem;
+            padding-bottom: 1rem;
+        }
+
+        h1 { margin-bottom: 0.5rem; }
+
+        /* --- PROJECT GRID SYSTEM --- */
+        .project-container {
+            display: flex;
+            flex-direction: column;
+            gap: 4rem; /* Space between different projects */
+        }
+
+        .project-item {
+            display: flex;
+            flex-wrap: wrap; /* Allows stacking on mobile */
+            gap: 2rem;
+            align-items: flex-start;
+        }
+
+        .project-image {
+            flex: 1;
+            min-width: 300px; /* Forces stack if screen is narrow */
+        }
+
+        .project-image img {
+            width: 100%;
+            height: auto;
+            border-radius: 6px;
+            border: 1px solid #ddd;
+            display: block;
+        }
+
+        .project-text {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .project-text h3 {
+            margin-top: 0;
+        }
+
+        ul {
+            padding-left: 1.2rem;
+        }
+
+        li {
+            margin-bottom: 0.5rem;
+        }
+
+        /* Responsive tweak for very small screens */
+        @media (max-width: 600px) {
+            body { padding: 1rem; }
+            .project-item { gap: 1rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Ahakkar</h1>
+        <p>Tampere University CS, expected graduation in 2026. Interested in systems, design, clean code and photography.</p>
+        <nav>
+            <a href="https://github.com/hahakkar">GitHub</a> • 
+            <a href="https://linkedin.com/in/a-hakkarainen">LinkedIn</a> • 
+            <a href="https://t.me/Ihmemies">Telegram</a>
+        </nav>
+    </header>
+
+    <main class="project-container">
+
+        <section class="project-item">
+            <div class="project-image">
+                <img src="https://via.placeholder.com/400x250" alt="Project One Screenshot">
+            </div>
+            <div class="project-text">
+                <h3>Project Title One</h3>
+                <ul>
+                    <li>Key feature or technical achievement goes here.</li>
+                    <li>Mentioned a specific tool or language (e.g., Rust, LLVM).</li>
+                    <li>Quantifiable result (e.g., "reduced latency by 20%").</li>
+                </ul>
+                <p><a href="#">View Code &rarr;</a></p>
+            </div>
+        </section>
+
+        <section class="project-item">
+            <div class="project-image">
+                <img src="https://via.placeholder.com/400x250" alt="Project Two Screenshot">
+            </div>
+            <div class="project-text">
+                <h3>Project Title Two</h3>
+                <ul>
+                    <li>Bullet point describing the systems-level work.</li>
+                    <li>Bullet point regarding the educational or musical aspect.</li>
+                    <li>Another impactful detail.</li>
+                </ul>
+                <p><a href="#">Live Demo &rarr;</a></p>
+            </div>
+        </section>
+
+    </main>
+
+    <footer style="margin-top: 5rem; font-size: 0.8rem; color: #888;">
+        <p>&copy; 2026 Your Name</p>
+    </footer>
+
+</body>
+</html>
