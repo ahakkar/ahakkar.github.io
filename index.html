@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- Generated with Gemini 3 Fast -->
+    <!-- Generated with Gemini 3 Flash -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your Name | Portfolio</title>
+    <title>Ahakkar | Portfolio</title>
     <style>
         /* --- BAREBONES STYLING --- */
         body {
@@ -29,11 +29,15 @@
         .project-container {
             display: flex;
             flex-direction: column;
-            gap: 4rem; /* Space between different projects */
+            gap: 2rem; /* Space between different projects */
         }
 
         .project-item {
             display: flex;
+            background-color: #f2f2f2;
+            border: 1px solid rgba(0,0,0,0.5);
+            border-radius: 0.5em;
+            padding: 1em;
             flex-wrap: wrap; /* Allows stacking on mobile */
             gap: 2rem;
             align-items: flex-start;
@@ -50,6 +54,7 @@
             border-radius: 6px;
             border: 1px solid #ddd;
             display: block;
+            margin-bottom: 1rem;
         }
 
         .project-text {
@@ -90,40 +95,140 @@
 
     <main class="project-container">
 
+        <!-- Project 1 -->
         <section class="project-item">
             <div class="project-image">
-                <img src="https://via.placeholder.com/400x250" alt="Project One Screenshot">
+                <img src="img/aoc.png" alt="Advent of Code solutions">
             </div>
             <div class="project-text">
-                <h3>Project Title One</h3>
+                <h3><a href="https://adventofcode.com">Advent of Code</a>, 2022-</h3>
                 <ul>
-                    <li>Key feature or technical achievement goes here.</li>
-                    <li>Mentioned a specific tool or language (e.g., Rust, LLVM).</li>
-                    <li>Quantifiable result (e.g., "reduced latency by 20%").</li>
+                    <li>Rust, colored CLI with self-made solution runner</li>  
+                    <li>Zero-Cost Abstractions, Data Parsing & Pattern Matching</li>
+                    <li>Algorithms and optimization: Graphs, BFS/DFS, Dijkstra, pathfinding, multithreading with Rayon</li>
+                    <li>Extensible architecture and utility libraries to avoid repetitive code</li>    
                 </ul>
-                <p><a href="#">View Code &rarr;</a></p>
+                <p><a href="https://github.com/ahakkar/aoc">View Code &rarr;</a></p>
             </div>
         </section>
 
+        <!-- Project 2 -->
         <section class="project-item">
             <div class="project-image">
-                <img src="https://via.placeholder.com/400x250" alt="Project Two Screenshot">
+                <img src="img/acsim.png" alt="ACSIM map generator">
             </div>
             <div class="project-text">
-                <h3>Project Title Two</h3>
+                <h3>ACSIM map generator, 2023</h3>
+                <p><i>Tech demo for high-performance 2D chunk-based map generator. Generates graphical SimCity-style maps based on input image.</i></p>
                 <ul>
-                    <li>Bullet point describing the systems-level work.</li>
-                    <li>Bullet point regarding the educational or musical aspect.</li>
-                    <li>Another impactful detail.</li>
+                    <li>Godot game engine, GDScript</li>
+                    <li>Threaded chunk rendering to support large maps and render only what is needed</li>
+                    <li>Procedural forest generation with noise map</li>
+                    <li>Basic rotatable camera and and a minimap</li>
                 </ul>
-                <p><a href="#">Live Demo &rarr;</a></p>
+                <p><a href="https://github.com/ahakkar/ACSIM">View Code &rarr;</a></p>
             </div>
         </section>
 
+        <!-- Project 3 -->
+        <section class="project-item">
+            <div class="project-image">
+                <img src="img/sisu.png" alt="ACSIM map generator">
+            </div>
+            <div class="project-text">
+                <h3><a href="https://www.funidata.fi/en/services/sisu">Sisu</a> degree planner, 2023</h3>
+                <p><i>Allows browsing <a href="https://www.funidata.fi/en/about-us">Funidata's</a> university course and degree programme database via <a href="https://sisu.tuni.fi/kori/swagger-ui/index.html?configUrl=%2Fkori%2Fv3%2Fapi-docs%2Fswagger-config&filter=true">SISU API</a>. Can be used to plan your degree programme and track course progression and grades.</i></p>
+                <ul>
+                    <li>Java with, JavaFX, unit testing, JSON parsing</li>
+                    <li>My role: Reactive UI development with Scene Builder, view and viewmodel programming</li>
+                    <li>OOP, MVVM to decouple UI logic from business rules</li>
+                    <li>High-performance data filtering: "live search" that provides instant results</li>
+                </ul>
+                <p><a href="https://github.com/ahakkar/ohj3proj">View Code &rarr;</a></p>
+            </div>
+        </section>
+
+        <!-- Project 4 -->
+        <section class="project-item">
+            <div class="project-image">
+                <img src="img/nordicwatt.png" alt="ACSIM map generator">
+            </div>
+            <div class="project-text">
+                <h3>Fingrid electricity data browser, 2023</h3>
+                <p><i>Allows browsing Fingrid's <a href="https://data.fingrid.fi">Open Data</a> and <a href="https://en.ilmatieteenlaitos.fi/open-data-manual">FMI's weather data</a>. Renders graphs based on the data to UI.</i></p>
+                <ul>
+                    <li>Java with, JavaFX, unit testing, JSON and XML parsing</li>
+                    <li>My role: Reactive UI development with Scene Builder, controllers</li>
+                    <li>OOP, MVC to decouple UI logic from business rules</li>
+                    <li>Threaded background data retriever for lag-free UI</li>
+                    <li>Mixed data in same charts - for example electricity usage and temperature</li>  
+                </ul>
+                <p><a href="https://github.com/ahakkar/swdesign">View Code &rarr;</a></p>
+            </div>
+        </section>
+
+        <!-- Project 5 -->
+        <section class="project-item">
+            <div class="project-image">
+                <img src="img/tiko.png" alt="Web billing and inventory management software">
+            </div>
+            <div class="project-text">
+                <h3>Web billing and inventory management software, 2024</h3>
+                <p><i>Allows importing inventory via XML, managing your customers, projects, invoices etc.</i></p>
+                <ul>
+                    <li>Typescript, Tailwind, Handlebars JS, Node.js,PostgreSQL, Docker</li>
+                    <li>My role: MVC's, UI styles, SQL queries</li>
+                    <li>Constructing views from SQL data, managing complex VAT amounts and percentages</li>  
+                    <li>Critically does not support ie. 25.5% vat due to insufficient precision: alv NUMERIC(10, 2)</li>
+                </ul>
+                <p><a href="https://github.com/ahakkar/tiko">View Code &rarr;</a></p>
+            </div>
+        </section>
+
+        <!-- Project 6 -->
+        <section class="project-item">
+            <div class="project-image">
+                <img src="img/cvmaker.png" alt="CVMaker flowchart">
+                <img src="img/cvmaker2.png" alt="CVMaker flowchart2">
+            </div>
+            <div class="project-text">
+                <h3><a href="https://www.paretosoftware.fi/en">Pareto software</a> CVMaker add-on, 2024</h3>
+                <p><i>CVMaker is an internal tool used by Pareto. It allows managers to check people's up to date skills and find suitable persons for new customer projects. Data entry by hand was tedious - implemented an automated CV import feature with help of LLM.</i></p>
+                <ul>
+                    <li>Dart, Flutter</li>    
+                    <li>Create structured JSON data with LLM from a freeform user-provided CV file.</li>
+                    <li>My role: Design and implementation of the add-on</li>
+                    <li>Parses data from .docx and .pdf CV's to JSON via OpenAI structured API</li>
+                    <li>Pre-fills CV data, user can then do any manual corrections if needed</li>  
+                    <li>Part of Software engineering 1 project course</li>       
+                </ul>
+                <p><i>For internal use only, no code available</i></p>
+            </div>
+        </section>
+
+        <!-- Project 6 -->
+        <section class="project-item">
+            <div class="project-image">
+                <img src="img/vibe.png" alt="SLT-Vibe flowchart">
+            </div>
+            <div class="project-text">
+                <h3><a href="https://www.solita.fi">Solita</a> offline voice assistant, 2025</h3>
+                <p><i>A headless, voice-first voice assistant running on Raspberry Pi. User can chat with an Edge LLM without internet access. Only mic and speaker required.</i></p>
+                <ul>
+                    <li>Python, Docker, Raspberry Pi 4, Runs inference with Google Gemma 1B model locally</li>
+                    <li>My role: Project manager, design, documentation, some coding</li>    
+                    <li>User Intent recognition with <a href="https://github.com/OHF-Voice/hassil">Hassil</a>, Speech-to-text with Wav2vec2, Text-to-speech with Piper</li>
+                    <li>ChromaDB for Resource-augmented generation, SBERT for summarizing user input</li>
+                    <li>Taught a lot about project management. Project was perfect on paper, and customer was disappointed in the end result ("no progress/useless").</li>
+                    <li>Part of Software engineering 2 project course</li>       
+                </ul> 
+                <p><a href="https://github.com/ahakkar/vibe">View Code &rarr;</a></p>
+            </div>
+        </section>
     </main>
 
     <footer style="margin-top: 5rem; font-size: 0.8rem; color: #888;">
-        <p>&copy; 2026 Your Name</p>
+        <p>&copy; 2026</p>
     </footer>
 
 </body>
