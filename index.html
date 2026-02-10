@@ -4,7 +4,7 @@
     <!-- Generated with Gemini 3 Flash -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ahakkar | Portfolio</title>
+    <title>Antti H | Portfolio</title>
     <style>
         /* --- BAREBONES STYLING --- */
         * {
@@ -92,13 +92,14 @@
 <body>
 
     <header>
-        <h1>Ahakkar</h1>
+        <h1>Antti H</h1>
         <p>Tampere University CS, expected graduation in 2026. Interested in systems, design, clean code and photography.</p>
         <nav>
             <a href="https://github.com/ahakkar">GitHub</a> • 
             <a href="https://linkedin.com/in/a-hakkarainen">LinkedIn</a> • 
             <a href="https://t.me/Ihmemies">Telegram</a>
         </nav>
+        <p>Eight highlight projects beginning from 2022:</p>
     </header>
 
     <main class="project-container">
@@ -109,14 +110,15 @@
                 <img src="img/aoc.png" alt="Advent of Code solutions">
             </div>
             <div class="project-text">
-                <h3><a href="https://adventofcode.com">Advent of Code</a>, 2022-</h3>
+                <h3>Advent of Code</a>, 2022-2025-></h3>
                 <ul>
+                    <li>Daily Christmas calendar <a href="<a href="https://adventofcode.com">coding tasks event</a>, once a year</li>
                     <li>Rust, colored CLI with self-made solution runner</li>  
                     <li>Zero-Cost Abstractions, Data Parsing & Pattern Matching</li>
                     <li>Algorithms and optimization: Graphs, BFS/DFS, Dijkstra, pathfinding, multithreading with Rayon</li>
                     <li>Extensible architecture and utility libraries to avoid repetitive code</li>    
                 </ul>
-                <p><a href="https://github.com/ahakkar/aoc">View Code &rarr;</a></p>
+                <p><a href="https://github.com/ahakkar/aoc">// View program code &rarr;</a></p>
             </div>
         </section>
 
@@ -134,67 +136,31 @@
                     <li>Procedural forest generation with noise map</li>
                     <li>Basic rotatable camera and and a minimap</li>
                 </ul>
-                <p><a href="https://github.com/ahakkar/ACSIM">View Code &rarr;</a></p>
+                <p><a href="https://github.com/ahakkar/ACSIM">// View program code &rarr;</a></p>
             </div>
         </section>
 
-        <!-- Project 3 -->
+
+        <!-- Project 7 -->
         <section class="project-item">
             <div class="project-image">
-                <img src="img/sisu.png" alt="ACSIM map generator">
+                <img src="img/vibe.png" alt="SLT-Vibe flowchart">
             </div>
             <div class="project-text">
-                <h3><a href="https://www.funidata.fi/en/services/sisu">Sisu</a> degree planner, 2023</h3>
-                <p><i>Allows browsing <a href="https://www.funidata.fi/en/about-us">Funidata's</a> university course and degree programme database via <a href="https://sisu.tuni.fi/kori/swagger-ui/index.html?configUrl=%2Fkori%2Fv3%2Fapi-docs%2Fswagger-config&filter=true">SISU API</a>. Can be used to plan your degree programme and track course progression and grades.</i></p>
+                <h3><a href="https://www.solita.fi">Solita</a> offline voice assistant, 2025</h3>
+                <p><i>A headless, voice-first voice assistant running on Raspberry Pi. User can chat with an Edge LLM without internet access. Only mic and speaker required.</i></p>
                 <ul>
-                    <li>Java with, JavaFX, unit testing, JSON parsing</li>
-                    <li>My role: Reactive UI development with Scene Builder, view and viewmodel programming</li>
-                    <li>OOP, MVVM to decouple UI logic from business rules</li>
-                    <li>High-performance data filtering: "live search" that provides instant results</li>
-                    <li>For <a href="https://opiskelijanopas.tuni.fi/en/tampere-university/curriculum/course-units/otm-9392333f-bff2-4c3d-b1cf-717ce9990253?year=2023">Programming 3</a> course</li>
-                </ul>
-                <p><a href="https://github.com/ahakkar/ohj3proj">View Code &rarr;</a></p>
+                    <li>Python, Docker, Raspberry Pi 4, Runs inference with Google Gemma 1B model locally</li>
+                    <li>My role: Project manager, design, documentation, some coding</li>    
+                    <li>User Intent recognition with <a href="https://github.com/OHF-Voice/hassil">Hassil</a>, Speech-to-text with Wav2vec2, Text-to-speech with Piper</li>
+                    <li>ChromaDB for Resource-augmented generation, SBERT for summarizing user input</li>
+                    <li>Taught a lot about project management. Project was perfect on paper 😁</li>
+                    <li>For <a href="https://opiskelijanopas.tuni.fi/fi/tampereen-yliopisto/opintotiedot/opintojaksot/otm-c25cddea-8bbe-48e8-b0d9-9ba9a313e574?year=2025">Software engineering 2</a> project course</li>       
+                </ul> 
+                <p><a href="https://github.com/ahakkar/vibe">// View program code &rarr;</a></p>
             </div>
         </section>
 
-        <!-- Project 4 -->
-        <section class="project-item">
-            <div class="project-image">
-                <img src="img/nordicwatt.png" alt="ACSIM map generator">
-            </div>
-            <div class="project-text">
-                <h3>Fingrid electricity data browser, 2023</h3>
-                <p><i>Allows browsing Fingrid's <a href="https://data.fingrid.fi">Open Data</a> and <a href="https://en.ilmatieteenlaitos.fi/open-data-manual">FMI's weather data</a>. Renders graphs based on the data to UI.</i></p>
-                <ul>
-                    <li>Java with, JavaFX, unit testing, JSON and XML parsing</li>
-                    <li>My role: Reactive UI development with Scene Builder, controllers</li>
-                    <li>OOP, MVC to decouple UI logic from business rules</li>
-                    <li>Threaded background data retriever for lag-free UI</li>
-                    <li>Mixed data in same charts - for example electricity usage and temperature</li>  
-                    <li>For <a href="https://opiskelijanopas.tuni.fi/en/tampere-university/curriculum/course-units/tut-cu-g-36927?year=2023">Software design</a> course</li>
-                </ul>
-                <p><a href="https://github.com/ahakkar/swdesign">View Code &rarr;</a></p>
-            </div>
-        </section>
-
-        <!-- Project 5 -->
-        <section class="project-item">
-            <div class="project-image">
-                <img src="img/tiko.png" alt="Web billing and inventory management software">
-            </div>
-            <div class="project-text">
-                <h3>Web billing and inventory management software, 2024</h3>
-                <p><i>Allows importing inventory via XML, managing your customers, projects, invoices etc.</i></p>
-                <ul>
-                    <li>Typescript, Tailwind, Handlebars JS, Node.js,PostgreSQL, Docker</li>
-                    <li>My role: MVC's, UI styles, SQL queries</li>
-                    <li>Constructing views from SQL data, managing complex VAT amounts and percentages</li>  
-                    <li>Critically does not support ie. 25.5% vat due to insufficient precision: alv NUMERIC(10, 2)</li>
-                    <li>For <a href="https://opiskelijanopas.tuni.fi/en/tampere-university/curriculum/course-units/otm-69209202-61f7-4e4c-bfe0-1f425eb60f33?year=2024">Database Programming</a> course</li>
-                </ul>
-                <p><a href="https://github.com/ahakkar/tiko">View Code &rarr;</a></p>
-            </div>
-        </section>
 
         <!-- Project 6 -->
         <section class="project-item">
@@ -217,23 +183,79 @@
             </div>
         </section>
 
-        <!-- Project 6 -->
+
+        <!-- Project 5 -->
         <section class="project-item">
             <div class="project-image">
-                <img src="img/vibe.png" alt="SLT-Vibe flowchart">
+                <img src="img/tiko.png" alt="Web billing and inventory management software">
             </div>
             <div class="project-text">
-                <h3><a href="https://www.solita.fi">Solita</a> offline voice assistant, 2025</h3>
-                <p><i>A headless, voice-first voice assistant running on Raspberry Pi. User can chat with an Edge LLM without internet access. Only mic and speaker required.</i></p>
+                <h3>Web billing and inventory management software, 2024</h3>
+                <p><i>Allows importing inventory via XML, managing your customers, projects, invoices etc.</i></p>
                 <ul>
-                    <li>Python, Docker, Raspberry Pi 4, Runs inference with Google Gemma 1B model locally</li>
-                    <li>My role: Project manager, design, documentation, some coding</li>    
-                    <li>User Intent recognition with <a href="https://github.com/OHF-Voice/hassil">Hassil</a>, Speech-to-text with Wav2vec2, Text-to-speech with Piper</li>
-                    <li>ChromaDB for Resource-augmented generation, SBERT for summarizing user input</li>
-                    <li>Taught a lot about project management. Project was perfect on paper, and customer was disappointed in the end result ("no progress/useless").</li>
-                    <li>For <a href="https://opiskelijanopas.tuni.fi/fi/tampereen-yliopisto/opintotiedot/opintojaksot/otm-c25cddea-8bbe-48e8-b0d9-9ba9a313e574?year=2025">Software engineering 2</a> project course</li>       
-                </ul> 
-                <p><a href="https://github.com/ahakkar/vibe">View Code &rarr;</a></p>
+                    <li>Typescript, Tailwind, Handlebars JS, Node.js,PostgreSQL, Docker</li>
+                    <li>My role: MVC's, UI styles, SQL queries</li>
+                    <li>Constructing views from SQL data, managing complex VAT amounts and percentages</li>  
+                    <li>Learned the importance of solid database design to support ie. 25,5 % VAT</li>
+                    <li>For <a href="https://opiskelijanopas.tuni.fi/en/tampere-university/curriculum/course-units/otm-69209202-61f7-4e4c-bfe0-1f425eb60f33?year=2024">Database Programming</a> course</li>
+                </ul>
+                <p><a href="https://github.com/ahakkar/tiko">// View program code &rarr;</a></p>
+            </div>
+        </section>
+
+
+        <!-- Project 4 -->
+        <section class="project-item">
+            <div class="project-image">
+                <img src="img/nordicwatt.png" alt="ACSIM map generator">
+            </div>
+            <div class="project-text">
+                <h3>Fingrid electricity data browser, 2023</h3>
+                <p><i>Allows browsing Fingrid's <a href="https://data.fingrid.fi">Open Data</a> and <a href="https://en.ilmatieteenlaitos.fi/open-data-manual">FMI's weather data</a>. Renders graphs based on the data to UI.</i></p>
+                <ul>
+                    <li>Java with, JavaFX, unit testing, JSON and XML parsing</li>
+                    <li>My role: Reactive UI development with Scene Builder, controllers</li>
+                    <li>OOP, MVC to decouple UI logic from business rules</li>
+                    <li>Threaded background data retriever for lag-free UI</li>
+                    <li>Mixed data in same charts - for example electricity usage and temperature</li>  
+                    <li>For <a href="https://opiskelijanopas.tuni.fi/en/tampere-university/curriculum/course-units/tut-cu-g-36927?year=2023">Software design</a> course</li>
+                </ul>
+                <p><a href="https://github.com/ahakkar/swdesign">// View program code &rarr;</a></p>
+            </div>
+        </section>
+
+
+        <!-- Project 3 -->
+        <section class="project-item">
+            <div class="project-image">
+                <img src="img/sisu.png" alt="Sisu degree planner">
+            </div>
+            <div class="project-text">
+                <h3><a href="https://www.funidata.fi/en/services/sisu">Sisu</a> degree planner, 2023</h3>
+                <p><i>Allows browsing <a href="https://www.funidata.fi/en/about-us">Funidata's</a> university course and degree programme database via <a href="https://sisu.tuni.fi/kori/swagger-ui/index.html?configUrl=%2Fkori%2Fv3%2Fapi-docs%2Fswagger-config&filter=true">SISU API</a>. Can be used to plan your degree programme and track course progression and grades.</i></p>
+                <ul>
+                    <li>Java with, JavaFX, unit testing, JSON parsing</li>
+                    <li>My role: Reactive UI development with Scene Builder, view and viewmodel programming</li>
+                    <li>OOP, MVVM to decouple UI logic from business rules</li>
+                    <li>High-performance data filtering: "live search" that provides instant results</li>
+                    <li>For <a href="https://opiskelijanopas.tuni.fi/en/tampere-university/curriculum/course-units/otm-9392333f-bff2-4c3d-b1cf-717ce9990253?year=2023">Programming 3</a> course</li>
+                </ul>
+                <p><a href="https://github.com/ahakkar/ohj3proj">// View program code &rarr;</a></p>
+            </div>
+        </section>
+
+
+        <!-- Project 8 -->
+        <section class="project-item">
+            <div class="project-text">
+                <h3>Home IT infrastructure, ever ongoing..</h3>
+                <p><i>For running of arbitrary services at home including development/test VM's, databases and file hosting</i></p>
+                <ul>
+                    <li>Unifi home network with PoE Wi-Fi AP's, 10GbE LAN</li>
+                    <li>Routing by OpnSense running on dedicated hardware</li>
+                    <li>Proxmox-based home lab with a TrueNAS ZFS Z2 pool for file storage</li>
+                    <li>Web-managed interfaces for everything, avoids most need for local access</li>       
+                </ul>
             </div>
         </section>
     </main>
