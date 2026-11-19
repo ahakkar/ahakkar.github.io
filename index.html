@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- Generated with Gemini 3 Flash -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Antti H | Portfolio</title>
@@ -24,8 +23,8 @@
 
         header {
             border-bottom: 1px solid #eee;
-            margin-bottom: 1rem;
-            padding-bottom: 1rem;
+            margin-bottom: 0rem;
+            padding-bottom: 0rem;
         }
 
         h1 { margin-bottom: 0.5rem; }
@@ -50,7 +49,7 @@
 
         .project-image {
             flex: 1;
-            min-width: 250; /* Forces stack if screen is narrow */
+            min-width: 250px; /* Forces stack if screen is narrow */
         }
 
         .project-image img {
@@ -62,9 +61,32 @@
             margin-bottom: 1rem;
         }
 
+        /* Lightbox styling */
+        .project-image a { cursor: zoom-in; }
+
+        #lightbox {
+            padding: 0;
+            border: none;
+            background: transparent;
+            max-width: 95vw;
+            max-height: 95vh;
+        }
+
+        #lightbox::backdrop { 
+            background: rgba(0, 0, 0, 0.8);
+        }
+
+        #lightbox img {
+            display: block;
+            max-width: 95vw;
+            max-height: 95vh;
+            border-radius: 6px;
+            cursor: zoom-out;
+        }
+
         .project-text {
             flex: 1;
-            min-width: 250;
+            min-width: 250px;
         }
 
         .project-text h3 {
@@ -93,7 +115,7 @@
 
     <header>
         <h1>Antti H</h1>
-        <p>Tampere University CS, expected graduation in 2026. Interested in systems, design, clean code and photography.</p>
+        <p>Tampere University CS, expected graduation in 2027. Interested in systems, design, clean code and photography.</p>
         <nav>
             <a href="https://github.com/ahakkar">GitHub</a> • 
             <a href="https://linkedin.com/in/a-hakkarainen">LinkedIn</a> • 
@@ -103,33 +125,59 @@
     </header>
 
     <main class="project-container">
-        <!-- Project 10 -->
+        <!-- Project 11 -->
         <section class="project-item">
             <div class="project-image">
-                <img src="img/workbot.png" alt="Workbot"></br>
-                <img src="img/workbot2.png" alt="Workbot">
+                <a href="img/workbot.png"><img src="img/workbot.png" alt="Job ad list with filters"></a>
+                <a href="img/workbot2.png"><img src="img/workbot2.png" alt="Generated CV preview"></a>
             </div>
             <div class="project-text">
                 <h3>Workbot, 2026</h3>
                 <p><i>AI-assisted job hunting tool (proto)</i></p>
                 <ul>
-                    <li>Spec-driven development, acted as product owner - AI agents generate the spec and code, operate git and github</li>          
+                    <li>Acted as a product owner for AI agents. Program is made in Claude Code with Spec-Driven Development. code, tests and CI.</li>
+                    <li>Spec written as Markdown files, compiled with Typst into a single PDF readable by both agents and humans</li>
+                    <li>Agents plan and track the work through GitHub milestones and issues using the gh CLI</li> 
                     <li>Fetch new job ads, browse ads, filter and sort them</li>
                     <li>Manage companies, personal details, applications</li>  
-                    <li>AI-assisted individual CV & Cover letter generation for each job ad</li>
-                    <li>Multiplatform, Separate frontend and backend C# with Avalonia, SQLite, OpenAPI</li>
+                    <li>AI-assisted tailored CV & Cover letter generation for each job ad</li>
+                    <li>Cross-platform desktop app (C#, Avalonia) with a separate backend, SQLite and an OpenAPI interface.</li>
                     <li>PDF export with Typst and a custom template</li>                    
-                    <li>Planned support for using local AI models</li>    
+                    <li>Planned support for using local AI models, job suitability via vector embeddings and many other things as time allows!</li>    
                 </ul>
-                <p>Closed source</p>
+                <p>Closed source, available upon request 😊</p>
             </div>
-        </section>   
+        </section> 
+
+
+        <!-- Project 10 -->
+        <section class="project-item">
+            <div class="project-image">
+                <a href="img/oc2000_1.png"><img src="img/oc2000_1.png" alt="City zoomed in with roads"></a>
+                <a href="img/oc2000_2.png"><img src="img/oc2000_2.png" alt="City zoomed out"></a>
+                <a href="img/oc2000_3.png"><img src="img/oc2000_3.png" alt="Terrain generation"></a>
+            </div>
+            <div class="project-text">
+                <h3>OC2000, 2026</h3>
+                <p><i>SimCity 2000 style city builder (proto), Godot game engine</i></p>
+                <ul>
+                    <li>Isometric 2.5D cities drawn from sprites with Godot.</li>
+                    <li>Graphics rendering, camera rotation, zooming, minimap, screenshot saving etc. work well up to 4096x4069 tiles</li>
+                    <li>Customizable procedural terrain generation with saved and shareable presets</li>
+                    <li>Building placement including non-square buildings, road drawing, layered decals like grass, pavement etc.</li> 
+                    <li>Data in Structs of Arrays</li>
+                    <li>Planning to add procedural parcel generation as a product of Master's thesis</li>
+                    <li>After that, statistical city simulation, statistical pathfinding etc. which support large cities of millions of citizens</li>                    
+                </ul>
+                <p>Closed source, available upon request 😊</p>
+            </div>
+        </section>  
 
 
         <!-- Project 1 -->
         <section class="project-item">
             <div class="project-image">
-                <img src="img/aoc.png" alt="Advent of Code solutions">
+                <a href="img/aoc.png"><img src="img/aoc.png" alt="Advent of Code solutions"></a>
             </div>
             <div class="project-text">
                 <h3>Advent of Code, 2022-2025-></h3>
@@ -147,7 +195,9 @@
         <!-- Project 9 -->
         <section class="project-item">
             <div class="project-image">
-                <img src="img/tc.png" alt="Tenebris Core">
+                <a href="img/tc.png"><img src="img/tc.png" alt="Tenebris Core"></a>
+                <a href="img/tc2.png"><img src="img/tc2.png" alt="Tenebris Core"></a>
+                <a href="img/tc3.png"><img src="img/tc3.png" alt="Tenebris Core"></a>
             </div>
             <div class="project-text">
                 <h3>Tenebris Core, 2026</h3>
@@ -168,7 +218,7 @@
         <!-- Project 7 -->
         <section class="project-item">
             <div class="project-image">
-                <img src="img/vibe.png" alt="SLT-Vibe flowchart">
+                <a href="img/vibe.png"><img src="img/vibe.png" alt="SLT-Vibe flowchart"></a>
             </div>
             <div class="project-text">
                 <h3><a href="https://www.solita.fi">Solita</a> offline voice assistant, 2025</h3>
@@ -189,8 +239,8 @@
         <!-- Project 6 -->
         <section class="project-item">
             <div class="project-image">
-                <img src="img/cvmaker.png" alt="CVMaker flowchart">
-                <img src="img/cvmaker2.png" alt="CVMaker flowchart2">
+                <a href="img/cvmaker.png"><img src="img/cvmaker.png" alt="CVMaker flowchart"></a>
+                <a href="img/cvmaker2.png"><img src="img/cvmaker2.png" alt="CVMaker flowchart2"></a>
             </div>
             <div class="project-text">
                 <h3><a href="https://www.paretosoftware.fi/en">Pareto software</a> CVMaker add-on, 2024</h3>
@@ -211,7 +261,7 @@
         <!-- Project 5 -->
         <section class="project-item">
             <div class="project-image">
-                <img src="img/tiko.png" alt="Web billing and inventory management software">
+                <a href="img/tiko.png"><img src="img/tiko.png" alt="Web billing and inventory management software"></a>
             </div>
             <div class="project-text">
                 <h3>Web billing and inventory management software, 2024</h3>
@@ -231,7 +281,7 @@
         <!-- Project 4 -->
         <section class="project-item">
             <div class="project-image">
-                <img src="img/nordicwatt.png" alt="ACSIM map generator">
+                <a href="img/nordicwatt.png"><img src="img/nordicwatt.png" alt="ACSIM map generator"></a>
             </div>
             <div class="project-text">
                 <h3>Fingrid electricity data browser, 2023</h3>
@@ -252,7 +302,7 @@
         <!-- Project 3 -->
         <section class="project-item">
             <div class="project-image">
-                <img src="img/sisu.png" alt="Sisu degree planner">
+                <a href="img/sisu.png"><img src="img/sisu.png" alt="Sisu degree planner"></a>
             </div>
             <div class="project-text">
                 <h3><a href="https://www.funidata.fi/en/services/sisu">Sisu</a> degree planner, 2023</h3>
@@ -272,7 +322,7 @@
         <!-- Project 2 -->
         <section class="project-item">
             <div class="project-image">
-                <img src="img/acsim.png" alt="ACSIM map generator">
+                <a href="img/acsim.png"><img src="img/acsim.png" alt="ACSIM map generator"></a>
             </div>
             <div class="project-text">
                 <h3>ACSIM map generator, 2023</h3>
@@ -306,6 +356,23 @@
     <footer style="margin-top: 5rem; font-size: 0.8rem; color: #888;">
         <p>&copy; 2026</p>
     </footer>
+
+    <dialog id="lightbox"><img alt=""></dialog>
+    <script>
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = lightbox.querySelector('img');
+
+        document.querySelectorAll('.project-image a').forEach(link => {
+            link.addEventListener('click', e => {
+                e.preventDefault();
+                lightboxImg.src = link.href;
+                lightboxImg.alt = link.querySelector('img').alt;
+                lightbox.showModal();
+            });
+        });
+
+        lightbox.addEventListener('click', () => lightbox.close());
+    </script>
 
 </body>
 </html>
