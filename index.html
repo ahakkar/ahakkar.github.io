@@ -37,19 +37,17 @@
         }
 
         .project-item {
-            display: flex;
+            display: flow-root;            /* keeps the floated images inside the box */
             background-color: #f2f2f2;
             border: 1px solid rgba(0,0,0,0.5);
             border-radius: 0.5em;
             padding: 1em;
-            flex-wrap: wrap; /* Allows stacking on mobile */
-            gap: 2rem;
-            align-items: flex-start;
         }
 
         .project-image {
-            flex: 1;
-            min-width: 250px; /* Forces stack if screen is narrow */
+            float: right;
+            width: calc(50% - 1rem);
+            margin-left: 2rem;
         }
 
         .project-image img {
@@ -89,9 +87,14 @@
             min-width: 250px;
         }
 
+        .project-text li {
+            display: list-item flow-root;
+        }
+
         .project-text h3 {
             margin-top: 0;
         }
+
 
         ul {
             padding-left: 1.2rem;
@@ -104,10 +107,11 @@
         /* Responsive tweak for very small screens */
         @media (max-width: 600px) {
             body { padding: 1rem; }
-            .project-item { gap: 1rem; }
-            .project-image, .project-text {
-                min-width: 100%;
-            }
+            .project-image {
+                float: none;
+                width: 100%;
+                margin-left: 0;
+            } 
         }
     </style>
 </head>
@@ -130,20 +134,22 @@
             <div class="project-image">
                 <a href="img/workbot.png"><img src="img/workbot.png" alt="Job ad list with filters"></a>
                 <a href="img/workbot2.png"><img src="img/workbot2.png" alt="Generated CV preview"></a>
+                <a href="img/workbot3.png"><img src="img/workbot3.png" alt="Motivation editor"></a>
             </div>
             <div class="project-text">
                 <h3>Workbot, 2026</h3>
                 <p><i>AI-assisted job hunting tool (proto)</i></p>
                 <ul>
-                    <li>Acted as a product owner for AI agents. Program is made in Claude Code with Spec-Driven Development. code, tests and CI.</li>
-                    <li>Spec written as Markdown files, compiled with Typst into a single PDF readable by both agents and humans</li>
+                    <li>Acted as a product owner for AI agents. Code, tests, CI, spec and everything else is made in Claude Code with Spec-Driven Development.</li>
+                    <li>Spec written as linted Markdown files, compiled with Typst into a single PDF readable by both agents and humans.</li>
                     <li>Agents plan and track the work through GitHub milestones and issues using the gh CLI</li> 
                     <li>Fetch new job ads, browse ads, filter and sort them</li>
                     <li>Manage companies, personal details, applications</li>  
                     <li>AI-assisted tailored CV & Cover letter generation for each job ad</li>
+                    <li>AI-assisted tailored motivation designer tool</li>
                     <li>Cross-platform desktop app (C#, Avalonia) with a separate backend, SQLite and an OpenAPI interface.</li>
-                    <li>PDF export with Typst and a custom template</li>                    
-                    <li>Planned support for using local AI models, job suitability via vector embeddings and many other things as time allows!</li>    
+                    <li>CV & cover letter PDF export with Typst and a custom template</li>                    
+                    <li>Planned support for using local AI models, job suitability via vector embeddings and many other things as time from studies allows!</li>    
                 </ul>
                 <p>Closed source, available upon request 😊</p>
             </div>
