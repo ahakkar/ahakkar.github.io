@@ -481,6 +481,53 @@ footer {
     cursor: zoom-out;
 }
 
+/* Previous/next buttons and counter, created by js/site.js. Dark glass in both themes. */
+#lightbox [hidden] { display: none; }
+
+.lightbox-nav, .lightbox-counter {
+    position: absolute;
+    color: #eceef3;
+    background: rgba(11, 12, 18, 0.7);
+    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(236, 238, 243, 0.25);
+    border-radius: 999px;
+}
+
+.lightbox-nav {
+    top: 50%;
+    width: 2.75rem;
+    height: 2.75rem;
+    padding: 0 0 0.2rem;
+    transform: translateY(-50%);
+    font: inherit;
+    font-size: 1.9rem;
+    line-height: 1;
+    cursor: pointer;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.lightbox-prev { left: 0.75rem; }
+.lightbox-next { right: 0.75rem; }
+
+.lightbox-nav:hover {
+    border-color: #ff7aa8;
+    box-shadow: 0 0 22px rgba(255, 46, 126, 0.55);
+}
+
+#lightbox .lightbox-nav:focus-visible { outline-color: #ff7aa8; }
+
+.lightbox-counter {
+    bottom: 0.75rem;
+    left: 50%;
+    margin: 0;
+    padding: 0.2rem 0.75rem;
+    transform: translateX(-50%);
+    font-size: 0.8rem;
+    font-weight: 700;
+    pointer-events: none;
+}
+
 /* --- Phone width --- */
 @media (max-width: 600px) {
     .page { padding: 0 1rem 2rem; margin-top: -6.5rem; }
@@ -526,6 +573,6 @@ footer {
 
 @media (prefers-reduced-motion: reduce) {
     .hero h1 { animation: none; }
-    .topbar a, .project-item, .button { transition: none; }
+    .topbar a, .project-item, .button, .lightbox-nav { transition: none; }
     .button:hover { transform: none; }
 }

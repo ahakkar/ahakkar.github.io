@@ -2,21 +2,65 @@
    The saved theme itself is applied before the first paint by the inline script in <head>. */
 
 /* Lightbox: each project image is a link to the full image, which opens in a dialog.
-   Without JS the link opens the image directly. */
+   Without JS the link opens the image directly. In projects with several images, previous
+   and next buttons, the arrow keys and a counter step through that project's images,
+   wrapping around at the ends. */
 (() => {
     const lightbox = document.getElementById('lightbox');
     const lightboxImg = lightbox.appendChild(document.createElement('img'));
+    let links = [];
+    let index = 0;
 
-    document.querySelectorAll('.project-image a').forEach(link => {
-        link.addEventListener('click', e => {
-            e.preventDefault();
-            lightboxImg.src = link.href;
-            lightboxImg.alt = link.querySelector('img').alt;
-            lightbox.showModal();
+    const counter = document.createElement('p');
+    counter.className = 'lightbox-counter';
+    counter.setAttribute('aria-live', 'polite');
+
+    const show = i => {
+        index = (i + links.length) % links.length;
+        lightboxImg.src = links[index].href;
+        lightboxImg.alt = links[index].querySelector('img').alt;
+        counter.textContent = `${index + 1} / ${links.length}`;
+    };
+
+    const navButton = (label, arrow, step) => {
+        const button = lightbox.appendChild(document.createElement('button'));
+        button.type = 'button';
+        button.className = `lightbox-nav lightbox-${step < 0 ? 'prev' : 'next'}`;
+        button.setAttribute('aria-label', label);
+        button.textContent = arrow;
+        button.addEventListener('click', () => show(index + step));
+        return button;
+    };
+    const prev = navButton('Previous image', '‹', -1);
+    const next = navButton('Next image', '›', 1);
+    next.autofocus = true;
+    lightbox.appendChild(counter);
+
+    document.querySelectorAll('.project-image').forEach(group => {
+        const groupLinks = [...group.querySelectorAll('a')];
+        groupLinks.forEach((link, i) => {
+            link.addEventListener('click', e => {
+                e.preventDefault();
+                links = groupLinks;
+                prev.hidden = next.hidden = counter.hidden = links.length < 2;
+                show(i);
+                lightbox.showModal();
+            });
         });
     });
 
-    lightbox.addEventListener('click', () => lightbox.close());
+    // The image and the backdrop close the lightbox; the buttons don't.
+    lightbox.addEventListener('click', e => {
+        if (!e.target.closest('button')) lightbox.close();
+    });
+
+    lightbox.addEventListener('keydown', e => {
+        if (links.length < 2) return;
+        if (e.key === 'ArrowLeft') show(index - 1);
+        else if (e.key === 'ArrowRight') show(index + 1);
+        else return;
+        e.preventDefault();
+    });
 })();
 
 /* Theme toggle: the button is hidden in the HTML and only appears when JS runs. */
