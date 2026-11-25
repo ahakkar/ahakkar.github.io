@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mockup A: Light/minimal | Antti H</title>
+    <style>
+        /* Mockup A: Light/minimal (issue #2). Off-white, dark text, one accent, lots of air. */
+        :root {
+            --bg: #faf9f6;
+            --surface: #ffffff;
+            --ink: #1c1c1a;
+            --ink-2: #44443f;
+            --muted: #6a6a63;      /* 5.2:1 on --bg */
+            --line: #e4e2db;
+            --accent: #1f4fd1;     /* 6.4:1 on --bg */
+            --accent-soft: #e8edfb;
+            --serif: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+            --sans: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            --radius: 6px;
+        }
+
+        * { box-sizing: border-box; }
+
+        body {
+            margin: 0;
+            background: var(--bg);
+            color: var(--ink);
+            font: 1rem/1.65 var(--sans);
+        }
+
+        .page {
+            max-width: 920px;
+            margin: 0 auto;
+            padding: 5rem 1.5rem 3rem;
+        }
+
+        /* --- Header / hero --- */
+        .hero { margin-bottom: 4rem; }
+
+        h1 {
+            font: 600 clamp(2.6rem, 7vw, 4rem)/1.05 var(--serif);
+            letter-spacing: -0.02em;
+            margin: 0 0 1.25rem;
+        }
+
+        .intro {
+            max-width: 34rem;
+            font-size: 1.15rem;
+            color: var(--ink-2);
+            margin: 0 0 1.5rem;
+        }
+
+        .profiles {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem 1.75rem;
+        }
+
+        .lead-in {
+            margin: 3.5rem 0 0;
+            font-size: 0.8rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--muted);
+        }
+
+        /* --- Links --- */
+        a {
+            color: var(--accent);
+            text-decoration: underline;
+            text-decoration-thickness: 1px;
+            text-underline-offset: 0.2em;
+        }
+
+        a:hover {
+            text-decoration-thickness: 2px;
+        }
+
+        a:focus-visible {
+            outline: 2px solid var(--accent);
+            outline-offset: 3px;
+            border-radius: 2px;
+        }
+
+        /* --- Project cards: no box, separated by hairlines --- */
+        .project-container { border-top: 1px solid var(--line); }
+
+        .project-item {
+            display: grid;
+            grid-template-columns: 1.35fr 1fr;
+            grid-template-areas: "text media";
+            gap: 3rem;
+            padding: 3.5rem 0;
+            border-bottom: 1px solid var(--line);
+        }
+
+        .project-text { grid-area: text; min-width: 0; }
+        .project-image { grid-area: media; display: grid; gap: 1rem; align-content: start; }
+
+        .project-text h3 {
+            font: 600 1.75rem/1.2 var(--serif);
+            margin: 0 0 0.5rem;
+        }
+
+        .year {
+            display: block;
+            font: 500 0.85rem/1.4 var(--sans);
+            letter-spacing: 0.08em;
+            color: var(--muted);
+            margin-top: 0.35rem;
+        }
+
+        .summary {
+            font-size: 1.1rem;
+            color: var(--ink-2);
+            margin: 0 0 1rem;
+        }
+
+        .role {
+            font-size: 0.9rem;
+            color: var(--muted);
+            margin: 0 0 1rem;
+        }
+
+        /* --- Tech tag pills --- */
+        .tech-tags {
+            list-style: none;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.4rem;
+            padding: 0;
+            margin: 0 0 1.5rem;
+        }
+
+        .tech-tags li {
+            font-size: 0.8rem;
+            line-height: 1;
+            padding: 0.4rem 0.7rem;
+            border: 1px solid var(--line);
+            border-radius: 999px;
+            background: var(--surface);
+            color: var(--ink-2);
+        }
+
+        .highlights {
+            padding-left: 1.1rem;
+            margin: 0 0 1.5rem;
+            color: var(--ink-2);
+        }
+
+        .highlights li { margin-bottom: 0.4rem; }
+        .highlights li::marker { color: var(--accent); }
+
+        .links { margin: 0; font-weight: 500; }
+
+        /* --- Images --- */
+        .project-image a {
+            display: block;
+            cursor: zoom-in;
+            border-radius: var(--radius);
+        }
+
+        .project-image img {
+            display: block;
+            width: 100%;
+            height: auto;
+            border-radius: var(--radius);
+            border: 1px solid var(--line);
+            transition: border-color 0.15s;
+        }
+
+        .project-image a:hover img { border-color: var(--accent); }
+
+        footer {
+            margin-top: 4rem;
+            font-size: 0.85rem;
+            color: var(--muted);
+        }
+
+        /* --- Lightbox (unchanged behaviour) --- */
+        #lightbox {
+            padding: 0;
+            border: none;
+            background: transparent;
+            max-width: 95vw;
+            max-height: 95vh;
+        }
+
+        #lightbox::backdrop { background: rgba(250, 249, 246, 0.92); }
+
+        #lightbox img {
+            display: block;
+            max-width: 95vw;
+            max-height: 95vh;
+            border-radius: var(--radius);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.18);
+            cursor: zoom-out;
+        }
+
+        /* --- Phone width --- */
+        @media (max-width: 600px) {
+            .page { padding: 3rem 1rem 2rem; }
+            .hero { margin-bottom: 2.5rem; }
+            .project-item {
+                grid-template-columns: 1fr;
+                grid-template-areas: "text" "media";
+                gap: 1.5rem;
+                padding: 2.5rem 0;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="page">
+
+    <header class="hero">
+        <h1>Antti H</h1>
+        <p class="intro">Tampere University CS, expected graduation in 2027. Interested in systems, design, clean code and photography.</p>
+        <nav class="profiles" aria-label="Profiles">
+            <a href="https://github.com/ahakkar">GitHub</a>
+            <a href="https://linkedin.com/in/a-hakkarainen">LinkedIn</a>
+            <a href="https://t.me/Ihmemies">Telegram</a>
+        </nav>
+        <p class="lead-in">Multiple highlight projects beginning from 2022</p>
+    </header>
+
+    <main class="project-container">
+        <section class="project-item">
+            <div class="project-image">
+                <a href="../img/workbot.png"><img src="../img/workbot.png" alt="Job ad list with filters"></a>
+                <a href="../img/workbot2.png"><img src="../img/workbot2.png" alt="Generated CV preview"></a>
+                <a href="../img/workbot3.png"><img src="../img/workbot3.png" alt="Motivation editor"></a>
+            </div>
+            <div class="project-text">
+                <h3>Workbot <span class="year">2026</span></h3>
+                <p class="summary">AI-assisted job hunting tool (proto)</p>
+                <p class="role">Role: Solo project</p>
+                <ul class="tech-tags">
+                    <li>C#</li>
+                    <li>Avalonia</li>
+                    <li>SQLite</li>
+                    <li>OpenAPI</li>
+                    <li>Typst</li>
+                    <li>Claude Code</li>
+                </ul>
+                <ul class="highlights">
+                    <li>Acted as a product owner for AI agents. Code, tests, CI, spec and everything else is made in Claude Code with Spec-Driven Development.</li>
+                    <li>Spec written as linted Markdown files, compiled with Typst into a single PDF readable by both agents and humans.</li>
+                    <li>Agents plan and track the work through GitHub milestones and issues using the gh CLI</li>
+                    <li>Fetch new job ads, browse ads, filter and sort them</li>
+                    <li>Manage companies, personal details, applications</li>
+                    <li>AI-assisted tailored CV &amp; Cover letter generation for each job ad</li>
+                    <li>AI-assisted tailored motivation designer tool</li>
+                    <li>Cross-platform desktop app with a separate backend and an OpenAPI interface.</li>
+                    <li>CV &amp; cover letter PDF export with Typst and a custom template</li>
+                    <li>Planned support for using local AI models, job suitability via vector embeddings and many other things as time from studies allows!</li>
+                </ul>
+                <p class="links">Closed source, available upon request 😊</p>
+            </div>
+        </section>
+
+        <section class="project-item">
+            <div class="project-image">
+                <a href="../img/oc2000_1.png"><img src="../img/oc2000_1.png" loading="lazy" alt="City zoomed in with roads"></a>
+                <a href="../img/oc2000_2.png"><img src="../img/oc2000_2.png" loading="lazy" alt="City zoomed out"></a>
+                <a href="../img/oc2000_3.png"><img src="../img/oc2000_3.png" loading="lazy" alt="Terrain generation"></a>
+            </div>
+            <div class="project-text">
+                <h3>OC2000 <span class="year">2026</span></h3>
+                <p class="summary">SimCity 2000 style city builder (proto)</p>
+                <p class="role">Role: Solo project</p>
+                <ul class="tech-tags">
+                    <li>Godot</li>
+                </ul>
+                <ul class="highlights">
+                    <li>Isometric 2.5D cities drawn from sprites with Godot.</li>
+                    <li>Graphics rendering, camera rotation, zooming, minimap, screenshot saving etc. work well up to 4096x4096 tiles</li>
+                    <li>Customizable procedural terrain generation with saved and shareable presets</li>
+                    <li>Building placement including non-square buildings, road drawing, layered decals like grass, pavement etc.</li>
+                    <li>Data in Structs of Arrays</li>
+                    <li>Planning to add procedural parcel generation as a product of Master's thesis</li>
+                    <li>After that, statistical city simulation, statistical pathfinding etc. which support large cities of millions of citizens</li>
+                </ul>
+                <p class="links">Closed source, available upon request 😊</p>
+            </div>
+        </section>
+
+        <section class="project-item">
+            <div class="project-image">
+                <a href="../img/aoc.png"><img src="../img/aoc.png" loading="lazy" alt="Terminal table of the 2025 solution results and run times for each day"></a>
+            </div>
+            <div class="project-text">
+                <h3>Advent of Code <span class="year">2022–ongoing</span></h3>
+                <p class="summary">Yearly Advent of Code puzzle solutions in Rust, with a self-made solution runner.</p>
+                <p class="role">Role: Solo project</p>
+                <ul class="tech-tags">
+                    <li>Rust</li>
+                    <li>Rayon</li>
+                </ul>
+                <ul class="highlights">
+                    <li>Daily Christmas calendar <a href="https://adventofcode.com">coding tasks event</a>, once a year</li>
+                    <li>Colored CLI with self-made solution runner</li>
+                    <li>Zero-Cost Abstractions, Data Parsing &amp; Pattern Matching</li>
+                    <li>Algorithms and optimization: Graphs, BFS/DFS, Dijkstra, pathfinding, multithreading with Rayon</li>
+                    <li>Extensible architecture and utility libraries to avoid repetitive code</li>
+                </ul>
+                <p class="links"><a href="https://github.com/ahakkar/aoc">View program code &rarr;</a></p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026</p>
+    </footer>
+
+</div>
+
+    <dialog id="lightbox"></dialog>
+    <script>
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = lightbox.appendChild(document.createElement('img'));
+
+        document.querySelectorAll('.project-image a').forEach(link => {
+            link.addEventListener('click', e => {
+                e.preventDefault();
+                lightboxImg.src = link.href;
+                lightboxImg.alt = link.querySelector('img').alt;
+                lightbox.showModal();
+            });
+        });
+
+        lightbox.addEventListener('click', () => lightbox.close());
+    </script>
+
+</body>
+</html>

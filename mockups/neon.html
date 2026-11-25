@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mockup C: Dark neon | Antti H</title>
+    <script>
+        /* Theme toggle, part 1: apply a saved or requested theme before first paint.
+           Without JS the page follows prefers-color-scheme. ?theme=light|dark is for the mockup index. */
+        (() => {
+            try {
+                const requested = new URLSearchParams(location.search).get('theme');
+                const theme = requested || localStorage.getItem('theme');
+                if (theme === 'light' || theme === 'dark') document.documentElement.dataset.theme = theme;
+            } catch (e) { /* storage blocked: fall back to the system setting */ }
+        })();
+    </script>
+    <style>
+        /* Mockup C: Dark neon (issue #2). Style inspired by portwatch-vi.xyz: near-black base,
+           violet -> pink -> orange gradient used sparingly, soft shadows, very rounded corners, glass header. */
+        :root {
+            --bg: #0b0c12;
+            --surface: #12131c;
+            --surface-2: #181a26;
+            --ink: #eceef3;
+            --ink-2: #c9ccd6;
+            --muted: #9297a7;      /* 6.4:1 on --surface */
+            --line: #262838;
+            --link: #ff7aa8;       /* 7.6:1 on --surface */
+            --glass: rgba(18, 19, 28, 0.62);
+            /* Headings only (large text, 3:1 needed): every stop is >= 4.2:1 on --surface. */
+            --grad: linear-gradient(90deg, #7a5cff 0%, #ff2e7e 55%, #ff8a3d 100%);
+            /* Buttons: dark text on a lighter gradient, every stop >= 6.7:1. */
+            --grad-btn: linear-gradient(90deg, #9d87ff 0%, #ff5c9a 55%, #ffa463 100%);
+            --grad-soft: linear-gradient(90deg, rgba(122, 92, 255, 0.16), rgba(255, 46, 126, 0.16), rgba(255, 138, 61, 0.16));
+            --blob-1: rgba(122, 92, 255, 0.30);
+            --blob-2: rgba(255, 46, 126, 0.20);
+            --blob-3: rgba(255, 138, 61, 0.12);
+            --grain: 0.07;
+            --shadow: 0 1px 2px rgba(0, 0, 0, 0.35), 0 12px 40px rgba(0, 0, 0, 0.35);
+            --shadow-hover: 0 0 0 1px rgba(255, 46, 126, 0.35), 0 24px 70px -12px rgba(122, 92, 255, 0.45);
+            --img-glow: 0 14px 34px -8px rgba(255, 46, 126, 0.5);
+            --sans: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            --radius: 28px;
+            --radius-sm: 18px;
+            color-scheme: dark;
+        }
+
+        /* Light variant: same accent, darker gradient stops so headings still pass on white. */
+        @media (prefers-color-scheme: light) {
+            :root:not([data-theme="dark"]) {
+                --bg: #f6f6fa; --surface: #ffffff; --surface-2: #f3f2f8;
+                --ink: #0d0e14; --ink-2: #2b2d38; --muted: #5d6170; --line: #e6e6ee;
+                --link: #c4135c; --glass: rgba(255, 255, 255, 0.7);
+                --grad: linear-gradient(90deg, #6a4cf0 0%, #e0136a 55%, #d9530a 100%);
+                --grad-soft: linear-gradient(90deg, rgba(122, 92, 255, 0.12), rgba(255, 46, 126, 0.12), rgba(255, 138, 61, 0.12));
+                --blob-1: rgba(122, 92, 255, 0.18); --blob-2: rgba(255, 46, 126, 0.12); --blob-3: rgba(255, 138, 61, 0.10);
+                --grain: 0.035;
+                --shadow: 0 1px 2px rgba(16, 18, 30, 0.04), 0 8px 24px rgba(16, 18, 30, 0.07);
+                --shadow-hover: 0 0 0 1px rgba(224, 19, 106, 0.25), 0 24px 60px -12px rgba(122, 92, 255, 0.3);
+                --img-glow: 0 14px 30px -10px rgba(224, 19, 106, 0.35);
+                color-scheme: light;
+            }
+        }
+
+        :root[data-theme="light"] {
+            --bg: #f6f6fa; --surface: #ffffff; --surface-2: #f3f2f8;
+            --ink: #0d0e14; --ink-2: #2b2d38; --muted: #5d6170; --line: #e6e6ee;
+            --link: #c4135c; --glass: rgba(255, 255, 255, 0.7);
+            --grad: linear-gradient(90deg, #6a4cf0 0%, #e0136a 55%, #d9530a 100%);
+            --grad-soft: linear-gradient(90deg, rgba(122, 92, 255, 0.12), rgba(255, 46, 126, 0.12), rgba(255, 138, 61, 0.12));
+            --blob-1: rgba(122, 92, 255, 0.18); --blob-2: rgba(255, 46, 126, 0.12); --blob-3: rgba(255, 138, 61, 0.10);
+            --grain: 0.035;
+            --shadow: 0 1px 2px rgba(16, 18, 30, 0.04), 0 8px 24px rgba(16, 18, 30, 0.07);
+            --shadow-hover: 0 0 0 1px rgba(224, 19, 106, 0.25), 0 24px 60px -12px rgba(122, 92, 255, 0.3);
+            --img-glow: 0 14px 30px -10px rgba(224, 19, 106, 0.35);
+            color-scheme: light;
+        }
+
+        * { box-sizing: border-box; }
+
+        html { background: var(--bg); }
+
+        body {
+            margin: 0;
+            color: var(--ink);
+            font: 1rem/1.6 var(--sans);
+        }
+
+        /* Sunset glow blobs behind everything */
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            z-index: -2;
+            pointer-events: none;
+            background:
+                radial-gradient(40rem circle at 8% -8%, var(--blob-1), transparent 60%),
+                radial-gradient(34rem circle at 98% 4%, var(--blob-2), transparent 60%),
+                radial-gradient(46rem circle at 55% 115%, var(--blob-3), transparent 60%);
+        }
+
+        /* Film grain, inline SVG noise */
+        body::after {
+            content: "";
+            position: fixed;
+            inset: 0;
+            z-index: -1;
+            pointer-events: none;
+            opacity: var(--grain);
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+        }
+
+        .page {
+            max-width: 1040px;
+            margin: 0 auto;
+            padding: 0 1.5rem 3rem;
+        }
+
+        /* --- Frosted-glass top bar --- */
+        .topbar {
+            position: sticky;
+            top: 0.75rem;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+            margin: 0.75rem 0 0;
+            padding: 0.4rem 0.4rem 0.4rem 1.1rem;
+            background: var(--glass);
+            -webkit-backdrop-filter: blur(16px) saturate(150%);
+            backdrop-filter: blur(16px) saturate(150%);
+            border: 1px solid var(--line);
+            border-radius: 999px;
+            box-shadow: var(--shadow);
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-right: auto;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+        }
+
+        .brand::before {
+            content: "";
+            width: 0.7rem;
+            height: 0.7rem;
+            border-radius: 50%;
+            background: var(--grad);
+            box-shadow: 0 0 12px rgba(255, 46, 126, 0.7);
+        }
+
+        .topbar a {
+            color: var(--ink-2);
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-decoration: none;
+            padding: 0.45rem 0.75rem;
+            border-radius: 999px;
+            transition: background 0.15s, color 0.15s;
+        }
+
+        .topbar a:hover {
+            color: var(--ink);
+            background: var(--grad-soft);
+        }
+
+        .theme-toggle {
+            font: inherit;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--ink);
+            background: var(--surface-2);
+            border: 1px solid var(--line);
+            border-radius: 999px;
+            padding: 0.45rem 0.8rem;
+            margin-left: 0.25rem;
+            cursor: pointer;
+        }
+
+        .theme-toggle:hover { border-color: var(--link); }
+
+        /* --- Hero --- */
+        .hero { padding: 5.5rem 0 3rem; }
+
+        h1 {
+            font-size: clamp(3.2rem, 11vw, 6rem);
+            font-weight: 900;
+            line-height: 1;
+            letter-spacing: -0.045em;
+            margin: 0 0 1.5rem;
+            width: fit-content;
+            background: var(--grad);
+            background-size: 200% 100%;
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            animation: shimmer 10s ease-in-out infinite alternate;
+        }
+
+        @keyframes shimmer {
+            from { background-position: 0% 50%; }
+            to { background-position: 100% 50%; }
+        }
+
+        .intro {
+            max-width: 36rem;
+            font-size: 1.2rem;
+            color: var(--ink-2);
+            margin: 0;
+        }
+
+        .lead-in {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin: 0 0 1.5rem;
+            font-size: 0.8rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--muted);
+        }
+
+        .lead-in::after {
+            content: "";
+            flex: 1;
+            height: 1px;
+            background: var(--grad);
+            opacity: 0.6;
+        }
+
+        /* --- Links --- */
+        a { color: var(--link); text-underline-offset: 0.2em; }
+        a:hover { text-decoration-thickness: 2px; }
+
+        a:focus-visible, button:focus-visible {
+            outline: 2px solid var(--link);
+            outline-offset: 3px;
+        }
+
+        .button {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            padding: 0.65rem 1.15rem;
+            border-radius: 999px;
+            background: var(--grad-btn);
+            color: #0b0c12;
+            font-weight: 700;
+            text-decoration: none;
+            box-shadow: 0 8px 24px -8px rgba(255, 46, 126, 0.6);
+            transition: transform 0.15s, box-shadow 0.15s;
+        }
+
+        .button:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 12px 30px -8px rgba(255, 46, 126, 0.8);
+        }
+
+        /* --- Project cards --- */
+        .project-container {
+            display: flex;
+            flex-direction: column;
+            gap: 1.75rem;
+        }
+
+        .project-item {
+            display: grid;
+            grid-template-columns: 1.25fr 1fr;
+            grid-template-areas: "text media";
+            gap: 2.25rem;
+            padding: 2.25rem;
+            background: var(--surface);
+            border: 1px solid var(--line);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .project-item:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .project-text { grid-area: text; min-width: 0; }
+
+        .project-image {
+            grid-area: media;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.85rem;
+            align-content: start;
+        }
+
+        .project-image a:first-child { grid-column: 1 / -1; }
+
+        .project-text h3 {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 0.4rem 0.75rem;
+            margin: 0 0 0.6rem;
+        }
+
+        .title {
+            font-size: 1.75rem;
+            font-weight: 800;
+            line-height: 1.15;
+            letter-spacing: -0.03em;
+            background: var(--grad);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .year {
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: var(--ink);
+            padding: 0.3rem 0.65rem;
+            border-radius: 999px;
+            background: var(--grad-soft);
+            border: 1px solid var(--line);
+        }
+
+        .summary {
+            font-size: 1.08rem;
+            color: var(--ink-2);
+            margin: 0 0 0.75rem;
+        }
+
+        .role {
+            font-size: 0.9rem;
+            color: var(--muted);
+            margin: 0 0 1.1rem;
+        }
+
+        .role b { color: var(--ink-2); font-weight: 600; }
+
+        /* --- Tech tag pills with a gradient border --- */
+        .tech-tags {
+            list-style: none;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.45rem;
+            padding: 0;
+            margin: 0 0 1.4rem;
+        }
+
+        .tech-tags li {
+            font-size: 0.8rem;
+            font-weight: 600;
+            line-height: 1;
+            padding: 0.45rem 0.8rem;
+            color: var(--ink);
+            border: 1px solid transparent;
+            border-radius: 999px;
+            background:
+                linear-gradient(var(--surface-2), var(--surface-2)) padding-box,
+                var(--grad) border-box;
+        }
+
+        .highlights {
+            padding-left: 1.1rem;
+            margin: 0 0 1.5rem;
+            color: var(--ink-2);
+        }
+
+        .highlights li { margin-bottom: 0.4rem; }
+        .highlights li::marker { color: var(--link); }
+
+        .links { margin: 0; color: var(--muted); font-size: 0.95rem; }
+
+        /* --- Images --- */
+        .project-image a {
+            display: block;
+            cursor: zoom-in;
+            border-radius: var(--radius-sm);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .project-image img {
+            display: block;
+            width: 100%;
+            height: auto;
+            border-radius: var(--radius-sm);
+            border: 1px solid var(--line);
+        }
+
+        .project-image a:hover {
+            transform: scale(1.02);
+            box-shadow: var(--img-glow);
+        }
+
+        footer {
+            margin-top: 4rem;
+            font-size: 0.85rem;
+            color: var(--muted);
+        }
+
+        /* --- Lightbox (unchanged behaviour) --- */
+        #lightbox {
+            padding: 0;
+            border: none;
+            background: transparent;
+            max-width: 95vw;
+            max-height: 95vh;
+        }
+
+        #lightbox::backdrop {
+            background: rgba(11, 12, 18, 0.8);
+            -webkit-backdrop-filter: blur(8px);
+            backdrop-filter: blur(8px);
+        }
+
+        #lightbox img {
+            display: block;
+            max-width: 95vw;
+            max-height: 95vh;
+            border-radius: var(--radius-sm);
+            box-shadow: 0 30px 90px -20px rgba(255, 46, 126, 0.55);
+            cursor: zoom-out;
+        }
+
+        /* --- Phone width --- */
+        @media (max-width: 600px) {
+            .page { padding: 0 1rem 2rem; }
+            .topbar { padding-left: 0.4rem; }
+            .brand { display: none; }
+            .topbar nav { margin-right: auto; }
+            .topbar a { padding: 0.45rem 0.55rem; }
+            .hero { padding: 3.5rem 0 2rem; }
+            .project-item {
+                grid-template-columns: 1fr;
+                grid-template-areas: "text" "media";
+                gap: 1.5rem;
+                padding: 1.4rem;
+                border-radius: 22px;
+            }
+            .title { font-size: 1.5rem; }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            h1 { animation: none; }
+            .project-item, .project-image a, .button { transition: none; }
+            .project-item:hover, .project-image a:hover, .button:hover { transform: none; }
+        }
+    </style>
+</head>
+<body>
+<div class="page">
+
+    <div class="topbar">
+        <span class="brand">ahakkar</span>
+        <nav aria-label="Profiles">
+            <a href="https://github.com/ahakkar">GitHub</a>
+            <a href="https://linkedin.com/in/a-hakkarainen">LinkedIn</a>
+            <a href="https://t.me/Ihmemies">Telegram</a>
+        </nav>
+        <button type="button" class="theme-toggle" id="theme-toggle" hidden>Theme</button>
+    </div>
+
+    <header class="hero">
+        <h1>Antti H</h1>
+        <p class="intro">Tampere University CS, expected graduation in 2027. Interested in systems, design, clean code and photography.</p>
+    </header>
+
+    <main class="project-container">
+        <p class="lead-in">Multiple highlight projects beginning from 2022</p>
+
+        <section class="project-item">
+            <div class="project-image">
+                <a href="../img/workbot.png"><img src="../img/workbot.png" alt="Job ad list with filters"></a>
+                <a href="../img/workbot2.png"><img src="../img/workbot2.png" alt="Generated CV preview"></a>
+                <a href="../img/workbot3.png"><img src="../img/workbot3.png" alt="Motivation editor"></a>
+            </div>
+            <div class="project-text">
+                <h3><span class="title">Workbot</span> <span class="year">2026</span></h3>
+                <p class="summary">AI-assisted job hunting tool (proto)</p>
+                <p class="role">Role: <b>Solo project</b></p>
+                <ul class="tech-tags">
+                    <li>C#</li>
+                    <li>Avalonia</li>
+                    <li>SQLite</li>
+                    <li>OpenAPI</li>
+                    <li>Typst</li>
+                    <li>Claude Code</li>
+                </ul>
+                <ul class="highlights">
+                    <li>Acted as a product owner for AI agents. Code, tests, CI, spec and everything else is made in Claude Code with Spec-Driven Development.</li>
+                    <li>Spec written as linted Markdown files, compiled with Typst into a single PDF readable by both agents and humans.</li>
+                    <li>Agents plan and track the work through GitHub milestones and issues using the gh CLI</li>
+                    <li>Fetch new job ads, browse ads, filter and sort them</li>
+                    <li>Manage companies, personal details, applications</li>
+                    <li>AI-assisted tailored CV &amp; Cover letter generation for each job ad</li>
+                    <li>AI-assisted tailored motivation designer tool</li>
+                    <li>Cross-platform desktop app with a separate backend and an OpenAPI interface.</li>
+                    <li>CV &amp; cover letter PDF export with Typst and a custom template</li>
+                    <li>Planned support for using local AI models, job suitability via vector embeddings and many other things as time from studies allows!</li>
+                </ul>
+                <p class="links">Closed source, available upon request 😊</p>
+            </div>
+        </section>
+
+        <section class="project-item">
+            <div class="project-image">
+                <a href="../img/oc2000_1.png"><img src="../img/oc2000_1.png" loading="lazy" alt="City zoomed in with roads"></a>
+                <a href="../img/oc2000_2.png"><img src="../img/oc2000_2.png" loading="lazy" alt="City zoomed out"></a>
+                <a href="../img/oc2000_3.png"><img src="../img/oc2000_3.png" loading="lazy" alt="Terrain generation"></a>
+            </div>
+            <div class="project-text">
+                <h3><span class="title">OC2000</span> <span class="year">2026</span></h3>
+                <p class="summary">SimCity 2000 style city builder (proto)</p>
+                <p class="role">Role: <b>Solo project</b></p>
+                <ul class="tech-tags">
+                    <li>Godot</li>
+                </ul>
+                <ul class="highlights">
+                    <li>Isometric 2.5D cities drawn from sprites with Godot.</li>
+                    <li>Graphics rendering, camera rotation, zooming, minimap, screenshot saving etc. work well up to 4096x4096 tiles</li>
+                    <li>Customizable procedural terrain generation with saved and shareable presets</li>
+                    <li>Building placement including non-square buildings, road drawing, layered decals like grass, pavement etc.</li>
+                    <li>Data in Structs of Arrays</li>
+                    <li>Planning to add procedural parcel generation as a product of Master's thesis</li>
+                    <li>After that, statistical city simulation, statistical pathfinding etc. which support large cities of millions of citizens</li>
+                </ul>
+                <p class="links">Closed source, available upon request 😊</p>
+            </div>
+        </section>
+
+        <section class="project-item">
+            <div class="project-image">
+                <a href="../img/aoc.png"><img src="../img/aoc.png" loading="lazy" alt="Terminal table of the 2025 solution results and run times for each day"></a>
+            </div>
+            <div class="project-text">
+                <h3><span class="title">Advent of Code</span> <span class="year">2022–ongoing</span></h3>
+                <p class="summary">Yearly Advent of Code puzzle solutions in Rust, with a self-made solution runner.</p>
+                <p class="role">Role: <b>Solo project</b></p>
+                <ul class="tech-tags">
+                    <li>Rust</li>
+                    <li>Rayon</li>
+                </ul>
+                <ul class="highlights">
+                    <li>Daily Christmas calendar <a href="https://adventofcode.com">coding tasks event</a>, once a year</li>
+                    <li>Colored CLI with self-made solution runner</li>
+                    <li>Zero-Cost Abstractions, Data Parsing &amp; Pattern Matching</li>
+                    <li>Algorithms and optimization: Graphs, BFS/DFS, Dijkstra, pathfinding, multithreading with Rayon</li>
+                    <li>Extensible architecture and utility libraries to avoid repetitive code</li>
+                </ul>
+                <p class="links"><a class="button" href="https://github.com/ahakkar/aoc">View program code &rarr;</a></p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026</p>
+    </footer>
+
+</div>
+
+    <dialog id="lightbox"></dialog>
+    <script>
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = lightbox.appendChild(document.createElement('img'));
+
+        document.querySelectorAll('.project-image a').forEach(link => {
+            link.addEventListener('click', e => {
+                e.preventDefault();
+                lightboxImg.src = link.href;
+                lightboxImg.alt = link.querySelector('img').alt;
+                lightbox.showModal();
+            });
+        });
+
+        lightbox.addEventListener('click', () => lightbox.close());
+    </script>
+    <script>
+        /* Theme toggle, part 2: the button only appears when JS runs. */
+        (() => {
+            const root = document.documentElement;
+            const toggle = document.getElementById('theme-toggle');
+            const current = () => root.dataset.theme
+                || (matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+            const render = () => {
+                const next = current() === 'dark' ? 'light' : 'dark';
+                toggle.textContent = next === 'light' ? '☀ Light' : '☾ Dark';
+                toggle.setAttribute('aria-label', `Switch to ${next} theme`);
+            };
+
+            toggle.addEventListener('click', () => {
+                root.dataset.theme = current() === 'dark' ? 'light' : 'dark';
+                try { localStorage.setItem('theme', root.dataset.theme); } catch (e) { /* not saved */ }
+                render();
+            });
+
+            toggle.hidden = false;
+            render();
+        })();
+    </script>
+
+</body>
+</html>

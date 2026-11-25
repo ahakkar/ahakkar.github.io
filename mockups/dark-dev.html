@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mockup B: Dark developer | Antti H</title>
+    <style>
+        /* Mockup B: Dark "developer" (issue #2). Near-black, one bright accent, monospace headings and tags. */
+        :root {
+            --bg: #0c0f14;
+            --surface: #11161d;
+            --surface-2: #161c25;
+            --ink: #e6e9ef;
+            --ink-2: #b9c0cc;      /* 9.9:1 on --surface */
+            --muted: #8b95a5;      /* 6.0:1 on --surface */
+            --line: #232b36;
+            --accent: #4ade80;     /* 10.4:1 on --surface */
+            --accent-dim: rgba(74, 222, 128, 0.35);
+            --accent-bg: rgba(74, 222, 128, 0.08);
+            --mono: ui-monospace, "Cascadia Code", "JetBrains Mono", "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+            --sans: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            --radius: 10px;
+        }
+
+        * { box-sizing: border-box; }
+
+        body {
+            margin: 0;
+            background: var(--bg);
+            color: var(--ink);
+            font: 1rem/1.6 var(--sans);
+        }
+
+        .page {
+            max-width: 980px;
+            margin: 0 auto;
+            padding: 4rem 1.5rem 3rem;
+        }
+
+        /* --- Header / hero --- */
+        .hero { margin-bottom: 3rem; }
+
+        .prompt {
+            font: 0.9rem/1.4 var(--mono);
+            color: var(--muted);
+            margin: 0 0 0.75rem;
+        }
+
+        .prompt b { color: var(--accent); font-weight: 400; }
+
+        h1 {
+            font: 700 clamp(2.2rem, 6vw, 3.25rem)/1.1 var(--mono);
+            letter-spacing: -0.03em;
+            margin: 0 0 1rem;
+        }
+
+        h1::after {
+            content: "";
+            display: inline-block;
+            width: 0.55em;
+            height: 0.9em;
+            margin-left: 0.15em;
+            vertical-align: -0.08em;
+            background: var(--accent);
+            animation: blink 1.1s steps(1) infinite;
+        }
+
+        @keyframes blink { 50% { opacity: 0; } }
+
+        @media (prefers-reduced-motion: reduce) {
+            h1::after { animation: none; }
+        }
+
+        .intro {
+            max-width: 36rem;
+            font-size: 1.1rem;
+            color: var(--ink-2);
+            margin: 0 0 1.5rem;
+        }
+
+        .profiles {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .profiles a {
+            font: 0.9rem/1 var(--mono);
+            padding: 0.55rem 0.85rem;
+            border: 1px solid var(--line);
+            border-radius: 6px;
+            background: var(--surface);
+            text-decoration: none;
+        }
+
+        .profiles a:hover {
+            border-color: var(--accent);
+            background: var(--accent-bg);
+        }
+
+        .lead-in {
+            margin: 3rem 0 0;
+            font: 0.9rem/1.4 var(--mono);
+            color: var(--muted);
+        }
+
+        .lead-in::before { content: "# "; color: var(--accent); }
+
+        /* --- Links --- */
+        a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+
+        a:hover { text-decoration: underline; text-underline-offset: 0.2em; }
+
+        a:focus-visible {
+            outline: 2px solid var(--accent);
+            outline-offset: 2px;
+            border-radius: 3px;
+        }
+
+        /* --- Project cards --- */
+        .project-container {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .project-item {
+            display: grid;
+            grid-template-columns: 1.3fr 1fr;
+            grid-template-areas: "text media";
+            gap: 2rem;
+            padding: 1.75rem;
+            background: var(--surface);
+            border: 1px solid var(--line);
+            border-radius: var(--radius);
+            transition: border-color 0.15s;
+        }
+
+        .project-item:hover { border-color: var(--accent-dim); }
+
+        .project-text { grid-area: text; min-width: 0; }
+
+        .project-image {
+            grid-area: media;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.75rem;
+            align-content: start;
+        }
+
+        .project-image a:first-child { grid-column: 1 / -1; }
+
+        .project-text h3 {
+            font: 700 1.35rem/1.3 var(--mono);
+            letter-spacing: -0.02em;
+            margin: 0 0 0.5rem;
+        }
+
+        .year {
+            font-weight: 400;
+            font-size: 0.85rem;
+            color: var(--muted);
+            margin-left: 0.4rem;
+            white-space: nowrap;
+        }
+
+        .year::before { content: "// "; }
+
+        .summary {
+            color: var(--ink-2);
+            margin: 0 0 0.75rem;
+        }
+
+        .role {
+            font: 0.85rem/1.5 var(--mono);
+            color: var(--muted);
+            margin: 0 0 1rem;
+        }
+
+        /* --- Tech tag pills --- */
+        .tech-tags {
+            list-style: none;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.4rem;
+            padding: 0;
+            margin: 0 0 1.25rem;
+        }
+
+        .tech-tags li {
+            font: 0.78rem/1 var(--mono);
+            padding: 0.4rem 0.55rem;
+            border: 1px solid var(--accent-dim);
+            border-radius: 4px;
+            background: var(--accent-bg);
+            color: var(--accent);
+        }
+
+        .highlights {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 1.25rem;
+            color: var(--ink-2);
+            font-size: 0.95rem;
+        }
+
+        .highlights li {
+            position: relative;
+            padding-left: 1.25rem;
+            margin-bottom: 0.4rem;
+        }
+
+        .highlights li::before {
+            content: ">";
+            position: absolute;
+            left: 0;
+            font-family: var(--mono);
+            color: var(--accent);
+        }
+
+        .links {
+            margin: 0;
+            font: 0.9rem/1.5 var(--mono);
+            color: var(--muted);
+        }
+
+        /* --- Images in a window frame --- */
+        .project-image a {
+            display: block;
+            cursor: zoom-in;
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            overflow: hidden;
+            background: var(--surface-2);
+            transition: border-color 0.15s, transform 0.15s;
+        }
+
+        .project-image a::before {
+            content: "";
+            display: block;
+            height: 18px;
+            border-bottom: 1px solid var(--line);
+            background:
+                radial-gradient(circle, #ff5f57 3px, transparent 3.5px) 6px 50% / 12px 12px no-repeat,
+                radial-gradient(circle, #febc2e 3px, transparent 3.5px) 18px 50% / 12px 12px no-repeat,
+                radial-gradient(circle, #28c840 3px, transparent 3.5px) 30px 50% / 12px 12px no-repeat;
+        }
+
+        .project-image a:hover {
+            border-color: var(--accent);
+            transform: translateY(-2px);
+        }
+
+        .project-image img {
+            display: block;
+            width: 100%;
+            height: auto;
+        }
+
+        footer {
+            margin-top: 4rem;
+            font: 0.85rem/1.5 var(--mono);
+            color: var(--muted);
+        }
+
+        /* --- Lightbox (unchanged behaviour) --- */
+        #lightbox {
+            padding: 0;
+            border: none;
+            background: transparent;
+            max-width: 95vw;
+            max-height: 95vh;
+        }
+
+        #lightbox::backdrop { background: rgba(5, 7, 10, 0.88); }
+
+        #lightbox img {
+            display: block;
+            max-width: 95vw;
+            max-height: 95vh;
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            cursor: zoom-out;
+        }
+
+        /* --- Phone width --- */
+        @media (max-width: 600px) {
+            .page { padding: 2.5rem 1rem 2rem; }
+            .project-item {
+                grid-template-columns: 1fr;
+                grid-template-areas: "text" "media";
+                gap: 1.25rem;
+                padding: 1.25rem;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .project-image a { transition: none; }
+            .project-image a:hover { transform: none; }
+        }
+    </style>
+</head>
+<body>
+<div class="page">
+
+    <header class="hero">
+        <p class="prompt" aria-hidden="true"><b>~/portfolio</b> $ whoami</p>
+        <h1>Antti H</h1>
+        <p class="intro">Tampere University CS, expected graduation in 2027. Interested in systems, design, clean code and photography.</p>
+        <nav class="profiles" aria-label="Profiles">
+            <a href="https://github.com/ahakkar">GitHub</a>
+            <a href="https://linkedin.com/in/a-hakkarainen">LinkedIn</a>
+            <a href="https://t.me/Ihmemies">Telegram</a>
+        </nav>
+        <p class="lead-in">Multiple highlight projects beginning from 2022</p>
+    </header>
+
+    <main class="project-container">
+        <section class="project-item">
+            <div class="project-image">
+                <a href="../img/workbot.png"><img src="../img/workbot.png" alt="Job ad list with filters"></a>
+                <a href="../img/workbot2.png"><img src="../img/workbot2.png" alt="Generated CV preview"></a>
+                <a href="../img/workbot3.png"><img src="../img/workbot3.png" alt="Motivation editor"></a>
+            </div>
+            <div class="project-text">
+                <h3>Workbot <span class="year">2026</span></h3>
+                <p class="summary">AI-assisted job hunting tool (proto)</p>
+                <p class="role">role: Solo project</p>
+                <ul class="tech-tags">
+                    <li>C#</li>
+                    <li>Avalonia</li>
+                    <li>SQLite</li>
+                    <li>OpenAPI</li>
+                    <li>Typst</li>
+                    <li>Claude Code</li>
+                </ul>
+                <ul class="highlights">
+                    <li>Acted as a product owner for AI agents. Code, tests, CI, spec and everything else is made in Claude Code with Spec-Driven Development.</li>
+                    <li>Spec written as linted Markdown files, compiled with Typst into a single PDF readable by both agents and humans.</li>
+                    <li>Agents plan and track the work through GitHub milestones and issues using the gh CLI</li>
+                    <li>Fetch new job ads, browse ads, filter and sort them</li>
+                    <li>Manage companies, personal details, applications</li>
+                    <li>AI-assisted tailored CV &amp; Cover letter generation for each job ad</li>
+                    <li>AI-assisted tailored motivation designer tool</li>
+                    <li>Cross-platform desktop app with a separate backend and an OpenAPI interface.</li>
+                    <li>CV &amp; cover letter PDF export with Typst and a custom template</li>
+                    <li>Planned support for using local AI models, job suitability via vector embeddings and many other things as time from studies allows!</li>
+                </ul>
+                <p class="links">// Closed source, available upon request 😊</p>
+            </div>
+        </section>
+
+        <section class="project-item">
+            <div class="project-image">
+                <a href="../img/oc2000_1.png"><img src="../img/oc2000_1.png" loading="lazy" alt="City zoomed in with roads"></a>
+                <a href="../img/oc2000_2.png"><img src="../img/oc2000_2.png" loading="lazy" alt="City zoomed out"></a>
+                <a href="../img/oc2000_3.png"><img src="../img/oc2000_3.png" loading="lazy" alt="Terrain generation"></a>
+            </div>
+            <div class="project-text">
+                <h3>OC2000 <span class="year">2026</span></h3>
+                <p class="summary">SimCity 2000 style city builder (proto)</p>
+                <p class="role">role: Solo project</p>
+                <ul class="tech-tags">
+                    <li>Godot</li>
+                </ul>
+                <ul class="highlights">
+                    <li>Isometric 2.5D cities drawn from sprites with Godot.</li>
+                    <li>Graphics rendering, camera rotation, zooming, minimap, screenshot saving etc. work well up to 4096x4096 tiles</li>
+                    <li>Customizable procedural terrain generation with saved and shareable presets</li>
+                    <li>Building placement including non-square buildings, road drawing, layered decals like grass, pavement etc.</li>
+                    <li>Data in Structs of Arrays</li>
+                    <li>Planning to add procedural parcel generation as a product of Master's thesis</li>
+                    <li>After that, statistical city simulation, statistical pathfinding etc. which support large cities of millions of citizens</li>
+                </ul>
+                <p class="links">// Closed source, available upon request 😊</p>
+            </div>
+        </section>
+
+        <section class="project-item">
+            <div class="project-image">
+                <a href="../img/aoc.png"><img src="../img/aoc.png" loading="lazy" alt="Terminal table of the 2025 solution results and run times for each day"></a>
+            </div>
+            <div class="project-text">
+                <h3>Advent of Code <span class="year">2022–ongoing</span></h3>
+                <p class="summary">Yearly Advent of Code puzzle solutions in Rust, with a self-made solution runner.</p>
+                <p class="role">role: Solo project</p>
+                <ul class="tech-tags">
+                    <li>Rust</li>
+                    <li>Rayon</li>
+                </ul>
+                <ul class="highlights">
+                    <li>Daily Christmas calendar <a href="https://adventofcode.com">coding tasks event</a>, once a year</li>
+                    <li>Colored CLI with self-made solution runner</li>
+                    <li>Zero-Cost Abstractions, Data Parsing &amp; Pattern Matching</li>
+                    <li>Algorithms and optimization: Graphs, BFS/DFS, Dijkstra, pathfinding, multithreading with Rayon</li>
+                    <li>Extensible architecture and utility libraries to avoid repetitive code</li>
+                </ul>
+                <p class="links"><a href="https://github.com/ahakkar/aoc">// View program code &rarr;</a></p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026</p>
+    </footer>
+
+</div>
+
+    <dialog id="lightbox"></dialog>
+    <script>
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = lightbox.appendChild(document.createElement('img'));
+
+        document.querySelectorAll('.project-image a').forEach(link => {
+            link.addEventListener('click', e => {
+                e.preventDefault();
+                lightboxImg.src = link.href;
+                lightboxImg.alt = link.querySelector('img').alt;
+                lightbox.showModal();
+            });
+        });
+
+        lightbox.addEventListener('click', () => lightbox.close());
+    </script>
+
+</body>
+</html>
