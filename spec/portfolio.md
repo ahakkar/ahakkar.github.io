@@ -132,10 +132,10 @@ the mockup disagree, this section wins. Design changes must still meet sections 
   saved in `localStorage`. A small inline script in `<head>` applies the saved theme before the
   first paint (as `data-theme` on `<html>`); `js/site.js`, loaded at the end of `<body>`, shows
   and wires the button. The button has the `hidden` attribute in the HTML, so it stays hidden without JS.
-- The button shows the icon of the theme it switches to and its name (`☀ Light` / `☾ Dark`).
-  Below 600 px it shows only the icon. Its accessible name is always "Switch to light theme" /
-  "Switch to dark theme" (`aria-label`).
   Storage errors are ignored and the page falls back to the system setting.
+- The button shows the icon of the theme it switches to and its name (`☀ Light` / `☾ Dark`).
+  Below 600 px it shows only the icon, in a circle instead of a pill. Its accessible name is
+  always "Switch to light theme" / "Switch to dark theme" (`aria-label`).
 - The hero panel (section 6.6) stays dark in both themes.
 
 ### 6.3 Colour tokens
