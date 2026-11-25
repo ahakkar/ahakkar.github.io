@@ -22,17 +22,16 @@
         counter.textContent = `${index + 1} / ${links.length}`;
     };
 
-    const navButton = (label, arrow, step) => {
+    const navButton = (label, step) => {
         const button = lightbox.appendChild(document.createElement('button'));
         button.type = 'button';
         button.className = `lightbox-nav lightbox-${step < 0 ? 'prev' : 'next'}`;
         button.setAttribute('aria-label', label);
-        button.textContent = arrow;
         button.addEventListener('click', () => show(index + step));
         return button;
     };
-    const prev = navButton('Previous image', '‹', -1);
-    const next = navButton('Next image', '›', 1);
+    const prev = navButton('Previous image', -1);
+    const next = navButton('Next image', 1);
     next.autofocus = true;
     lightbox.appendChild(counter);
 

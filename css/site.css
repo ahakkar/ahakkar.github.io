@@ -496,19 +496,30 @@ footer {
 
 .lightbox-nav {
     top: 50%;
+    display: grid;
+    place-items: center;
     width: 2.75rem;
     height: 2.75rem;
-    padding: 0 0 0.2rem;
+    padding: 0;
     transform: translateY(-50%);
-    font: inherit;
-    font-size: 1.9rem;
-    line-height: 1;
     cursor: pointer;
     transition: border-color 0.2s, box-shadow 0.2s;
 }
 
+/* The chevron is drawn with borders, so it is centred the same in every font. The shift
+   balances its visual weight, which sits towards the point. */
+.lightbox-nav::before {
+    content: "";
+    width: 0.6rem;
+    height: 0.6rem;
+    border: solid currentColor;
+    border-width: 0 2px 2px 0;
+}
+
 .lightbox-prev { left: 0.75rem; }
+.lightbox-prev::before { transform: translateX(0.12rem) rotate(135deg); }
 .lightbox-next { right: 0.75rem; }
+.lightbox-next::before { transform: translateX(-0.12rem) rotate(-45deg); }
 
 .lightbox-nav:hover {
     border-color: #ff7aa8;
