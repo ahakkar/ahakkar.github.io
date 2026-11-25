@@ -107,7 +107,7 @@
         footer {
             margin-top: 5rem;
             font-size: 0.8rem;
-            color: #888;
+            color: #555;
         }
 
         /* Responsive tweak for very small screens */
@@ -145,6 +145,15 @@
             <div class="project-text">
                 <h3>Workbot, 2026</h3>
                 <p><i>AI-assisted job hunting tool (proto)</i></p>
+                <p class="role">Role: Solo project</p>
+                <ul class="tech-tags">
+                    <li>C#</li>
+                    <li>Avalonia</li>
+                    <li>SQLite</li>
+                    <li>OpenAPI</li>
+                    <li>Typst</li>
+                    <li>Claude Code</li>
+                </ul>
                 <ul>
                     <li>Acted as a product owner for AI agents. Code, tests, CI, spec and everything else is made in Claude Code with Spec-Driven Development.</li>
                     <li>Spec written as linted Markdown files, compiled with Typst into a single PDF readable by both agents and humans.</li>
@@ -153,7 +162,7 @@
                     <li>Manage companies, personal details, applications</li>
                     <li>AI-assisted tailored CV &amp; Cover letter generation for each job ad</li>
                     <li>AI-assisted tailored motivation designer tool</li>
-                    <li>Cross-platform desktop app (C#, Avalonia) with a separate backend, SQLite and an OpenAPI interface.</li>
+                    <li>Cross-platform desktop app with a separate backend and an OpenAPI interface.</li>
                     <li>CV &amp; cover letter PDF export with Typst and a custom template</li>
                     <li>Planned support for using local AI models, job suitability via vector embeddings and many other things as time from studies allows!</li>
                 </ul>
@@ -165,13 +174,17 @@
         <!-- Project 10 -->
         <section class="project-item">
             <div class="project-image">
-                <a href="img/oc2000_1.png"><img src="img/oc2000_1.png" alt="City zoomed in with roads"></a>
-                <a href="img/oc2000_2.png"><img src="img/oc2000_2.png" alt="City zoomed out"></a>
-                <a href="img/oc2000_3.png"><img src="img/oc2000_3.png" alt="Terrain generation"></a>
+                <a href="img/oc2000_1.png"><img src="img/oc2000_1.png" loading="lazy" alt="City zoomed in with roads"></a>
+                <a href="img/oc2000_2.png"><img src="img/oc2000_2.png" loading="lazy" alt="City zoomed out"></a>
+                <a href="img/oc2000_3.png"><img src="img/oc2000_3.png" loading="lazy" alt="Terrain generation"></a>
             </div>
             <div class="project-text">
                 <h3>OC2000, 2026</h3>
-                <p><i>SimCity 2000 style city builder (proto), Godot game engine</i></p>
+                <p><i>SimCity 2000 style city builder (proto)</i></p>
+                <p class="role">Role: Solo project</p>
+                <ul class="tech-tags">
+                    <li>Godot</li>
+                </ul>
                 <ul>
                     <li>Isometric 2.5D cities drawn from sprites with Godot.</li>
                     <li>Graphics rendering, camera rotation, zooming, minimap, screenshot saving etc. work well up to 4096x4096 tiles</li>
@@ -189,13 +202,19 @@
         <!-- Project 1 -->
         <section class="project-item">
             <div class="project-image">
-                <a href="img/aoc.png"><img src="img/aoc.png" alt="Advent of Code solutions"></a>
+                <a href="img/aoc.png"><img src="img/aoc.png" loading="lazy" alt="Terminal table of the 2025 solution results and run times for each day"></a>
             </div>
             <div class="project-text">
-                <h3>Advent of Code, 2022-2025-></h3>
+                <h3>Advent of Code, 2022–ongoing</h3>
+                <p><i>Yearly Advent of Code puzzle solutions in Rust, with a self-made solution runner.</i></p>
+                <p class="role">Role: Solo project</p>
+                <ul class="tech-tags">
+                    <li>Rust</li>
+                    <li>Rayon</li>
+                </ul>
                 <ul>
                     <li>Daily Christmas calendar <a href="https://adventofcode.com">coding tasks event</a>, once a year</li>
-                    <li>Rust, colored CLI with self-made solution runner</li>
+                    <li>Colored CLI with self-made solution runner</li>
                     <li>Zero-Cost Abstractions, Data Parsing &amp; Pattern Matching</li>
                     <li>Algorithms and optimization: Graphs, BFS/DFS, Dijkstra, pathfinding, multithreading with Rayon</li>
                     <li>Extensible architecture and utility libraries to avoid repetitive code</li>
@@ -207,19 +226,25 @@
         <!-- Project 9 -->
         <section class="project-item">
             <div class="project-image">
-                <a href="img/tc.png"><img src="img/tc.png" alt="Tenebris Core"></a>
-                <a href="img/tc2.png"><img src="img/tc2.png" alt="Tenebris Core"></a>
-                <a href="img/tc3.png"><img src="img/tc3.png" alt="Tenebris Core"></a>
+                <a href="img/tc.png"><img src="img/tc.png" loading="lazy" alt="Player beside a crescent moon portal, saying they need to find the pieces"></a>
+                <a href="img/tc2.png"><img src="img/tc2.png" loading="lazy" alt="Intro screen with the soldier monkey's story and the controls"></a>
+                <a href="img/tc3.png"><img src="img/tc3.png" loading="lazy" alt="Player jumping above a lava pit in a blue stone cave"></a>
             </div>
             <div class="project-text">
                 <h3>Tenebris Core, 2026</h3>
-                <p><i>Created by Team SANDA as part of the Game Project 2026 course at Tampere University, Finland</i></p>
+                <p><i>2D Metroidvania action-platformer set in a mysterious, atmospheric world.</i></p>
+                <p class="role">Role: Programmer and project manager</p>
+                <ul class="tech-tags">
+                    <li>Godot 4.6</li>
+                    <li>GDScript</li>
+                </ul>
                 <ul>
-                    <li>2D Metroidvania action-platformer set in a mysterious atmospheric world</li>
+                    <li>Created by Team SANDA for the Game Project 2026 course at Tampere University, Finland</li>
                     <li>Two zones, multiple maps, three types of enemies</li>
                     <li>Melee combat, pickups like double jump, lava boots</li>
                     <li>Keys, moon pieces, secret item pickups for alternative ending</li>
-                    <li>Godot 4.6, GDScript, entity state machine, Signal Bus, solid architecture and separation of concerns</li>
+                    <li>Entity state machine, Signal Bus, solid architecture and separation of concerns</li>
+                    <li>As project manager, learned how hard it is to reach team alignment</li>
                 </ul>
                 <p><a href="https://github.com/ahakkar/VIM.MT.310">// View program code &rarr;</a></p>
                 <p><a href="https://naderamraie.itch.io/tenebris-core">// Download game &rarr;</a></p>
@@ -230,14 +255,25 @@
         <!-- Project 7 -->
         <section class="project-item">
             <div class="project-image">
-                <a href="img/vibe.png"><img src="img/vibe.png" alt="SLT-Vibe flowchart"></a>
+                <a href="img/vibe.png"><img src="img/vibe.png" loading="lazy" alt="Architecture diagram: microphone to speech-to-text, intent search and LLM, then text-to-speech to the speaker"></a>
             </div>
             <div class="project-text">
                 <h3><a href="https://www.solita.fi">Solita</a> offline voice assistant, 2025</h3>
                 <p><i>A headless, voice-first voice assistant running on Raspberry Pi. User can chat with an Edge LLM without internet access. Only mic and speaker required.</i></p>
+                <p class="role">Role: Project manager, design, documentation, some coding</p>
+                <ul class="tech-tags">
+                    <li>Python</li>
+                    <li>Docker</li>
+                    <li>Raspberry Pi 4</li>
+                    <li>Gemma 1B</li>
+                    <li>Hassil</li>
+                    <li>Wav2vec2</li>
+                    <li>Piper</li>
+                    <li>ChromaDB</li>
+                    <li>SBERT</li>
+                </ul>
                 <ul>
-                    <li>Python, Docker, Raspberry Pi 4, Runs inference with Google Gemma 1B model locally</li>
-                    <li>My role: Project manager, design, documentation, some coding</li>
+                    <li>Runs inference with the Google Gemma 1B model locally</li>
                     <li>User Intent recognition with <a href="https://github.com/OHF-Voice/hassil">Hassil</a>, Speech-to-text with Wav2vec2, Text-to-speech with Piper</li>
                     <li>ChromaDB for Resource-augmented generation, SBERT for summarizing user input</li>
                     <li>Taught a lot about project management. Project was perfect on paper 😁</li>
@@ -251,16 +287,20 @@
         <!-- Project 6 -->
         <section class="project-item">
             <div class="project-image">
-                <a href="img/cvmaker.png"><img src="img/cvmaker.png" alt="CVMaker flowchart"></a>
-                <a href="img/cvmaker2.png"><img src="img/cvmaker2.png" alt="CVMaker flowchart2"></a>
+                <a href="img/cvmaker.png"><img src="img/cvmaker.png" loading="lazy" alt="UI flow mockup for importing a CV with AI, including the failure path"></a>
+                <a href="img/cvmaker2.png"><img src="img/cvmaker2.png" loading="lazy" alt="Sequence diagram of the CV import, from file selection through the OpenAI API to saving"></a>
             </div>
             <div class="project-text">
                 <h3><a href="https://www.paretosoftware.fi/en">Pareto software</a> CVMaker add-on, 2024</h3>
                 <p><i>CVMaker is an internal tool used by Pareto. It allows managers to check people's up to date skills and find suitable persons for new customer projects. Data entry by hand was tedious - implemented an automated CV import feature with help of LLM.</i></p>
+                <p class="role">Role: Design and implementation of the add-on</p>
+                <ul class="tech-tags">
+                    <li>Dart</li>
+                    <li>Flutter</li>
+                    <li>OpenAI API</li>
+                </ul>
                 <ul>
-                    <li>Dart, Flutter</li>
                     <li>Create structured JSON data with LLM from a freeform user-provided CV file.</li>
-                    <li>My role: Design and implementation of the add-on</li>
                     <li>Parses data from .docx and .pdf CV's to JSON via OpenAI structured API</li>
                     <li>Pre-fills CV data, user can then do any manual corrections if needed</li>
                     <li>For <a href="https://opiskelijanopas.tuni.fi/fi/tampereen-yliopisto/opintotiedot/opintojaksot/uta-ykoodi-25895?year=2024">Software engineering 1</a> project course</li>
@@ -273,14 +313,21 @@
         <!-- Project 5 -->
         <section class="project-item">
             <div class="project-image">
-                <a href="img/tiko.png"><img src="img/tiko.png" alt="Web billing and inventory management software"></a>
+                <a href="img/tiko.png"><img src="img/tiko.png" loading="lazy" alt="Work contract view with customer details, invoices, supplies and a VAT breakdown"></a>
             </div>
             <div class="project-text">
                 <h3>Web billing and inventory management software, 2024</h3>
                 <p><i>Allows importing inventory via XML, managing your customers, projects, invoices etc.</i></p>
+                <p class="role">Role: MVCs, UI styles, SQL queries</p>
+                <ul class="tech-tags">
+                    <li>TypeScript</li>
+                    <li>Tailwind</li>
+                    <li>Handlebars.js</li>
+                    <li>Node.js</li>
+                    <li>PostgreSQL</li>
+                    <li>Docker</li>
+                </ul>
                 <ul>
-                    <li>Typescript, Tailwind, Handlebars JS, Node.js, PostgreSQL, Docker</li>
-                    <li>My role: MVC's, UI styles, SQL queries</li>
                     <li>Constructing views from SQL data, managing complex VAT amounts and percentages</li>
                     <li>Learned the importance of solid database design to support ie. 25,5 % VAT</li>
                     <li>For <a href="https://opiskelijanopas.tuni.fi/en/tampere-university/curriculum/course-units/otm-69209202-61f7-4e4c-bfe0-1f425eb60f33?year=2024">Database Programming</a> course</li>
@@ -293,14 +340,19 @@
         <!-- Project 4 -->
         <section class="project-item">
             <div class="project-image">
-                <a href="img/nordicwatt.png"><img src="img/nordicwatt.png" alt="Fingrid electricity data browser"></a>
+                <a href="img/nordicwatt.png"><img src="img/nordicwatt.png" loading="lazy" alt="Stacked area chart of electricity production by type over the last 24 hours"></a>
             </div>
             <div class="project-text">
                 <h3>Fingrid electricity data browser, 2023</h3>
                 <p><i>Allows browsing Fingrid's <a href="https://data.fingrid.fi">Open Data</a> and <a href="https://en.ilmatieteenlaitos.fi/open-data-manual">FMI's weather data</a>. Renders graphs based on the data to UI.</i></p>
+                <p class="role">Role: Reactive UI development, controllers</p>
+                <ul class="tech-tags">
+                    <li>Java</li>
+                    <li>JavaFX</li>
+                    <li>Scene Builder</li>
+                </ul>
                 <ul>
-                    <li>Java with JavaFX, unit testing, JSON and XML parsing</li>
-                    <li>My role: Reactive UI development with Scene Builder, controllers</li>
+                    <li>Unit testing, JSON and XML parsing</li>
                     <li>OOP, MVC to decouple UI logic from business rules</li>
                     <li>Threaded background data retriever for lag-free UI</li>
                     <li>Mixed data in same charts - for example electricity usage and temperature</li>
@@ -314,14 +366,19 @@
         <!-- Project 3 -->
         <section class="project-item">
             <div class="project-image">
-                <a href="img/sisu.png"><img src="img/sisu.png" alt="Sisu degree planner"></a>
+                <a href="img/sisu.png"><img src="img/sisu.png" loading="lazy" alt="Degree programme tree with passed courses, next to the selected course's details"></a>
             </div>
             <div class="project-text">
                 <h3><a href="https://www.funidata.fi/en/services/sisu">Sisu</a> degree planner, 2023</h3>
                 <p><i>Allows browsing <a href="https://www.funidata.fi/en/about-us">Funidata's</a> university course and degree programme database via <a href="https://sisu.tuni.fi/kori/swagger-ui/index.html?configUrl=%2Fkori%2Fv3%2Fapi-docs%2Fswagger-config&filter=true">SISU API</a>. Can be used to plan your degree programme and track course progression and grades.</i></p>
+                <p class="role">Role: Reactive UI development, view and viewmodel programming</p>
+                <ul class="tech-tags">
+                    <li>Java</li>
+                    <li>JavaFX</li>
+                    <li>Scene Builder</li>
+                </ul>
                 <ul>
-                    <li>Java with JavaFX, unit testing, JSON parsing</li>
-                    <li>My role: Reactive UI development with Scene Builder, view and viewmodel programming</li>
+                    <li>Unit testing, JSON parsing</li>
                     <li>OOP, MVVM to decouple UI logic from business rules</li>
                     <li>High-performance data filtering: "live search" that provides instant results</li>
                     <li>For <a href="https://opiskelijanopas.tuni.fi/en/tampere-university/curriculum/course-units/otm-9392333f-bff2-4c3d-b1cf-717ce9990253?year=2023">Programming 3</a> course</li>
@@ -334,13 +391,17 @@
         <!-- Project 2 -->
         <section class="project-item">
             <div class="project-image">
-                <a href="img/acsim.png"><img src="img/acsim.png" alt="ACSIM map generator"></a>
+                <a href="img/acsim.png"><img src="img/acsim.png" loading="lazy" alt="Generated top-down map with forests, fields and a river, with a minimap in the corner"></a>
             </div>
             <div class="project-text">
                 <h3>ACSIM map generator, 2023</h3>
                 <p><i>Tech demo for high-performance 2D chunk-based map generator. Generates graphical SimCity-style maps based on input image.</i></p>
+                <p class="role">Role: Solo project</p>
+                <ul class="tech-tags">
+                    <li>Godot</li>
+                    <li>GDScript</li>
+                </ul>
                 <ul>
-                    <li>Godot game engine, GDScript</li>
                     <li>Threaded chunk rendering to support large maps and render only what is needed</li>
                     <li>Procedural forest generation with noise map</li>
                     <li>Basic rotatable camera and and a minimap</li>
@@ -353,8 +414,16 @@
         <!-- Project 8 -->
         <section class="project-item">
             <div class="project-text">
-                <h3>Home IT infrastructure, ever ongoing..</h3>
+                <h3>Home IT infrastructure, ongoing</h3>
                 <p><i>For running of arbitrary services at home including development/test VM's, databases and file hosting</i></p>
+                <p class="role">Role: Solo project</p>
+                <ul class="tech-tags">
+                    <li>UniFi</li>
+                    <li>OPNsense</li>
+                    <li>Proxmox</li>
+                    <li>TrueNAS</li>
+                    <li>ZFS</li>
+                </ul>
                 <ul>
                     <li>Unifi home network with PoE Wi-Fi AP's, 10GbE LAN</li>
                     <li>Routing by OpnSense running on dedicated hardware</li>
