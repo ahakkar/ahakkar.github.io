@@ -1,0 +1,531 @@
+/* Dark neon design, spec section 6. Style inspired by portwatch-vi.xyz: near-black base,
+   violet -> pink -> orange gradient used sparingly, soft shadows, very rounded corners,
+   frosted-glass top bar. */
+
+/* --- Colour tokens (spec 6.3) --- */
+:root {
+    --bg: #0b0c12;
+    --surface: #12131c;
+    --surface-2: #181a26;
+    --ink: #eceef3;
+    --ink-2: #c9ccd6;
+    --muted: #9297a7;      /* 6.4:1 on --surface */
+    --line: #262838;
+    --card-line: #4a4d72;  /* card and hero border, 2.4:1 on --bg */
+    --link: #ff7aa8;       /* 7.6:1 on --surface */
+    --glass: rgba(18, 19, 28, 0.62);
+    /* Large text only (3:1 needed): every stop is at least 4.0:1 on its background. */
+    --grad: linear-gradient(90deg, #7a5cff 0%, #ff2e7e 55%, #ff8a3d 100%);
+    /* Buttons: dark text on a lighter gradient, every stop at least 6.7:1. Both themes. */
+    --grad-btn: linear-gradient(90deg, #9d87ff 0%, #ff5c9a 55%, #ffa463 100%);
+    --grad-soft: linear-gradient(90deg, rgba(122, 92, 255, 0.16), rgba(255, 46, 126, 0.16), rgba(255, 138, 61, 0.16));
+    --blob-1: rgba(122, 92, 255, 0.30);
+    --blob-2: rgba(255, 46, 126, 0.20);
+    --blob-3: rgba(255, 138, 61, 0.12);
+    --grain: 0.07;
+    --shadow: 0 1px 2px rgba(0, 0, 0, 0.35), 0 12px 40px rgba(0, 0, 0, 0.35);
+    --shadow-hover: 0 0 0 1px rgba(255, 46, 126, 0.35), 0 24px 70px -12px rgba(122, 92, 255, 0.45);
+    --sans: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    --radius: 28px;
+    --radius-sm: 18px;
+    color-scheme: dark;
+}
+
+/* Light variant: same layout and accent, darker gradient stops so titles still pass on white.
+   The two blocks below must stay identical: one follows the system, one the theme toggle. */
+@media (prefers-color-scheme: light) {
+    :root:not([data-theme="dark"]) {
+        --bg: #f6f6fa; --surface: #ffffff; --surface-2: #f3f2f8;
+        --ink: #0d0e14; --ink-2: #2b2d38; --muted: #5d6170; --line: #e6e6ee; --card-line: #b8b8cf;
+        --link: #c4135c; --glass: rgba(255, 255, 255, 0.7);
+        --grad: linear-gradient(90deg, #6a4cf0 0%, #e0136a 55%, #d9530a 100%);
+        --grad-soft: linear-gradient(90deg, rgba(122, 92, 255, 0.12), rgba(255, 46, 126, 0.12), rgba(255, 138, 61, 0.12));
+        --blob-1: rgba(122, 92, 255, 0.18); --blob-2: rgba(255, 46, 126, 0.12); --blob-3: rgba(255, 138, 61, 0.10);
+        --grain: 0.035;
+        --shadow: 0 1px 2px rgba(16, 18, 30, 0.04), 0 8px 24px rgba(16, 18, 30, 0.07);
+        --shadow-hover: 0 0 0 1px rgba(224, 19, 106, 0.25), 0 24px 60px -12px rgba(122, 92, 255, 0.3);
+        color-scheme: light;
+    }
+}
+
+:root[data-theme="light"] {
+    --bg: #f6f6fa; --surface: #ffffff; --surface-2: #f3f2f8;
+    --ink: #0d0e14; --ink-2: #2b2d38; --muted: #5d6170; --line: #e6e6ee; --card-line: #b8b8cf;
+    --link: #c4135c; --glass: rgba(255, 255, 255, 0.7);
+    --grad: linear-gradient(90deg, #6a4cf0 0%, #e0136a 55%, #d9530a 100%);
+    --grad-soft: linear-gradient(90deg, rgba(122, 92, 255, 0.12), rgba(255, 46, 126, 0.12), rgba(255, 138, 61, 0.12));
+    --blob-1: rgba(122, 92, 255, 0.18); --blob-2: rgba(255, 46, 126, 0.12); --blob-3: rgba(255, 138, 61, 0.10);
+    --grain: 0.035;
+    --shadow: 0 1px 2px rgba(16, 18, 30, 0.04), 0 8px 24px rgba(16, 18, 30, 0.07);
+    --shadow-hover: 0 0 0 1px rgba(224, 19, 106, 0.25), 0 24px 60px -12px rgba(122, 92, 255, 0.3);
+    color-scheme: light;
+}
+
+* { box-sizing: border-box; }
+
+html { background: var(--bg); }
+
+body {
+    margin: 0;
+    color: var(--ink);
+    font: 1rem/1.6 var(--sans);
+}
+
+/* --- Background decoration: sunset glows and film grain, behind everything --- */
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -2;
+    pointer-events: none;
+    background:
+        radial-gradient(40rem circle at 8% -8%, var(--blob-1), transparent 60%),
+        radial-gradient(34rem circle at 98% 4%, var(--blob-2), transparent 60%),
+        radial-gradient(46rem circle at 55% 115%, var(--blob-3), transparent 60%);
+}
+
+body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    opacity: var(--grain);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* --- Content column: overlaps the bottom of the hero panel --- */
+.page {
+    position: relative;
+    z-index: 1;
+    max-width: 1040px;
+    margin: -12rem auto 0;
+    padding: 0 1.5rem 3rem;
+}
+
+/* --- Frosted-glass top bar --- */
+.topbar {
+    position: sticky;
+    top: 0.75rem;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    width: calc(100% - 3rem);
+    max-width: 992px;
+    margin: 0.75rem auto 0;
+    padding: 0.4rem 0.4rem 0.4rem 1.1rem;
+    background: var(--glass);
+    -webkit-backdrop-filter: blur(16px) saturate(150%);
+    backdrop-filter: blur(16px) saturate(150%);
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    box-shadow: var(--shadow);
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-right: auto;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+}
+
+.brand::before {
+    content: "";
+    width: 0.7rem;
+    height: 0.7rem;
+    border-radius: 50%;
+    background: var(--grad);
+    box-shadow: 0 0 12px rgba(255, 46, 126, 0.7);
+}
+
+.topbar nav { display: flex; }
+
+.topbar a {
+    white-space: nowrap;
+    color: var(--ink-2);
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-decoration: none;
+    padding: 0.45rem 0.75rem;
+    border-radius: 999px;
+    transition: background 0.15s, color 0.15s;
+}
+
+.topbar a:hover {
+    color: var(--ink);
+    background: var(--grad-soft);
+}
+
+.theme-toggle {
+    font: inherit;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--ink);
+    background: var(--surface-2);
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: 0.45rem 0.8rem;
+    margin-left: 0.25rem;
+    white-space: nowrap;
+    cursor: pointer;
+}
+
+.theme-toggle:hover { border-color: var(--link); }
+
+/* --- Hero: a dark photo panel, wider than the content column, dark in both themes --- */
+.hero {
+    --grad: linear-gradient(90deg, #7a5cff 0%, #ff2e7e 55%, #ff8a3d 100%);
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    display: flex;
+    align-items: flex-start;
+    width: calc(100% - 1.5rem);
+    max-width: 1440px;
+    min-height: 520px;
+    margin: 1rem auto 0;
+    border: 1px solid var(--card-line);
+    border-radius: 30px;
+    background: #07070b;
+    color: #eceef3;
+    box-shadow: var(--shadow);
+}
+
+.hero-photo,
+.hero-scrim {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+}
+
+/* The photo fills the right 64% and fades out to the left. Only the file for the current
+   width is downloaded: the phone media query below replaces it. */
+.hero-photo {
+    inset: 0 0 0 auto;
+    width: 64%;
+    background: url("../img/hero-2000px.jpg") center / cover no-repeat;
+    -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 40%);
+    mask-image: linear-gradient(90deg, transparent 0%, #000 40%);
+}
+
+/* Tint the photo with the accent gradient, keeping its light and shadow */
+.hero-photo::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, #7a5cff 0%, #ff2e7e 55%, #ff8a3d 100%);
+    mix-blend-mode: color;
+    opacity: 0.9;
+}
+
+/* Darken the bottom so the section label stays readable */
+.hero-scrim {
+    background: linear-gradient(0deg, rgba(7, 7, 11, 0.7) 0%, rgba(7, 7, 11, 0) 50%);
+}
+
+.hero-inner {
+    width: calc(100% - 1.5rem);
+    max-width: 992px;
+    margin: 0 auto;
+    padding: clamp(3rem, 9vh, 5rem) 0 15rem; /* bottom room for the overlapping content */
+}
+
+.hero h1 {
+    font-size: clamp(3.2rem, 11vw, 6rem);
+    font-weight: 900;
+    line-height: 1;
+    letter-spacing: -0.045em;
+    margin: 0 0 1.5rem;
+    width: fit-content;
+    background: var(--grad);
+    background-size: 200% 100%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: shimmer 10s ease-in-out infinite alternate;
+}
+
+@keyframes shimmer {
+    from { background-position: 0% 50%; }
+    to { background-position: 100% 50%; }
+}
+
+/* The text block is exactly as wide as the name: width 0 keeps the paragraphs from
+   widening it, min-width 100% then stretches them to the name's width. The name
+   scales with the viewport, so the paragraphs reflow narrower with it. */
+.hero-text {
+    display: grid;
+    width: fit-content;
+    max-width: 100%;
+}
+
+.hero-text > p {
+    width: 0;
+    min-width: 100%;
+}
+
+.intro {
+    font-size: 1.2rem;
+    color: rgba(236, 238, 243, 0.9);
+    margin: 0;
+}
+
+.lead-in {
+    margin: 1.75rem 0 0;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(236, 238, 243, 0.85); /* sits on the dark hero in both themes */
+    text-shadow: 0 1px 8px rgba(0, 0, 0, 0.6);
+}
+
+/* --- Links --- */
+a { color: var(--link); text-underline-offset: 0.2em; }
+a:hover { text-decoration-thickness: 2px; }
+
+a:focus-visible, button:focus-visible {
+    outline: 2px solid var(--link);
+    outline-offset: 3px;
+}
+
+.button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.65rem 1.15rem;
+    border-radius: 999px;
+    background: var(--grad-btn);
+    color: #0b0c12;
+    font-weight: 700;
+    text-decoration: none;
+    box-shadow: 0 8px 24px -8px rgba(255, 46, 126, 0.6);
+    transition: transform 0.15s, box-shadow 0.15s;
+}
+
+.button:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 12px 30px -8px rgba(255, 46, 126, 0.8);
+}
+
+/* --- Project cards --- */
+.project-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1.75rem;
+}
+
+/* Images float right and the text flows underneath them once they end. */
+.project-item {
+    display: flow-root;
+    padding: 2.25rem;
+    background: var(--surface);
+    border: 1px solid var(--card-line);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    transition: box-shadow 0.2s;
+}
+
+.project-item:hover {
+    box-shadow: var(--shadow-hover);
+}
+
+.project-image {
+    float: right;
+    width: 44%;
+    margin: 0 0 1.25rem 2.25rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.85rem;
+    align-content: start;
+}
+
+.project-image a:first-child { grid-column: 1 / -1; }
+
+.project-text h3 {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.4rem 0.75rem;
+    margin: 0 0 0.6rem;
+}
+
+.title {
+    font-size: 1.75rem;
+    font-weight: 800;
+    line-height: 1.15;
+    letter-spacing: -0.005em;
+    background: var(--grad);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+/* A link in a title shows the gradient too, with a link-coloured underline */
+.title a {
+    color: inherit;
+    text-decoration-color: var(--link);
+}
+
+.year {
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--ink);
+    padding: 0.3rem 0.65rem;
+    border-radius: 999px;
+    background: var(--grad-soft);
+    border: 1px solid var(--line);
+}
+
+.summary {
+    font-size: 1.08rem;
+    color: var(--ink-2);
+    margin: 0 0 0.75rem;
+}
+
+.role {
+    font-size: 0.9rem;
+    color: var(--muted);
+    margin: 0 0 1.1rem;
+}
+
+.role b { color: var(--ink-2); }
+
+/* --- Tech tag pills with a gradient border --- */
+.tech-tags {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.45rem;
+    padding: 0;
+    margin: 0 0 1.4rem;
+}
+
+.tech-tags li {
+    font-size: 0.8rem;
+    font-weight: 700;
+    line-height: 1;
+    padding: 0.45rem 0.8rem;
+    color: var(--ink);
+    border: 1px solid transparent;
+    border-radius: 999px;
+    background:
+        linear-gradient(var(--surface-2), var(--surface-2)) padding-box,
+        var(--grad) border-box;
+}
+
+.highlights {
+    padding-left: 1.1rem;
+    margin: 0 0 1.5rem;
+    color: var(--ink-2);
+}
+
+/* flow-root keeps bullet markers from sliding under the floated images */
+.highlights li { display: list-item flow-root; margin-bottom: 0.4rem; }
+.highlights li::marker { color: var(--link); }
+
+.links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin: 0;
+    color: var(--muted);
+    font-size: 0.95rem;
+}
+
+/* --- Images --- */
+.project-image a {
+    display: block;
+    cursor: zoom-in;
+    border-radius: var(--radius-sm);
+}
+
+.project-image img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--line);
+}
+
+footer {
+    margin-top: 4rem;
+    font-size: 0.85rem;
+    color: var(--muted);
+}
+
+/* --- Lightbox --- */
+#lightbox {
+    padding: 0;
+    border: none;
+    background: transparent;
+    max-width: 95vw;
+    max-height: 95vh;
+}
+
+#lightbox::backdrop {
+    background: rgba(11, 12, 18, 0.8);
+    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
+}
+
+#lightbox img {
+    display: block;
+    max-width: 95vw;
+    max-height: 95vh;
+    border-radius: var(--radius-sm);
+    box-shadow: 0 30px 90px -20px rgba(255, 46, 126, 0.55);
+    cursor: zoom-out;
+}
+
+/* --- Phone width --- */
+@media (max-width: 600px) {
+    .page { padding: 0 1rem 2rem; margin-top: -6.5rem; }
+    .topbar { width: calc(100% - 2rem); padding-left: 0.4rem; }
+    .brand { display: none; }
+    .topbar nav { margin-right: auto; }
+    .topbar a { font-size: 0.85rem; padding: 0.45rem 0.5rem; }
+    .theme-toggle { padding: 0.45rem 0.65rem; }
+    .hero {
+        width: calc(100% - 1rem);
+        min-height: 0;
+        margin: 0.75rem auto 0;
+        border-radius: 24px;
+    }
+    .hero-inner { width: calc(100% - 2.5rem); padding: 14rem 0 8rem; }
+    .hero-text { width: auto; }
+    .hero-text > p { width: auto; min-width: 0; }
+    /* The photo sits at the top, full width, fading out at the bottom */
+    .hero-photo {
+        inset: 0 0 auto 0;
+        width: 100%;
+        height: 18rem;
+        background-image: url("../img/hero-1280px.jpg");
+        -webkit-mask-image: linear-gradient(180deg, #000 55%, transparent 100%);
+        mask-image: linear-gradient(180deg, #000 55%, transparent 100%);
+    }
+    .hero-scrim { background: none; }
+    .project-item {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+        padding: 1.4rem;
+        border-radius: 22px;
+    }
+    .project-image {
+        order: 1;    /* images under the text */
+        float: none;
+        width: 100%;
+        margin: 0;
+    }
+    .title { font-size: 1.5rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .hero h1 { animation: none; }
+    .topbar a, .project-item, .button { transition: none; }
+    .button:hover { transform: none; }
+}
