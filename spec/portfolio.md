@@ -171,8 +171,11 @@ Background decoration, fixed behind all content and ignoring pointer events. Eac
 tall as the largest viewport (`100lvh`, the height with a phone browser's toolbar hidden), so it
 fills the screen while the toolbar hides or reappears:
 
-- Three large radial "sunset" glows: violet top left, pink top right, orange at the bottom.
-  Opacity 30% / 20% / 12% in dark, 18% / 12% / 10% in light.
+- Two large radial "sunset" glows: violet top left and pink top right. Opacity 30% / 20% in
+  dark, 18% / 12% in light.
+- A third, orange glow at the bottom (opacity 12% dark / 10% light) is disabled: it is
+  commented out in the CSS, and its `--blob-3` token is kept. It sat at the layer's bottom edge,
+  so in iPhone Safari it showed a hard line that moved while scrolling (issue #27).
 - Film grain from an inline SVG `feTurbulence` noise (a `data:` URI), opacity 7% in dark and
   3.5% in light.
 
