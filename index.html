@@ -104,6 +104,12 @@
             margin-bottom: 0.5rem;
         }
 
+        footer {
+            margin-top: 5rem;
+            font-size: 0.8rem;
+            color: #888;
+        }
+
         /* Responsive tweak for very small screens */
         @media (max-width: 600px) {
             body { padding: 1rem; }
@@ -359,14 +365,14 @@
         </section>
     </main>
 
-    <footer style="margin-top: 5rem; font-size: 0.8rem; color: #888;">
+    <footer>
         <p>&copy; 2026</p>
     </footer>
 
-    <dialog id="lightbox"><img alt=""></dialog>
+    <dialog id="lightbox"></dialog>
     <script>
         const lightbox = document.getElementById('lightbox');
-        const lightboxImg = lightbox.querySelector('img');
+        const lightboxImg = lightbox.appendChild(document.createElement('img'));
 
         document.querySelectorAll('.project-image a').forEach(link => {
             link.addEventListener('click', e => {
