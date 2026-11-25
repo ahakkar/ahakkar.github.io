@@ -133,6 +133,9 @@ the mockup disagree, this section wins. Design changes must still meet sections 
   first paint (as `data-theme` on `<html>`); `js/site.js`, loaded at the end of `<body>`, shows
   and wires the button. The button has the `hidden` attribute in the HTML, so it stays hidden without JS.
   Storage errors are ignored and the page falls back to the system setting.
+- The button shows the icon of the theme it switches to and its name (`☀ Light` / `☾ Dark`).
+  Below 600 px it shows only the icon, in a circle instead of a pill. Its accessible name is
+  always "Switch to light theme" / "Switch to dark theme" (`aria-label`).
 - The hero panel (section 6.6) stays dark in both themes.
 
 ### 6.3 Colour tokens
@@ -192,12 +195,14 @@ fills the screen while the toolbar hides or reappears:
 - **Content column:** at most 992 px wide, with 1.5rem side padding (1rem below 600 px).
 - **Top bar:** a sticky pill (`border-radius: 999px`) 0.75rem from the top of the viewport, as
   wide as the content column. It holds the handle `ahakkar` with a small glowing gradient dot
-  (hidden below 600 px), the profile links and the theme toggle, on one line down to 360 px.
+  (hidden below 600 px), the profile links and the theme toggle (icon only below 600 px), on one
+  line down to 360 px.
   Frosted glass: `--glass` with `backdrop-filter: blur(16px) saturate(150%)`.
-- **Hero panel:** wider than the content column: the viewport width minus 1.5rem (1rem below
-  600 px), at most 1440 px. Radius 30px (24px below 600 px), `--card-line` border, background
-  `#07070b`, minimum height 520 px. Its text is aligned with the left edge of the content
-  column and sits at the top of the panel.
+- **Hero panel:** wider than the content column: the viewport width minus 1.5rem, at most
+  1440 px. Radius 30px, `--card-line` border, background `#07070b`, minimum height 520 px. Its
+  text is aligned with the left edge of the content column and sits at the top of the panel.
+  Below 600 px it is a full-width band: the full viewport width, square corners and only a top
+  border (1px `--card-line`), with no minimum height.
 - **Hero text:** the name, the intro and the section label ("Multiple highlight projects
   beginning from 2022") directly under the intro. The text block is exactly as wide as the
   name: the intro and label wrap to the name's width and reflow narrower with it as the

@@ -93,7 +93,11 @@
         || (matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
     const render = () => {
         const next = current() === 'dark' ? 'light' : 'dark';
-        toggle.textContent = next === 'light' ? '☀ Light' : '☾ Dark';
+        // The name is in its own span, so the phone layout can hide it and show only the icon.
+        const name = document.createElement('span');
+        name.className = 'theme-toggle-name';
+        name.textContent = next === 'light' ? ' Light' : ' Dark';
+        toggle.replaceChildren(next === 'light' ? '☀' : '☾', name);
         toggle.setAttribute('aria-label', `Switch to ${next} theme`);
     };
 
