@@ -1,3 +1,11 @@
 theme: jekyll-theme-minimal
 title: ahkkar's portfolio
 description: Portfolio
+exclude:
+  - AGENTS.md
+  - CLAUDE.md
+  - README.md
+  - package.json
+  - bun.lock
+  - lychee.toml
+  - spec/

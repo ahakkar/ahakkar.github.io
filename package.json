@@ -1,0 +1,13 @@
+{
+  "private": true,
+  "scripts": {
+    "check": "bun run check:html && bun run check:links",
+    "check:html": "html-validate index.html",
+    "check:links": "lychee --offline index.html",
+    "check:links:all": "lychee index.html"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "html-validate": "^11.22.1"
+  }
+}

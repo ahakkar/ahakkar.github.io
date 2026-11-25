@@ -1,0 +1,10 @@
+# Link checker config for lychee (https://lychee.cli.rs), loaded automatically from the repo root.
+
+# Sites that block automated checkers and would always report false errors.
+exclude = ['^https://(www\.)?linkedin\.com/']
+
+max_retries = 3
+timeout = 20
+
+# 429 = rate limited, not a dead link.
+accept = ["200..=299", "429"]
