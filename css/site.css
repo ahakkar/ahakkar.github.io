@@ -84,8 +84,11 @@ body::before {
     pointer-events: none;
     background:
         radial-gradient(40rem circle at 8% -8%, var(--blob-1), transparent 60%),
-        radial-gradient(34rem circle at 98% 4%, var(--blob-2), transparent 60%),
-        radial-gradient(46rem circle at 55% 115%, var(--blob-3), transparent 60%);
+        radial-gradient(34rem circle at 98% 4%, var(--blob-2), transparent 60%);
+    /* Orange glow disabled (issue #27). It is brightest at this layer's bottom edge, so in
+       iPhone Safari that edge showed as a hard line moving while scrolling. To restore it, add
+       this back as the last layer above:
+       radial-gradient(46rem circle at 55% 115%, var(--blob-3), transparent 60%) */
 }
 
 body::after {
