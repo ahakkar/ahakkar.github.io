@@ -555,15 +555,19 @@ footer {
     .topbar { width: calc(100% - 2rem); padding-left: 0.4rem; }
     .brand { display: none; }
     .topbar nav { margin-right: auto; }
-    .topbar a { font-size: 0.85rem; padding: 0.45rem 0.5rem; }
-    .theme-toggle { padding: 0.45rem 0.65rem; }
+    .topbar a { font-size: 0.85rem; padding: 0.45rem 0.4rem; }
+    .theme-toggle { padding: 0.45rem 0.55rem; margin-left: 0; }
+    .theme-toggle-name { display: none; }    /* icon only; the aria-label names the button */
+    /* A full-width band with only a top border */
     .hero {
-        width: calc(100% - 1rem);
+        width: 100%;
         min-height: 0;
-        margin: 0.75rem auto 0;
-        border-radius: 24px;
+        margin: 0.75rem 0 0;
+        border: 0;
+        border-top: 1px solid var(--card-line);
+        border-radius: 0;
     }
-    .hero-inner { width: calc(100% - 2.5rem); padding: 14rem 0 8rem; }
+    .hero-inner { width: calc(100% - 3.5rem); padding: 14rem 0 8rem; }
     .hero-text { width: auto; }
     .hero-text > p { width: auto; min-width: 0; }
     /* The photo sits at the top, full width, fading out at the bottom */
