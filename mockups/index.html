@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Design mockups | Issue #2</title>
+    <style>
+        * { box-sizing: border-box; }
+
+        body {
+            margin: 0;
+            padding: 2rem 1.5rem 3rem;
+            background: #e9e9ec;
+            color: #1c1c22;
+            font: 1rem/1.55 system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        h1 { font-size: 1.6rem; margin: 0 0 0.5rem; }
+
+        .note { max-width: 60rem; margin: 0 0 2rem; color: #44444c; }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(390px, 1fr));
+            gap: 1.5rem;
+        }
+
+        figure {
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        figcaption h2 { font-size: 1.05rem; margin: 0; }
+        figcaption p { margin: 0.25rem 0 0; font-size: 0.9rem; color: #44444c; }
+
+        iframe {
+            width: 100%;
+            height: 900px;
+            border: 1px solid #c9c9d0;
+            border-radius: 12px;
+            background: #fff;
+        }
+
+        a { color: #1f4fd1; }
+
+        @media (max-width: 600px) {
+            body { padding: 1rem; }
+            .grid { grid-template-columns: 1fr; }
+            iframe { height: 700px; }
+        }
+    </style>
+</head>
+<body>
+    <h1>Visual design mockups (issue #2)</h1>
+    <p class="note">
+        Three directions with the same real content: the header and the three pinned projects.
+        Each frame is roughly phone width. Open a mockup on its own to see the desktop layout.
+        Each mockup keeps the spec's constraints: one file, inline CSS, no web fonts, the unchanged lightbox script.
+        This folder is excluded from the published site in <code>_config.yml</code>.
+    </p>
+
+    <div class="grid">
+        <figure>
+            <figcaption>
+                <h2>A. Light/minimal</h2>
+                <p>Off-white, serif headings, one cobalt accent, no card boxes, hairline dividers. <a href="light.html">Open full page</a></p>
+            </figcaption>
+            <iframe src="light.html" title="Mockup A: Light/minimal" loading="lazy"></iframe>
+        </figure>
+
+        <figure>
+            <figcaption>
+                <h2>B. Dark "developer"</h2>
+                <p>Near-black, terminal green accent, monospace headings and tags, window-framed screenshots. <a href="dark-dev.html">Open full page</a></p>
+            </figcaption>
+            <iframe src="dark-dev.html" title="Mockup B: Dark developer" loading="lazy"></iframe>
+        </figure>
+
+        <figure>
+            <figcaption>
+                <h2>C. Dark neon, hero 1: light streaks</h2>
+                <p>Violet → pink → orange gradient, soft shadows, 28 px corners, frosted top bar, theme toggle. Hero photo flipped so the dark side is under the text; name in white with a glow. <a href="neon.html?theme=dark&amp;hero=1">Open full page</a></p>
+            </figcaption>
+            <iframe src="neon.html?theme=dark&amp;hero=1" title="Mockup C: Dark neon, hero 1" loading="lazy"></iframe>
+        </figure>
+
+        <figure>
+            <figcaption>
+                <h2>C. Dark neon, hero 2: crystal</h2>
+                <p>The crystal sits on the right and fades into the dark panel; name keeps the gradient. <a href="neon.html?theme=dark&amp;hero=2">Open full page</a></p>
+            </figcaption>
+            <iframe src="neon.html?theme=dark&amp;hero=2" title="Mockup C: Dark neon, hero 2" loading="lazy"></iframe>
+        </figure>
+
+        <figure>
+            <figcaption>
+                <h2>C. Dark neon, hero 3: neon-tinted crystal</h2>
+                <p>Same crystal, tinted with the neon gradient in CSS (mix-blend-mode: color). <a href="neon.html?theme=dark&amp;hero=3">Open full page</a></p>
+            </figcaption>
+            <iframe src="neon.html?theme=dark&amp;hero=3" title="Mockup C: Dark neon, hero 3" loading="lazy"></iframe>
+        </figure>
+
+        <figure>
+            <figcaption>
+                <h2>C. Dark neon, light variant</h2>
+                <p>Light page with the same accent; the hero panel stays dark. <a href="neon.html?theme=light&amp;hero=1">Open full page</a></p>
+            </figcaption>
+            <iframe src="neon.html?theme=light&amp;hero=1" title="Mockup C: Dark neon, light theme" loading="lazy"></iframe>
+        </figure>
+    </div>
+</body>
+</html>

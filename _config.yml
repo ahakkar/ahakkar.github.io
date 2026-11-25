@@ -9,3 +9,4 @@ exclude:
   - bun.lock
   - lychee.toml
   - spec/
+  - mockups/
