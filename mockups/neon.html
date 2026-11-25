@@ -270,11 +270,9 @@
             gap: 1.75rem;
         }
 
+        /* Images float right and the text flows underneath them once they end. */
         .project-item {
-            display: grid;
-            grid-template-columns: 1.25fr 1fr;
-            grid-template-areas: "text media";
-            gap: 2.25rem;
+            display: flow-root;
             padding: 2.25rem;
             background: var(--surface);
             border: 1px solid var(--card-line);
@@ -287,10 +285,10 @@
             box-shadow: var(--shadow-hover);
         }
 
-        .project-text { grid-area: text; min-width: 0; }
-
         .project-image {
-            grid-area: media;
+            float: right;
+            width: 44%;
+            margin: 0 0 1.25rem 2.25rem;
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 0.85rem;
@@ -371,7 +369,8 @@
             color: var(--ink-2);
         }
 
-        .highlights li { margin-bottom: 0.4rem; }
+        /* flow-root keeps bullet markers from sliding under the floated images */
+        .highlights li { display: list-item flow-root; margin-bottom: 0.4rem; }
         .highlights li::marker { color: var(--link); }
 
         .links { margin: 0; color: var(--muted); font-size: 0.95rem; }
@@ -431,11 +430,17 @@
             .theme-toggle { padding: 0.45rem 0.65rem; }
             .hero { padding: 3.5rem 0 2rem; }
             .project-item {
-                grid-template-columns: 1fr;
-                grid-template-areas: "text" "media";
+                display: flex;
+                flex-direction: column;
                 gap: 1.5rem;
                 padding: 1.4rem;
                 border-radius: 22px;
+            }
+            .project-image {
+                order: 1;    /* images under the text */
+                float: none;
+                width: 100%;
+                margin: 0;
             }
             .title { font-size: 1.5rem; }
         }
