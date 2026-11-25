@@ -164,7 +164,9 @@ Gradients:
 - **`--grad-soft`**, tinted backgrounds (year badge, top bar link hover): the `--grad` dark
   stops at 16% opacity (dark) or 12% (light).
 
-Background decoration, fixed behind all content and ignoring pointer events:
+Background decoration, fixed behind all content and ignoring pointer events. Each layer is as
+tall as the largest viewport (`100lvh`, the height with a phone browser's toolbar hidden), so it
+fills the screen while the toolbar hides or reappears:
 
 - Three large radial "sunset" glows: violet top left, pink top right, orange at the bottom.
   Opacity 30% / 20% / 12% in dark, 18% / 12% / 10% in light.
