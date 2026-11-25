@@ -118,7 +118,7 @@
             position: relative;
             z-index: 1;
             max-width: 1040px;
-            margin: -13rem auto 0;
+            margin: -12rem auto 0;
             padding: 0 1.5rem 3rem;
         }
 
@@ -204,7 +204,7 @@
             align-items: flex-start;
             width: calc(100% - 1.5rem);
             max-width: 1440px;
-            min-height: clamp(560px, 78vh, 700px);
+            min-height: 520px;
             margin: 1rem auto 0;
             border: 1px solid var(--card-line);
             border-radius: 30px;
@@ -262,7 +262,7 @@
             width: calc(100% - 1.5rem);
             max-width: 992px;
             margin: 0 auto;
-            padding: clamp(3rem, 9vh, 5rem) 0 16rem; /* bottom room for the overlapping content */
+            padding: clamp(3rem, 9vh, 5rem) 0 15rem; /* bottom room for the overlapping content */
         }
 
         h1 {
@@ -303,32 +303,34 @@
             to { background-position: 100% 50%; }
         }
 
+        /* The text block is exactly as wide as the name: width 0 keeps the paragraphs from
+           widening it, min-width 100% then stretches them to the name's width. The name
+           scales with the viewport, so the paragraphs reflow narrower with it. */
+        .hero-text {
+            display: grid;
+            width: fit-content;
+            max-width: 100%;
+        }
+
+        .hero-text > p {
+            width: 0;
+            min-width: 100%;
+        }
+
         .intro {
-            max-width: 36rem;
             font-size: 1.2rem;
             color: rgba(236, 238, 243, 0.9);
             margin: 0;
         }
 
         .lead-in {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            margin: 0 0 1.5rem;
+            margin: 1.75rem 0 0;
             font-size: 0.8rem;
             font-weight: 700;
             letter-spacing: 0.1em;
             text-transform: uppercase;
             color: rgba(236, 238, 243, 0.85); /* sits on the dark hero in both themes */
             text-shadow: 0 1px 8px rgba(0, 0, 0, 0.6);
-        }
-
-        .lead-in::after {
-            content: "";
-            flex: 1;
-            height: 1px;
-            background: var(--grad);
-            opacity: 0.6;
         }
 
         /* --- Links --- */
@@ -531,6 +533,8 @@
                 border-radius: 24px;
             }
             .hero-inner { width: calc(100% - 2.5rem); padding: 14rem 0 8rem; }
+            .hero-text { width: auto; }
+            .hero-text > p { width: auto; min-width: 0; }
             .hero-scrim {
                 background: linear-gradient(0deg, rgba(7, 7, 11, 0.92) 0%, rgba(7, 7, 11, 0.55) 50%, rgba(7, 7, 11, 0.15) 100%);
             }
@@ -583,16 +587,17 @@
         <div class="hero-photo" aria-hidden="true"></div>
         <div class="hero-scrim" aria-hidden="true"></div>
         <div class="hero-inner">
-            <h1>Antti H</h1>
-            <p class="intro">Tampere University CS, expected graduation in 2027. Interested in systems, design, clean code and photography.</p>
+            <div class="hero-text">
+                <h1>Antti H</h1>
+                <p class="intro">Tampere University CS, expected graduation in 2027. Interested in systems, design, clean code and photography.</p>
+                <p class="lead-in">Multiple highlight projects beginning from 2022</p>
+            </div>
         </div>
     </header>
 
 <div class="page">
 
     <main class="project-container">
-        <p class="lead-in">Multiple highlight projects beginning from 2022</p>
-
         <section class="project-item">
             <div class="project-image">
                 <a href="../img/workbot.png"><img src="../img/workbot.png" alt="Job ad list with filters"></a>
