@@ -6,10 +6,14 @@
     <title>Mockup C: Dark neon | Antti H</title>
     <script>
         /* Theme toggle, part 1: apply a saved or requested theme before first paint.
-           Without JS the page follows prefers-color-scheme. ?theme=light|dark is for the mockup index. */
+           Without JS the page follows prefers-color-scheme. ?theme=light|dark is for the mockup index.
+           ?hero=1|2|3 picks the hero photo variant for the mockup (default 1). */
         (() => {
+            const params = new URLSearchParams(location.search);
+            const hero = params.get('hero');
+            if (['1', '2', '3'].includes(hero)) document.documentElement.dataset.hero = hero;
             try {
-                const requested = new URLSearchParams(location.search).get('theme');
+                const requested = params.get('theme');
                 const theme = requested || localStorage.getItem('theme');
                 if (theme === 'light' || theme === 'dark') document.documentElement.dataset.theme = theme;
             } catch (e) { /* storage blocked: fall back to the system setting */ }
@@ -123,7 +127,9 @@
             display: flex;
             align-items: center;
             gap: 0.25rem;
-            margin: 0.75rem 0 0;
+            width: calc(100% - 3rem);
+            max-width: 992px;
+            margin: 0.75rem auto 0;
             padding: 0.4rem 0.4rem 0.4rem 1.1rem;
             background: var(--glass);
             -webkit-backdrop-filter: blur(16px) saturate(150%);
@@ -185,8 +191,76 @@
 
         .theme-toggle:hover { border-color: var(--link); }
 
-        /* --- Hero --- */
-        .hero { padding: 5.5rem 0 3rem; }
+        /* --- Hero: a dark photo panel, wider than the content column --- */
+        .hero {
+            --grad: linear-gradient(90deg, #7a5cff 0%, #ff2e7e 55%, #ff8a3d 100%); /* always dark */
+            position: relative;
+            isolation: isolate;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            width: calc(100% - 1.5rem);
+            max-width: 1440px;
+            min-height: clamp(420px, 62vh, 600px);
+            margin: 1rem auto 3rem;
+            border: 1px solid var(--card-line);
+            border-radius: 30px;
+            background: #07070b;
+            color: #eceef3;
+            box-shadow: var(--shadow);
+        }
+
+        .hero-photo,
+        .hero-scrim {
+            position: absolute;
+            inset: 0;
+            z-index: -1;
+        }
+
+        /* Variant 1 (default): light streaks, flipped so the dark side is under the text */
+        .hero-photo {
+            background: url("hero.jpg") center / cover no-repeat;
+            transform: scaleX(-1);
+        }
+
+        .hero-scrim {
+            background:
+                linear-gradient(90deg, rgba(7, 7, 11, 0.88) 0%, rgba(7, 7, 11, 0.6) 38%, rgba(7, 7, 11, 0.08) 72%),
+                linear-gradient(0deg, rgba(7, 7, 11, 0.55) 0%, rgba(7, 7, 11, 0) 45%);
+        }
+
+        /* Variants 2 and 3: the crystal sits on the right and fades into the dark panel */
+        :root[data-hero="2"] .hero-photo,
+        :root[data-hero="3"] .hero-photo {
+            inset: 0 0 0 auto;
+            width: 64%;
+            background-image: url("hero2.jpg");
+            transform: none;
+            -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 40%);
+            mask-image: linear-gradient(90deg, transparent 0%, #000 40%);
+        }
+
+        :root[data-hero="2"] .hero-scrim,
+        :root[data-hero="3"] .hero-scrim {
+            background: linear-gradient(0deg, rgba(7, 7, 11, 0.4) 0%, rgba(7, 7, 11, 0) 40%);
+        }
+
+        /* Variant 3: tint the crystal with the neon gradient, keeping its light and shadow */
+        :root[data-hero="3"] .hero-photo::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, #7a5cff 0%, #ff2e7e 55%, #ff8a3d 100%);
+            mix-blend-mode: color;
+            opacity: 0.9;
+        }
+
+        .hero-inner {
+            width: calc(100% - 1.5rem);
+            max-width: 992px;
+            margin: 0 auto;
+            padding: 4rem 0;
+        }
 
         h1 {
             font-size: clamp(3.2rem, 11vw, 6rem);
@@ -203,6 +277,24 @@
             animation: shimmer 10s ease-in-out infinite alternate;
         }
 
+        .hero h1 {
+            background: none;
+            color: #fff;
+            text-shadow: 0 0 32px rgba(255, 46, 126, 0.55), 0 2px 14px rgba(0, 0, 0, 0.5);
+            animation: none;
+        }
+
+        :root[data-hero="2"] .hero h1,
+        :root[data-hero="3"] .hero h1 {
+            background: var(--grad);
+            background-size: 200% 100%;
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: none;
+            animation: shimmer 10s ease-in-out infinite alternate;
+        }
+
         @keyframes shimmer {
             from { background-position: 0% 50%; }
             to { background-position: 100% 50%; }
@@ -211,7 +303,7 @@
         .intro {
             max-width: 36rem;
             font-size: 1.2rem;
-            color: var(--ink-2);
+            color: rgba(236, 238, 243, 0.9);
             margin: 0;
         }
 
@@ -423,12 +515,32 @@
         /* --- Phone width --- */
         @media (max-width: 600px) {
             .page { padding: 0 1rem 2rem; }
-            .topbar { padding-left: 0.4rem; }
+            .topbar { width: calc(100% - 2rem); padding-left: 0.4rem; }
             .brand { display: none; }
             .topbar nav { margin-right: auto; }
             .topbar a { font-size: 0.85rem; padding: 0.45rem 0.5rem; }
             .theme-toggle { padding: 0.45rem 0.65rem; }
-            .hero { padding: 3.5rem 0 2rem; }
+            .hero {
+                width: calc(100% - 1rem);
+                min-height: 500px;
+                margin: 0.75rem auto 2rem;
+                align-items: flex-end;
+                border-radius: 24px;
+            }
+            .hero-inner { width: calc(100% - 2.5rem); padding: 3rem 0 2rem; }
+            .hero-scrim {
+                background: linear-gradient(0deg, rgba(7, 7, 11, 0.92) 0%, rgba(7, 7, 11, 0.55) 50%, rgba(7, 7, 11, 0.15) 100%);
+            }
+            :root[data-hero="2"] .hero-photo,
+            :root[data-hero="3"] .hero-photo {
+                inset: 0 0 auto 0;
+                width: 100%;
+                height: 62%;
+                -webkit-mask-image: linear-gradient(180deg, #000 55%, transparent 100%);
+                mask-image: linear-gradient(180deg, #000 55%, transparent 100%);
+            }
+            :root[data-hero="2"] .hero-scrim,
+            :root[data-hero="3"] .hero-scrim { background: none; }
             .project-item {
                 display: flex;
                 flex-direction: column;
@@ -446,14 +558,13 @@
         }
 
         @media (prefers-reduced-motion: reduce) {
-            h1 { animation: none; }
+            h1, :root[data-hero] .hero h1 { animation: none; }
             .project-item, .button { transition: none; }
             .button:hover { transform: none; }
         }
     </style>
 </head>
 <body>
-<div class="page">
 
     <div class="topbar">
         <span class="brand">ahakkar</span>
@@ -466,9 +577,15 @@
     </div>
 
     <header class="hero">
-        <h1>Antti H</h1>
-        <p class="intro">Tampere University CS, expected graduation in 2027. Interested in systems, design, clean code and photography.</p>
+        <div class="hero-photo" aria-hidden="true"></div>
+        <div class="hero-scrim" aria-hidden="true"></div>
+        <div class="hero-inner">
+            <h1>Antti H</h1>
+            <p class="intro">Tampere University CS, expected graduation in 2027. Interested in systems, design, clean code and photography.</p>
+        </div>
     </header>
+
+<div class="page">
 
     <main class="project-container">
         <p class="lead-in">Multiple highlight projects beginning from 2022</p>
