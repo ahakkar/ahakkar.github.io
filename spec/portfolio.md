@@ -29,12 +29,19 @@ The key words "must", "should" and "may" are used in their usual requirement sen
   agent instructions, design mockups in `mockups/`) are listed under `exclude` in
   `_config.yml` so they aren't published.
 - **No build step and no framework:** the file in the repository is the file that is served.
-- **Minimal JS:** the only scripts are the image lightbox and the theme toggle (section 6.2).
+- **Minimal JS:** the only scripts are the image lightbox (with previous/next navigation)
+  and the theme toggle (section 6.2).
   New JS needs a spec change first.
 - **Works without JS:** with scripts disabled, all content and links must be usable. The
   lightbox is a progressive enhancement: each project image is wrapped in a link to the full
   image file, so without JS the link opens the image directly. Without JS the theme follows
   the system setting and the theme toggle button stays hidden.
+- **Lightbox behaviour:** clicking a project image opens it in a modal `<dialog>`. When the
+  project has more than one image, the lightbox shows previous and next buttons and a counter
+  (e.g. `2 / 3`); the buttons and the ← and → keys step through that project's images only,
+  wrapping around from the last image to the first and back. Projects with one image show no
+  buttons or counter. The buttons and counter are created by JS. Clicking a button doesn't
+  close the lightbox; clicking the image or the backdrop, or pressing Esc, closes it.
 
 ## 3. Content model
 
@@ -188,7 +195,7 @@ Background decoration, fixed behind all content and ignoring pointer events:
   beginning from 2022") directly under the intro. The text block is exactly as wide as the
   name: the intro and label wrap to the name's width and reflow narrower with it as the
   viewport narrows. Below 600 px they use the full width.
-- **Overlap:** the content column starts 12rem above the bottom of the hero (6.5rem below
+- **Overlap:** the content column starts 8rem above the bottom of the hero (6.5rem below
   600 px), so the first project card overlaps the hero's lower edge.
 - **Cards:** stacked with a 1.75rem gap.
 
@@ -242,11 +249,19 @@ Background decoration, fixed behind all content and ignoring pointer events:
   text shadow, in both themes. No decoration after it.
 - **Footer:** 0.85rem, `--muted`.
 - **Lightbox:** backdrop `rgba(11, 12, 18, 0.8)` with an 8px blur; the image has radius 18px
-  and a pink glow. Behaviour unchanged.
+  and a pink glow. The lightbox stays dark in both themes. Behaviour is in section 2.
+  - **Previous and next buttons:** real `<button>`s with an `aria-label` ("Previous image",
+    "Next image"), round (2.75rem), vertically centred over the left and right edges of the
+    image. Dark glass: `rgba(11, 12, 18, 0.7)` with an 8px blur, a 1px
+    `rgba(236, 238, 243, 0.25)` border and `#eceef3` arrows. On hover the border turns
+    `#ff7aa8` with a pink glow. The focus outline is `#ff7aa8` in both themes.
+  - **Counter:** a small pill centred at the bottom of the image, in the same dark glass,
+    0.8rem bold `#eceef3` text. It is announced to screen readers when it changes.
 
 ### 6.8 Motion
 
 - The name's gradient slowly shifts back and forth (10 s, alternating).
-- Hover transitions (card glow, button) take at most 0.2 s.
+- Hover transitions (card glow, buttons, lightbox buttons) take at most 0.2 s.
+- Switching images in the lightbox is instant, without an animated transition.
 - Under `prefers-reduced-motion: reduce` the name animation, the transitions and the button
   lift are all off.
