@@ -262,6 +262,10 @@ Background decoration, fixed behind all content and ignoring pointer events:
     `#ff7aa8` with a pink glow. The focus outline is `#ff7aa8` in both themes.
   - **Counter:** a small pill centred at the bottom of the image, in the same dark glass,
     0.8rem bold `#eceef3` text. It is announced to screen readers when it changes.
+  - **Below 600 px:** the image is the full width of the viewport, with no corner radius. The
+    previous button, the counter and the next button sit in one row centred under the image
+    instead of over it, and the image height shrinks so that the image and the row fit on the
+    screen together. Projects with one image show no row.
 
 ### 6.8 Motion
 
