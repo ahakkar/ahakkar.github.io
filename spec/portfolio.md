@@ -29,8 +29,8 @@ The key words "must", "should" and "may" are used in their usual requirement sen
   agent instructions, design mockups in `mockups/`) are listed under `exclude` in
   `_config.yml` so they aren't published.
 - **No build step and no framework:** the file in the repository is the file that is served.
-- **Minimal JS:** the only scripts are the image lightbox (with previous/next navigation)
-  and the theme toggle (section 6.2).
+- **Minimal JS:** the only scripts are the image lightbox (with previous/next navigation
+  and swipe gestures) and the theme toggle (section 6.2).
   New JS needs a spec change first.
 - **Works without JS:** with scripts disabled, all content and links must be usable. The
   lightbox is a progressive enhancement: each project image is wrapped in a link to the full
@@ -40,8 +40,13 @@ The key words "must", "should" and "may" are used in their usual requirement sen
   project has more than one image, the lightbox shows previous and next buttons and a counter
   (e.g. `2 / 3`); the buttons and the ← and → keys step through that project's images only,
   wrapping around from the last image to the first and back. Projects with one image show no
-  buttons or counter. The buttons and counter are created by JS. Clicking a button doesn't
-  close the lightbox; clicking the image or the backdrop, or pressing Esc, closes it.
+  buttons or counter. The buttons and counter are created by JS. On touch screens, a mostly
+  horizontal swipe of more than about 50 px also steps through the images (swipe left for
+  the next image, right for the previous one), with the same wrap-around and only in
+  projects with more than one image. Swipes are ignored while the page is pinch-zoomed, so
+  dragging around a zoomed image doesn't change it, and pinch-zoom keeps working in the
+  lightbox. Mouse dragging doesn't change images. Clicking a button or swiping doesn't close
+  the lightbox; clicking or tapping the image or the backdrop, or pressing Esc, closes it.
 
 ## 3. Content model
 
