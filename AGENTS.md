@@ -35,7 +35,7 @@ Run before opening a PR; all must pass:
 CI (`.github/workflows/checks.yml`) runs `check:html` and `check:links` on every PR.
 
 Not applicable to this repo: there is no `/src`, so the 90-character line limit and the test
-coverage thresholds don't apply, and the inline JS is too small for type checking or unit tests.
+coverage thresholds don't apply, and the JS (`js/site.js` plus the inline theme script) is too small for type checking or unit tests.
 
 ## Communication
 
