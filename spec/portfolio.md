@@ -19,8 +19,11 @@ The key words "must", "should" and "may" are used in their usual requirement sen
 ## 2. Architecture constraints
 
 - **Single page:** all content is in one `index.html` at the repository root.
-- **Inline CSS and JS:** styles in one `<style>` element in `<head>`, scripts in `<script>`
-  elements in the same file. No external stylesheets, scripts or web fonts.
+- **One stylesheet and one script:** styles are in `css/site.css` and scripts in `js/site.js`,
+  apart from the small pre-paint theme script (section 6.2), which stays inline in `<head>` so
+  the wrong theme never flashes and it adds no render-blocking request. Paths avoid
+  `assets/css/style.css`, which the Jekyll theme publishes. No third-party stylesheets,
+  scripts or web fonts.
 - **Images** live in `img/` and are referenced with relative paths.
 - **Hosting:** GitHub Pages, published from the `main` branch. Repo-only files (spec, tooling,
   agent instructions, design mockups in `mockups/`) are listed under `exclude` in
@@ -114,9 +117,9 @@ the mockup disagree, this section wins. Design changes must still meet sections 
   the light tokens in section 6.3.
 - By default the theme follows `prefers-color-scheme`.
 - A **theme toggle** button in the top bar switches between dark and light, and the choice is
-  saved in `localStorage`. A small script in `<head>` applies the saved theme before the first
-  paint (as `data-theme` on `<html>`); a script at the end of `<body>` shows and wires the
-  button. The button has the `hidden` attribute in the HTML, so it stays hidden without JS.
+  saved in `localStorage`. A small inline script in `<head>` applies the saved theme before the
+  first paint (as `data-theme` on `<html>`); `js/site.js`, loaded at the end of `<body>`, shows
+  and wires the button. The button has the `hidden` attribute in the HTML, so it stays hidden without JS.
   Storage errors are ignored and the page falls back to the system setting.
 - The hero panel (section 6.6) stays dark in both themes.
 
@@ -201,14 +204,14 @@ Background decoration, fixed behind all content and ignoring pointer events:
 - **Below 600 px:** the photo sits at the top of the panel, full width and 18rem tall, fading
   out at the bottom. The text follows below it.
 - The photo is decorative: a CSS background on an `aria-hidden` element, with no alt text.
-  A media query picks the file, so only one is downloaded: `img/hero-1200.jpg` below 600 px,
-  `img/hero-2000.jpg` otherwise. It is not lazy-loaded.
+  A media query picks the file, so only one is downloaded: `img/hero-1280px.jpg` below 600 px,
+  `img/hero-2000px.jpg` otherwise. It is not lazy-loaded.
 - Files:
 
   | File | Resolution | Max size |
   |---|---|---|
-  | `img/hero-2000.jpg` | 2000 × 1333 | 400 KB |
-  | `img/hero-1200.jpg` | 1200 × 800 | 150 KB |
+  | `img/hero-2000px.jpg` | 2048 × 1365 | 500 KB |
+  | `img/hero-1280px.jpg` | 1280 × 853 | 200 KB |
 
   JPEG, sRGB, the full 3:2 frame with the subject centred. Metadata is stripped or limited to
   copyright: no camera or lens serial numbers, no location. The files may be black and white,
