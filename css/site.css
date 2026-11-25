@@ -464,6 +464,8 @@ footer {
     background: transparent;
     max-width: 95vw;
     max-height: 95vh;
+    /* Sideways swipes go to js/site.js; vertical panning and pinch-zoom stay with the browser. */
+    touch-action: pan-y pinch-zoom;
 }
 
 #lightbox::backdrop {

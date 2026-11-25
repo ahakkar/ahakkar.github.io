@@ -3,8 +3,8 @@
 
 /* Lightbox: each project image is a link to the full image, which opens in a dialog.
    Without JS the link opens the image directly. In projects with several images, previous
-   and next buttons, the arrow keys and a counter step through that project's images,
-   wrapping around at the ends. */
+   and next buttons, the arrow keys, touch swipes and a counter step through that project's
+   images, wrapping around at the ends. */
 (() => {
     const lightbox = document.getElementById('lightbox');
     const lightboxImg = lightbox.appendChild(document.createElement('img'));
@@ -48,9 +48,32 @@
         });
     });
 
-    // The image and the backdrop close the lightbox; the buttons don't.
+    // Touch swipes: a mostly horizontal swipe of over 50 px steps through the images. A second
+    // finger (pinch) cancels it, and it is ignored while the page is pinch-zoomed.
+    let start = null;
+    let swiped = false;
+    const zoomed = () => window.visualViewport?.scale > 1;
+    lightbox.addEventListener('pointerdown', e => {
+        swiped = false;
+        start = e.pointerType === 'touch' && e.isPrimary && links.length > 1 && !zoomed()
+            ? { id: e.pointerId, x: e.clientX, y: e.clientY } : null;
+    });
+    lightbox.addEventListener('pointerup', e => {
+        if (!start || e.pointerId !== start.id) return;
+        const dx = e.clientX - start.x;
+        const dy = e.clientY - start.y;
+        start = null;
+        if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy) && !zoomed()) {
+            swiped = true;
+            show(index + (dx < 0 ? 1 : -1));
+        }
+    });
+    lightbox.addEventListener('pointercancel', () => { start = null; });
+
+    // The image and the backdrop close the lightbox; the buttons and swipes don't.
     lightbox.addEventListener('click', e => {
-        if (!e.target.closest('button')) lightbox.close();
+        if (swiped) swiped = false;
+        else if (!e.target.closest('button')) lightbox.close();
     });
 
     lightbox.addEventListener('keydown', e => {
