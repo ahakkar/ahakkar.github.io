@@ -195,7 +195,7 @@ Background decoration, fixed behind all content and ignoring pointer events:
   beginning from 2022") directly under the intro. The text block is exactly as wide as the
   name: the intro and label wrap to the name's width and reflow narrower with it as the
   viewport narrows. Below 600 px they use the full width.
-- **Overlap:** the content column starts 12rem above the bottom of the hero (6.5rem below
+- **Overlap:** the content column starts 8rem above the bottom of the hero (6.5rem below
   600 px), so the first project card overlaps the hero's lower edge.
 - **Cards:** stacked with a 1.75rem gap.
 
