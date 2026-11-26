@@ -60,7 +60,7 @@ One `<section class="summary-box">` at the top of `<main>`, before the projects.
 - **Focus areas:** at most three, each a bold name followed by a few keywords. They should be
   backed by the projects on the page.
 - **Open to:** one line on the kind of work the author is open to, where, and from when
-  (for example "Open to internships and junior roles in the Tampere region. Available now.").
+  (for example "Open to internships and junior roles in Pirkanmaa. Available now.").
   It is a plain statement, not a request.
 
 The summary is kept short so that the first project still starts near the top of the page.
