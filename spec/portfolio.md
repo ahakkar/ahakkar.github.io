@@ -207,8 +207,8 @@ fills the screen while the toolbar hides or reappears:
 - **Hero panel:** wider than the content column: the viewport width minus 1.5rem, at most
   1440 px. Radius 30px, `--card-line` border, background `#07070b`, minimum height 520 px. Its
   text is aligned with the left edge of the content column and sits at the top of the panel.
-  Below 600 px it is a full-width band: the full viewport width, square corners and only a top
-  border (1px `--card-line`), with no minimum height.
+  Below 600 px it is a full-width band: the full viewport width, square corners, 1px
+  `--card-line` borders at the top and bottom only, and no minimum height.
 - **Hero text:** the name, the intro and the section label ("Multiple highlight projects
   beginning from 2022") directly under the intro. The text block is exactly as wide as the
   name: the intro and label wrap to the name's width and reflow narrower with it as the

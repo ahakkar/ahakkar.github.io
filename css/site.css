@@ -575,13 +575,12 @@ footer {
     }
     .theme-toggle[hidden] { display: none; }
     .theme-toggle-name { display: none; }
-    /* A full-width band with only a top border */
+    /* A full-width band with borders at the top and bottom only */
     .hero {
         width: 100%;
         min-height: 0;
         margin: 0.75rem 0 0;
-        border: 0;
-        border-top: 1px solid var(--card-line);
+        border-width: 1px 0;
         border-radius: 0;
     }
     .hero-inner { width: calc(100% - 3.5rem); padding: 14rem 0 8rem; }
