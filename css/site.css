@@ -14,6 +14,10 @@
     --card-line: #4a4d72;  /* card and hero border, 2.4:1 on --bg */
     --link: #ff7aa8;       /* 7.6:1 on --surface */
     --glass: rgba(18, 19, 28, 0.62);
+    /* Summary box glass: dense enough that --ink-2 stays above 4.5:1 over the bright photo */
+    --glass-box: rgba(30, 31, 46, 0.62);
+    --glass-line: rgba(255, 255, 255, 0.2);
+    --glass-shadow: 0 20px 60px rgba(10, 6, 30, 0.35);
     /* Large text only (3:1 needed): every stop is at least 4.0:1 on its background. */
     --grad: linear-gradient(90deg, #7a5cff 0%, #ff2e7e 55%, #ff8a3d 100%);
     /* Buttons: dark text on a lighter gradient, every stop at least 6.7:1. Both themes. */
@@ -38,12 +42,14 @@
         --bg: #f6f6fa; --surface: #ffffff; --surface-2: #f3f2f8;
         --ink: #0d0e14; --ink-2: #2b2d38; --muted: #5d6170; --line: #e6e6ee; --card-line: #b8b8cf;
         --link: #c4135c; --glass: rgba(255, 255, 255, 0.7);
+        --glass-box: rgba(255, 255, 255, 0.78); --glass-line: rgba(184, 184, 207, 0.7);
         --grad: linear-gradient(90deg, #6a4cf0 0%, #e0136a 55%, #d9530a 100%);
         --grad-soft: linear-gradient(90deg, rgba(122, 92, 255, 0.12), rgba(255, 46, 126, 0.12), rgba(255, 138, 61, 0.12));
         --blob-1: rgba(122, 92, 255, 0.18); --blob-2: rgba(255, 46, 126, 0.12); --blob-3: rgba(255, 138, 61, 0.10);
         --grain: 0.035;
         --shadow: 0 1px 2px rgba(16, 18, 30, 0.04), 0 8px 24px rgba(16, 18, 30, 0.07);
         --shadow-hover: 0 0 0 1px rgba(224, 19, 106, 0.25), 0 24px 60px -12px rgba(122, 92, 255, 0.3);
+        --glass-shadow: var(--shadow);
         color-scheme: light;
     }
 }
@@ -52,12 +58,14 @@
     --bg: #f6f6fa; --surface: #ffffff; --surface-2: #f3f2f8;
     --ink: #0d0e14; --ink-2: #2b2d38; --muted: #5d6170; --line: #e6e6ee; --card-line: #b8b8cf;
     --link: #c4135c; --glass: rgba(255, 255, 255, 0.7);
+    --glass-box: rgba(255, 255, 255, 0.78); --glass-line: rgba(184, 184, 207, 0.7);
     --grad: linear-gradient(90deg, #6a4cf0 0%, #e0136a 55%, #d9530a 100%);
     --grad-soft: linear-gradient(90deg, rgba(122, 92, 255, 0.12), rgba(255, 46, 126, 0.12), rgba(255, 138, 61, 0.12));
     --blob-1: rgba(122, 92, 255, 0.18); --blob-2: rgba(255, 46, 126, 0.12); --blob-3: rgba(255, 138, 61, 0.10);
     --grain: 0.035;
     --shadow: 0 1px 2px rgba(16, 18, 30, 0.04), 0 8px 24px rgba(16, 18, 30, 0.07);
     --shadow-hover: 0 0 0 1px rgba(224, 19, 106, 0.25), 0 24px 60px -12px rgba(122, 92, 255, 0.3);
+    --glass-shadow: var(--shadow);
     color-scheme: light;
 }
 
@@ -236,7 +244,7 @@ body::after {
     opacity: 0.9;
 }
 
-/* Darken the bottom so the section label stays readable */
+/* Darken the bottom so the summary box stays readable over the photo */
 .hero-scrim {
     background: linear-gradient(0deg, rgba(7, 7, 11, 0.7) 0%, rgba(7, 7, 11, 0) 50%);
 }
@@ -288,14 +296,75 @@ body::after {
     margin: 0;
 }
 
+/* --- Author summary: frosted glass, partly over the hero and partly over the page --- */
+.summary-box {
+    padding: 1.75rem;
+    background: var(--glass-box);
+    -webkit-backdrop-filter: blur(18px) saturate(1.3);
+    backdrop-filter: blur(18px) saturate(1.3);
+    border: 1px solid var(--glass-line);
+    border-radius: 24px;
+    box-shadow: var(--glass-shadow);
+    color: var(--ink-2);
+}
+
+/* Summary and section labels share the small uppercase style */
+.summary-label,
 .lead-in {
-    margin: 1.75rem 0 0;
     font-size: 0.8rem;
     font-weight: 700;
+    line-height: 1.6;
     letter-spacing: 0.1em;
     text-transform: uppercase;
-    color: rgba(236, 238, 243, 0.85); /* sits on the dark hero in both themes */
-    text-shadow: 0 1px 8px rgba(0, 0, 0, 0.6);
+}
+
+.summary-label {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    margin: 0 0 0.9rem;
+}
+
+/* A small glowing dot, like the top bar handle */
+.summary-label::before {
+    content: "";
+    width: 0.55rem;
+    height: 0.55rem;
+    border-radius: 50%;
+    background: var(--grad);
+    box-shadow: 0 0 10px rgba(255, 46, 126, 0.7);
+}
+
+.focus-areas {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.focus-areas li + li { margin-top: 0.4rem; }
+.focus-areas b { color: var(--ink); }
+
+.open-to {
+    margin: 1.1rem 0 0;
+    padding-top: 1.1rem;
+    border-top: 1px solid var(--line);
+}
+
+/* --- Section label, followed by a gradient line filling the rest of the row --- */
+.lead-in {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin: 2.5rem 0 1.25rem;
+    color: var(--muted);
+}
+
+.lead-in::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: var(--grad);
+    opacity: 0.6;
 }
 
 /* --- Links --- */
@@ -596,6 +665,7 @@ footer {
         mask-image: linear-gradient(180deg, #000 55%, transparent 100%);
     }
     .hero-scrim { background: none; }
+    .summary-box { padding: 1.4rem; border-radius: 20px; }
     .project-item {
         display: flex;
         flex-direction: column;
