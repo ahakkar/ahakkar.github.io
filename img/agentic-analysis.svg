@@ -1,0 +1,103 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 620 880" width="620" height="880" role="img" aria-labelledby="t d">
+  <title id="t">Agent workflow</title>
+  <desc id="d">A written brief steers parallel subagents in their own lanes. Script checks send failures back for fixing, a merge step combines the results, and Typst renders a PDF report. The author frames the question and approves the plan at the start, and challenges findings at the end.</desc>
+  <defs>
+    <linearGradient id="grad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#7a5cff"/>
+      <stop offset="0.55" stop-color="#ff2e7e"/>
+      <stop offset="1" stop-color="#ff8a3d"/>
+    </linearGradient>
+    <radialGradient id="glow-violet" cx="0" cy="0" r="1">
+      <stop offset="0" stop-color="#7a5cff" stop-opacity="0.3"/>
+      <stop offset="1" stop-color="#7a5cff" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glow-orange" cx="1" cy="1" r="1">
+      <stop offset="0" stop-color="#ff8a3d" stop-opacity="0.14"/>
+      <stop offset="1" stop-color="#ff8a3d" stop-opacity="0"/>
+    </radialGradient>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#9297a7"/>
+    </marker>
+    <marker id="arrow-pink" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#ff7aa8"/>
+    </marker>
+  </defs>
+
+  <!-- Background: the page background colour with its sunset glows -->
+  <rect width="620" height="880" fill="#0b0c12"/>
+  <rect width="620" height="880" fill="url(#glow-violet)"/>
+  <rect width="620" height="880" fill="url(#glow-orange)"/>
+
+  <g font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" text-anchor="middle">
+
+    <!-- Main flow arrows -->
+    <g stroke="#9297a7" stroke-width="2" fill="none" marker-end="url(#arrow)">
+      <line x1="280" y1="128" x2="280" y2="162"/>
+      <line x1="280" y1="236" x2="280" y2="270"/>
+      <line x1="280" y1="420" x2="280" y2="454"/>
+      <line x1="280" y1="528" x2="280" y2="562"/>
+      <line x1="280" y1="636" x2="280" y2="670"/>
+      <line x1="280" y1="744" x2="280" y2="778"/>
+    </g>
+
+    <!-- Feedback loops -->
+    <g stroke="#ff7aa8" stroke-width="2" stroke-dasharray="6 5" fill="none" marker-end="url(#arrow-pink)">
+      <path d="M450 492 H576 V346 H543"/>
+      <path d="M500 816 H576 V600 H453"/>
+    </g>
+    <g fill="#ff7aa8" font-size="16" font-weight="700">
+      <text transform="translate(596 419) rotate(-90)">fix</text>
+      <text transform="translate(596 708) rotate(-90)">corrections</text>
+    </g>
+
+    <!-- 1. Author: framing -->
+    <rect x="60" y="56" width="440" height="72" rx="36" fill="#181a26" stroke="url(#grad)" stroke-width="2"/>
+    <text x="280" y="84" font-size="14" font-weight="700" letter-spacing="1.3" fill="#ff7aa8">YOU</text>
+    <text x="280" y="109" font-size="20" fill="#eceef3">Frame the question, approve the plan</text>
+
+    <!-- 2. Brief -->
+    <rect x="130" y="164" width="300" height="72" rx="18" fill="#12131c" stroke="#4a4d72" stroke-width="1.5"/>
+    <text x="280" y="194" font-size="22" font-weight="700" fill="#eceef3">Written brief</text>
+    <text x="280" y="218" font-size="17" fill="#c9ccd6">rules, lanes, output format</text>
+
+    <!-- 3. Parallel subagents -->
+    <rect x="20" y="272" width="520" height="148" rx="22" fill="none" stroke="#4a4d72" stroke-width="1.5" stroke-dasharray="6 5"/>
+    <text x="280" y="300" font-size="14" font-weight="700" letter-spacing="1.3" fill="#9297a7">PARALLEL SUBAGENTS · CLEAN CONTEXT</text>
+    <g>
+      <rect x="34" y="314" width="152" height="84" rx="16" fill="#12131c" stroke="#4a4d72" stroke-width="1.5"/>
+      <text x="110" y="342" font-size="20" font-weight="700" fill="#eceef3">Agent A</text>
+      <text x="110" y="366" font-size="16" fill="#c9ccd6">own lane</text>
+      <text x="110" y="386" font-size="16" fill="#c9ccd6">own files</text>
+
+      <rect x="204" y="314" width="152" height="84" rx="16" fill="#12131c" stroke="#4a4d72" stroke-width="1.5"/>
+      <text x="280" y="342" font-size="20" font-weight="700" fill="#eceef3">Agent B</text>
+      <text x="280" y="366" font-size="16" fill="#c9ccd6">own lane</text>
+      <text x="280" y="386" font-size="16" fill="#c9ccd6">own files</text>
+
+      <rect x="374" y="314" width="152" height="84" rx="16" fill="#12131c" stroke="#4a4d72" stroke-width="1.5"/>
+      <text x="450" y="342" font-size="20" font-weight="700" fill="#eceef3">Agent C</text>
+      <text x="450" y="366" font-size="16" fill="#c9ccd6">own lane</text>
+      <text x="450" y="386" font-size="16" fill="#c9ccd6">own files</text>
+    </g>
+
+    <!-- 4. Script checks -->
+    <rect x="110" y="456" width="340" height="72" rx="18" fill="#12131c" stroke="#ff8a3d" stroke-width="1.5"/>
+    <text x="280" y="486" font-size="22" font-weight="700" fill="#eceef3">Script checks</text>
+    <text x="280" y="510" font-size="17" fill="#c9ccd6">quotes vs. source, file:line evidence</text>
+
+    <!-- 5. Merge -->
+    <rect x="110" y="564" width="340" height="72" rx="18" fill="#12131c" stroke="#4a4d72" stroke-width="1.5"/>
+    <text x="280" y="594" font-size="22" font-weight="700" fill="#eceef3">Merge</text>
+    <text x="280" y="618" font-size="17" fill="#c9ccd6">remove duplicates, rank, summarise</text>
+
+    <!-- 6. Report -->
+    <rect x="130" y="672" width="300" height="72" rx="18" fill="#12131c" stroke="#4a4d72" stroke-width="1.5"/>
+    <text x="280" y="702" font-size="22" font-weight="700" fill="#eceef3">Typst PDF report</text>
+    <text x="280" y="726" font-size="17" fill="#c9ccd6">tables generated from YAML</text>
+
+    <!-- 7. Author: review -->
+    <rect x="60" y="780" width="440" height="72" rx="36" fill="#181a26" stroke="url(#grad)" stroke-width="2"/>
+    <text x="280" y="808" font-size="14" font-weight="700" letter-spacing="1.3" fill="#ff7aa8">YOU</text>
+    <text x="280" y="833" font-size="20" fill="#eceef3">Challenge findings, decide</text>
+  </g>
+</svg>
