@@ -80,7 +80,7 @@ and the section label ("Multiple highlight projects beginning from 2022"), with 
 | Role | yes | The author's role, e.g. "Design and implementation" or "Project manager, documentation". Solo projects state "Solo project". |
 | Highlights | no | A short bullet list of notable details. Should stay at most 7 bullets. |
 | Links | yes, one of | Links to code, a download or a demo, **or** a note why there is none, e.g. "Closed source, available upon request" or "For internal use only, no code available". |
-| Images | yes, with exception | One to three screenshots in `img/`, each with an `alt` that describes what the image shows (not just the project name). Projects without visual output, such as infrastructure work, may have no images. |
+| Images | yes, with exception | One to three screenshots or diagrams in `img/`, each with an `alt` that describes what the image shows (not just the project name). Projects without visual output, such as infrastructure work, may have no images, or a diagram instead (for example of a workflow). |
 
 ### 3.3 Ordering
 
