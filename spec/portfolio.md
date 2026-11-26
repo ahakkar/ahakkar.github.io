@@ -15,6 +15,8 @@ The key words "must", "should" and "may" are used in their usual requirement sen
   author's role was. Details beyond that are for readers who choose to dig in.
 - The header identifies the author (name, short intro) and links to their profiles
   (GitHub, LinkedIn, Telegram).
+- An **author summary** above the projects tells the reader what the author is currently
+  focusing on and what kind of work they are open to, before they read the project list.
 
 ## 2. Architecture constraints
 
@@ -50,9 +52,24 @@ The key words "must", "should" and "may" are used in their usual requirement sen
 
 ## 3. Content model
 
-### 3.1 Project fields
+### 3.1 Author summary
 
-Each project is one `<section class="project-item">` inside `<main>`, with these fields:
+One `<section class="summary-box">` at the top of `<main>`, before the projects. It holds:
+
+- A short label as its heading ("Currently").
+- **Focus areas:** at most three, each a bold name followed by a few keywords. They should be
+  backed by the projects on the page.
+- **Open to:** one line on the kind of work the author is open to, where, and from when
+  (for example "Open to internships and junior roles in Pirkanmaa. Available now.").
+  It is a plain statement, not a request.
+
+The summary is kept short so that the first project still starts near the top of the page.
+It is the author's own wording; agents may draft it, but `ahakkar` approves it.
+
+### 3.2 Project fields
+
+Each project is one `<section class="project-item">` inside `<main>`, after the author summary
+and the section label ("Multiple highlight projects beginning from 2022"), with these fields:
 
 | Field | Required | Notes |
 |---|---|---|
@@ -65,7 +82,7 @@ Each project is one `<section class="project-item">` inside `<main>`, with these
 | Links | yes, one of | Links to code, a download or a demo, **or** a note why there is none, e.g. "Closed source, available upon request" or "For internal use only, no code available". |
 | Images | yes, with exception | One to three screenshots in `img/`, each with an `alt` that describes what the image shows (not just the project name). Projects without visual output, such as infrastructure work, may have no images. |
 
-### 3.2 Ordering
+### 3.3 Ordering
 
 1. **Pinned projects** come first, in the order the author chooses. The author pins strong
    highlights so they aren't buried under newer but weaker work (currently Workbot, OC2000
@@ -83,11 +100,11 @@ Each project is one `<section class="project-item">` inside `<main>`, with these
 - **Phone width:** the page works at 360 CSS pixels wide without horizontal scrolling, and
   text stays readable without zooming. Images stack under the text below 600 px.
 - **Lazy images:** every project image has `loading="lazy"`, except the images of the first
-  project, which are visible on load.
+  project, which are visible on load on wide screens even below the author summary.
 - **Readable contrast:** text meets WCAG 2.2 level AA contrast against its background:
   4.5:1 for normal text, 3:1 for large text (at least 24 px, or 18.66 px bold).
-- **Accessible structure:** one `<h1>` for the author, project titles as headings at one
-  consistent level, and the page language set on `<html>`.
+- **Accessible structure:** one `<h1>` for the author, the summary label and the section
+  label as `<h2>`s, project titles as `<h3>`s, and the page language set on `<html>`.
 
 ## 5. Quality checks
 
@@ -155,6 +172,8 @@ background named in the last column.
 | `--card-line` | `#4a4d72` | `#b8b8cf` | Project card and hero border. 2.4:1 / 1.8:1 on `--bg`. |
 | `--link` | `#ff7aa8` | `#c4135c` | Text links, bullet markers, focus outline. 7.6:1 / 5.8:1 on `--surface`. |
 | `--glass` | `rgba(18, 19, 28, 0.62)` | `rgba(255, 255, 255, 0.7)` | Top bar background. |
+| `--glass-box` | `rgba(30, 31, 46, 0.62)` | `rgba(255, 255, 255, 0.78)` | Summary box background. `--ink-2` on it stays above 4.5:1 over both the hero photo and the page background. |
+| `--glass-line` | `rgba(255, 255, 255, 0.2)` | `rgba(184, 184, 207, 0.7)` | Summary box border. |
 
 Gradients:
 
@@ -193,8 +212,9 @@ fills the screen while the toolbar hides or reappears:
   text.
 - Summary: 1.08rem in `--ink-2`. Role: 0.9rem, the label in `--muted` and the value bold in
   `--ink-2`.
-- Small labels (section label, year badge, tags): 0.8rem, bold. The section label is
-  uppercase with 0.1em letter spacing.
+- Small labels (summary label, section label, year badge, tags): 0.8rem, bold. The summary
+  and section labels are uppercase with 0.1em letter spacing.
+- Summary box text: 1rem in `--ink-2`, focus area names bold in `--ink`.
 
 ### 6.5 Layout and spacing
 
@@ -209,12 +229,13 @@ fills the screen while the toolbar hides or reappears:
   text is aligned with the left edge of the content column and sits at the top of the panel.
   Below 600 px it is a full-width band: the full viewport width, square corners, 1px
   `--card-line` borders at the top and bottom only, and no minimum height.
-- **Hero text:** the name, the intro and the section label ("Multiple highlight projects
-  beginning from 2022") directly under the intro. The text block is exactly as wide as the
-  name: the intro and label wrap to the name's width and reflow narrower with it as the
-  viewport narrows. Below 600 px they use the full width.
+- **Hero text:** the name and the intro only. The text block is exactly as wide as the
+  name: the intro wraps to the name's width and reflows narrower with it as the viewport
+  narrows. Below 600 px it uses the full width.
 - **Overlap:** the content column starts 8rem above the bottom of the hero (6.5rem below
-  600 px), so the first project card overlaps the hero's lower edge.
+  600 px), so the summary box overlaps the hero's lower edge.
+- **Order in the content column:** the summary box, then the section label 2.5rem below it,
+  then the project cards 1.25rem below the label.
 - **Cards:** stacked with a 1.75rem gap.
 
 ### 6.6 Hero image
@@ -225,7 +246,7 @@ fills the screen while the toolbar hides or reappears:
 - **From 600 px up:** the photo fills the right 64% of the panel at full height
   (`background-size: cover`). Its left edge fades out with a mask (transparent to opaque over
   the first 40% of the photo's width), and the bottom of the panel is darkened (70% black
-  fading to none over the lower half) so the section label stays readable.
+  fading to none over the lower half) so the summary box stays readable over the photo.
 - **Below 600 px:** the photo sits at the top of the panel, full width and 18rem tall, fading
   out at the bottom. The text follows below it.
 - The photo is decorative: a CSS background on an `aria-hidden` element, with no alt text.
@@ -263,8 +284,16 @@ fills the screen while the toolbar hides or reappears:
   background, `#0b0c12` bold text, a pink glow shadow, lifting 1px on hover. A note instead of
   a link ("Closed source, available upon request") is plain `--muted` text.
 - **Focus:** a 2px `--link` outline with a 3px offset on links and buttons.
-- **Section label:** in the hero, in light text (`rgba(236, 238, 243, 0.85)`) with a soft dark
-  text shadow, in both themes. No decoration after it.
+- **Summary box:** frosted glass, in the style of the "Executable drop" and "Pinned" boxes on
+  <https://portwatch-vi.xyz>: `--glass-box` background, 1px `--glass-line` border,
+  `backdrop-filter: blur(18px) saturate(1.3)`, radius 24px (20px below 600 px), padding 1.75rem
+  (1.4rem below 600 px) and the shadow `0 20px 60px rgba(10, 6, 30, 0.35)` (a lighter
+  `--shadow` in light). It sits partly over the dark hero and partly over the page background
+  in both themes. The label has a small glowing gradient dot in front of it, like the top bar
+  handle, in `--ink-2`. The focus areas are a list without bullets; the "Open to" line sits
+  under them, separated by a 1px `--line` hairline.
+- **Section label:** on the page background, in `--muted`, followed by a gradient line that
+  fills the rest of the row: 1px high, `--grad` at 60% opacity, 1rem from the text.
 - **Footer:** 0.85rem, `--muted`.
 - **Lightbox:** backdrop `rgba(11, 12, 18, 0.8)` with an 8px blur; the image has radius 18px
   and a pink glow. The lightbox stays dark in both themes. Behaviour is in section 2.
