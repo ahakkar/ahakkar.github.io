@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <!-- ahakkar avatar, spec section 6.9: a dark disc with a gradient ring and "AH".
+       GitHub crops it to the inscribed circle. The letters are paths, so no font is needed,
+       and they are centred on their ink area: 13 units left of and 5 above the canvas centre. -->
+  <defs>
+    <radialGradient id="glow-violet" cx="0.08" cy="-0.08" r="0.9">
+      <stop offset="0" stop-color="#7a5cff" stop-opacity="0.45"/>
+      <stop offset="0.6" stop-color="#7a5cff" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glow-pink" cx="0.98" cy="0.04" r="0.8">
+      <stop offset="0" stop-color="#ff2e7e" stop-opacity="0.3"/>
+      <stop offset="0.6" stop-color="#ff2e7e" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glow-orange" cx="0.55" cy="1.15" r="1">
+      <stop offset="0" stop-color="#ff8a3d" stop-opacity="0.28"/>
+      <stop offset="0.6" stop-color="#ff8a3d" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="ring" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#7a5cff"/>
+      <stop offset="0.55" stop-color="#ff2e7e"/>
+      <stop offset="1" stop-color="#ff8a3d"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" fill="#0b0c12"/>
+  <rect width="512" height="512" fill="url(#glow-violet)"/>
+  <rect width="512" height="512" fill="url(#glow-pink)"/>
+  <rect width="512" height="512" fill="url(#glow-orange)"/>
+  <circle cx="256" cy="256" r="226" fill="none" stroke="url(#ring)" stroke-width="16"/>
+  <g fill="#eceef3">
+    <path d="M87 330 L155 172 L195 172 L263 330 L216 330 L204.1 302.3 L145.9 302.3 L134 330 Z M191.2 272.3 L175 234.7 L158.8 272.3 Z"/>
+    <path d="M273 172 L315 172 L315 236 L357 236 L357 172 L399 172 L399 330 L357 330 L357 266 L315 266 L315 330 L273 330 Z"/>
+  </g>
+</svg>

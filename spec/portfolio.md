@@ -26,7 +26,8 @@ The key words "must", "should" and "may" are used in their usual requirement sen
   the wrong theme never flashes and it adds no render-blocking request. Paths avoid
   `assets/css/style.css`, which the Jekyll theme publishes. No third-party stylesheets,
   scripts or web fonts.
-- **Images** live in `img/` and are referenced with relative paths.
+- **Images** live in `img/` and are referenced with relative paths. The avatar (section 6.9)
+  is also the favicon.
 - **Hosting:** GitHub Pages, published from the `main` branch. Repo-only files (spec, tooling,
   agent instructions, design mockups in `mockups/`) are listed under `exclude` in
   `_config.yml` so they aren't published.
@@ -220,9 +221,9 @@ fills the screen while the toolbar hides or reappears:
 
 - **Content column:** at most 992 px wide, with 1.5rem side padding (1rem below 600 px).
 - **Top bar:** a sticky pill (`border-radius: 999px`) 0.75rem from the top of the viewport, as
-  wide as the content column. It holds the handle `ahakkar` with a small glowing gradient dot
-  (hidden below 600 px), the profile links and the theme toggle (icon only below 600 px), on one
-  line down to 360 px.
+  wide as the content column. It holds the avatar (section 6.9) with the handle `ahakkar`, the
+  profile links and the theme toggle, on one line down to 360 px. Below 600 px the handle is
+  hidden but the avatar stays, and the theme toggle shows only its icon.
   Frosted glass: `--glass` with `backdrop-filter: blur(16px) saturate(150%)`.
 - **Hero panel:** wider than the content column: the viewport width minus 1.5rem, at most
   1440 px. Radius 30px, `--card-line` border, background `#07070b`, minimum height 520 px. Its
@@ -289,8 +290,8 @@ fills the screen while the toolbar hides or reappears:
   `backdrop-filter: blur(18px) saturate(1.3)`, radius 24px (20px below 600 px), padding 1.75rem
   (1.4rem below 600 px) and the shadow `0 20px 60px rgba(10, 6, 30, 0.35)` (a lighter
   `--shadow` in light). It sits partly over the dark hero and partly over the page background
-  in both themes. The label has a small glowing gradient dot in front of it, like the top bar
-  handle, in `--ink-2`. The focus areas are a list without bullets; the "Open to" line sits
+  in both themes. The label is in `--ink-2`, with a small glowing gradient dot in front of
+  it. The focus areas are a list without bullets; the "Open to" line sits
   under them, separated by a 1px `--line` hairline.
 - **Section label:** on the page background, in `--muted`, followed by a gradient line that
   fills the rest of the row: 1px high, `--grad` at 60% opacity, 1rem from the text.
@@ -316,3 +317,37 @@ fills the screen while the toolbar hides or reappears:
 - Switching images in the lightbox is instant, without an animated transition.
 - Under `prefers-reduced-motion: reduce` the name animation, the transitions and the button
   lift are all off.
+
+### 6.9 Avatar
+
+The author's avatar is the GitHub profile picture, and the site shows it too. It was chosen in
+#40; the concepts compared there are in `mockups/avatar.html`.
+
+- **Design:** a dark disc with a gradient ring and the letters "AH", the same in both themes.
+  On a square 512 × 512 canvas:
+  - the background is `#0b0c12` with the three sunset glows of the page background (violet
+    top left, pink top right, orange at the bottom);
+  - a ring centred on the canvas, radius 226 and 16 wide, in the dark `--grad` stops running
+    from the top left to the bottom right;
+  - the letters "AH" in `#eceef3`.
+- **Letters:** drawn as SVG paths in a heavy geometric sans (cap height 158, stems 42), not set
+  as text, so the avatar needs no font and looks the same everywhere.
+- **Optical centring:** the centre of the letters' ink area, not of their bounding box, is at
+  the centre of the canvas. The solid H weighs more than the open top of the A, so the letters
+  sit 13 units left of and 5 above the mathematical centre, and the lower left corner of the A
+  is closer to the ring than the corners of the H.
+- **Round crop:** the ring and the letters are inside the inscribed circle, so GitHub's round
+  crop only cuts the dark corners.
+- **Small sizes:** the letters stay readable at 20 px, GitHub's smallest avatar size, in both of
+  GitHub's themes.
+- **Files:**
+
+  | File | Size | Use |
+  |---|---|---|
+  | `img/avatar.svg` | `viewBox` 512 × 512 | The source; the top bar and the favicon. |
+  | `img/avatar-1024px.png` | 1024 × 1024 | Uploaded to GitHub by the author; the page doesn't use it. Under 1 MB, GitHub's limit. |
+
+  The PNG is rendered from the SVG and is rendered again whenever the SVG changes.
+- **Top bar:** a 2.25rem circle in front of the handle (section 6.5). It is decorative
+  (`alt=""`): it isn't a link, and the handle next to it names the author.
+- **Favicon:** `<link rel="icon" href="img/avatar.svg" type="image/svg+xml">` in `<head>`.
