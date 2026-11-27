@@ -137,7 +137,7 @@ body::after {
     width: calc(100% - 3rem);
     max-width: 992px;
     margin: 0.75rem auto 0;
-    padding: 0.4rem 0.4rem 0.4rem 1.1rem;
+    padding: 0.4rem;
     background: var(--glass);
     -webkit-backdrop-filter: blur(16px) saturate(150%);
     backdrop-filter: blur(16px) saturate(150%);
@@ -155,13 +155,12 @@ body::after {
     letter-spacing: -0.02em;
 }
 
-.brand::before {
-    content: "";
-    width: 0.7rem;
-    height: 0.7rem;
+/* The avatar (spec 6.9): a square image, cropped round like on GitHub */
+.brand img {
+    display: block;
+    width: 2.25rem;
+    height: 2.25rem;
     border-radius: 50%;
-    background: var(--grad);
-    box-shadow: 0 0 12px rgba(255, 46, 126, 0.7);
 }
 
 .topbar nav { display: flex; }
@@ -325,7 +324,7 @@ body::after {
     margin: 0 0 0.9rem;
 }
 
-/* A small glowing dot, like the top bar handle */
+/* A small glowing gradient dot in front of the label */
 .summary-label::before {
     content: "";
     width: 0.55rem;
@@ -629,8 +628,8 @@ footer {
 @media (max-width: 600px) {
     .page { padding: 0 1rem 2rem; margin-top: -6.5rem; }
     .topbar { width: calc(100% - 2rem); padding-left: 0.4rem; }
-    .brand { display: none; }
-    .topbar nav { margin-right: auto; }
+    /* The avatar stays; the handle text doesn't fit next to the links */
+    .brand-name { display: none; }
     .topbar a { font-size: 0.85rem; padding: 0.45rem 0.4rem; }
     /* Icon only, in a circle; the aria-label names the button */
     .theme-toggle {
