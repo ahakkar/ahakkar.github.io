@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Avatar concepts | Mockup</title>
+<style>
+/* Layout: one column of concept cards (two on wide screens), then a placement preview. Tokens follow the portfolio's spec, section 6.3. */
+:root {
+  --bg: #0b0c12; --surface: #12131c; --surface-2: #181a26;
+  --ink: #eceef3; --ink-2: #c9ccd6; --muted: #9297a7;
+  --line: #262838; --card-line: #4a4d72; --link: #ff7aa8;
+  --glass: rgba(18, 19, 28, 0.62);
+  --grad: linear-gradient(90deg, #7a5cff 0%, #ff2e7e 55%, #ff8a3d 100%);
+  --grad-soft: linear-gradient(90deg, rgba(122, 92, 255, 0.16), rgba(255, 46, 126, 0.16), rgba(255, 138, 61, 0.16));
+  --blob-1: rgba(122, 92, 255, 0.3); --blob-2: rgba(255, 46, 126, 0.2); --blob-3: rgba(255, 138, 61, 0.12);
+  --shadow: 0 20px 60px rgba(10, 6, 30, 0.35);
+  --font: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  color-scheme: dark;
+}
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme="dark"]) {
+    --bg: #f6f6fa; --surface: #ffffff; --surface-2: #f3f2f8;
+    --ink: #0d0e14; --ink-2: #2b2d38; --muted: #5d6170;
+    --line: #e6e6ee; --card-line: #b8b8cf; --link: #c4135c;
+    --glass: rgba(255, 255, 255, 0.7);
+    --grad: linear-gradient(90deg, #6a4cf0 0%, #e0136a 55%, #d9530a 100%);
+    --grad-soft: linear-gradient(90deg, rgba(122, 92, 255, 0.12), rgba(255, 46, 126, 0.12), rgba(255, 138, 61, 0.12));
+    --blob-1: rgba(122, 92, 255, 0.18); --blob-2: rgba(255, 46, 126, 0.12); --blob-3: rgba(255, 138, 61, 0.1);
+    --shadow: 0 16px 40px rgba(60, 40, 120, 0.12);
+    color-scheme: light;
+  }
+}
+:root[data-theme="light"] {
+  --bg: #f6f6fa; --surface: #ffffff; --surface-2: #f3f2f8;
+  --ink: #0d0e14; --ink-2: #2b2d38; --muted: #5d6170;
+  --line: #e6e6ee; --card-line: #b8b8cf; --link: #c4135c;
+  --glass: rgba(255, 255, 255, 0.7);
+  --grad: linear-gradient(90deg, #6a4cf0 0%, #e0136a 55%, #d9530a 100%);
+  --grad-soft: linear-gradient(90deg, rgba(122, 92, 255, 0.12), rgba(255, 46, 126, 0.12), rgba(255, 138, 61, 0.12));
+  --blob-1: rgba(122, 92, 255, 0.18); --blob-2: rgba(255, 46, 126, 0.12); --blob-3: rgba(255, 138, 61, 0.1);
+  --shadow: 0 16px 40px rgba(60, 40, 120, 0.12);
+  color-scheme: light;
+}
+.c1 { --av: url("avatar/1-sunset.svg"); }
+.c2 { --av: url("avatar/2-neon.svg"); }
+.c3 { --av: url("../img/avatar.svg"); }
+.c4 { --av: url("avatar/4-single-a.svg"); }
+
+* { box-sizing: border-box; }
+body {
+  margin: 0; background: var(--bg); color: var(--ink); font-family: var(--font); font-size: 1rem; line-height: 1.6;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 3rem 4rem;
+}
+body::before {
+  content: ""; position: fixed; inset: 0; z-index: -1; pointer-events: none;
+  background:
+    radial-gradient(40rem circle at 8% -8%, var(--blob-1), transparent 60%),
+    radial-gradient(34rem circle at 98% 4%, var(--blob-2), transparent 60%),
+    radial-gradient(46rem circle at 55% 115%, var(--blob-3), transparent 60%);
+}
+.wrap { max-width: 992px; margin: 0 auto; display: grid; gap: 2.5rem; }
+h1 {
+  margin: 0; font-size: clamp(2.4rem, 8vw, 4rem); font-weight: 900; line-height: 1; letter-spacing: -0.045em;
+  background: var(--grad); -webkit-background-clip: text; background-clip: text; color: transparent;
+  text-wrap: balance; width: fit-content;
+}
+.intro { margin: 1rem 0 0; max-width: 62ch; font-size: 1.1rem; color: var(--ink-2); }
+.section-label {
+  display: flex; align-items: center; gap: 1rem; margin: 0;
+  font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted);
+}
+.section-label::after { content: ""; flex: 1; height: 1px; background: var(--grad); opacity: 0.6; }
+
+.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr)); gap: 1.75rem; }
+.concept {
+  background: var(--surface); border: 1px solid var(--card-line); border-radius: 28px; padding: 1.75rem;
+  box-shadow: var(--shadow); display: grid; gap: 1.25rem; align-content: start; min-width: 0;
+}
+.concept-head { display: flex; align-items: center; justify-content: space-between; gap: 0.75rem; flex-wrap: wrap; }
+.concept h2 { margin: 0; font-size: 1.5rem; font-weight: 800; letter-spacing: -0.005em; display: flex; align-items: center; gap: 0.6rem; }
+.num {
+  display: inline-grid; place-items: center; width: 1.9rem; height: 1.9rem; border-radius: 50%;
+  font-size: 0.95rem; font-weight: 800; color: var(--ink); background: var(--grad-soft); border: 1px solid var(--line);
+}
+.rec {
+  font-size: 0.8rem; font-weight: 700; padding: 0.2rem 0.75rem; border-radius: 999px; color: #0b0c12;
+  background: linear-gradient(90deg, #9d87ff 0%, #ff5c9a 55%, #ffa463 100%);
+}
+
+.av {
+  display: inline-block; width: var(--s); height: var(--s); flex: none;
+  background: var(--av) center / cover no-repeat; border-radius: 50%;
+}
+.av.square { border-radius: 0; }
+.av.round { box-shadow: 0 0 0 1px var(--line); }
+.shots { display: flex; align-items: flex-end; gap: 1.5rem; flex-wrap: wrap; }
+figure { margin: 0; display: grid; gap: 0.5rem; justify-items: start; }
+figcaption { font-size: 0.8rem; color: var(--muted); }
+
+.gh-pair { display: grid; grid-template-columns: 1fr 1fr; border-radius: 14px; overflow: hidden; border: 1px solid var(--line); }
+.gh { padding: 0.8rem 0.9rem; display: grid; gap: 0.55rem; align-content: start; min-width: 0; }
+/* GitHub's own theme colours, fixed on purpose: these strips simulate GitHub, not this page. */
+.gh-light { background: #ffffff; color: #1f2328; }
+.gh-light .gh-meta, .gh-light .gh-label { color: #59636e; }
+.gh-dark { background: #0d1117; color: #f0f6fc; }
+.gh-dark .gh-meta, .gh-dark .gh-label { color: #9198a1; }
+.gh .av { box-shadow: 0 0 0 1px rgba(128, 128, 128, 0.25); }
+.gh-label { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; }
+.gh-row { display: flex; align-items: center; gap: 0.5rem; font-size: 0.875rem; min-width: 0; white-space: nowrap; }
+.gh-row.small { font-size: 0.75rem; gap: 0.35rem; }
+.gh-name { font-weight: 600; }
+.gh-meta { overflow: hidden; text-overflow: ellipsis; }
+.what { margin: 0; color: var(--ink-2); }
+.verdict { margin: 0; font-size: 0.9rem; color: var(--muted); }
+
+/* Placement preview */
+.place {
+  background: var(--surface); border: 1px solid var(--card-line); border-radius: 28px; padding: 1.75rem;
+  box-shadow: var(--shadow); display: grid; gap: 1.5rem;
+}
+.place h2 { margin: 0; font-size: 1.5rem; font-weight: 800; }
+.place p { margin: 0; color: var(--ink-2); max-width: 65ch; }
+.picker { display: flex; flex-wrap: wrap; gap: 0.5rem; border: 0; margin: 0; padding: 0; }
+.picker legend { font-size: 0.8rem; font-weight: 700; color: var(--muted); margin-bottom: 0.5rem; padding: 0; }
+.picker label {
+  display: inline-flex; align-items: center; gap: 0.4rem; padding: 0.35rem 0.9rem; border-radius: 999px; cursor: pointer;
+  background: var(--surface-2); border: 1px solid var(--line); font-size: 0.9rem; font-weight: 600;
+}
+.picker label:has(input:checked) { border-color: var(--link); }
+.picker input { accent-color: #ff2e7e; margin: 0; }
+.picker input:focus-visible { outline: 2px solid var(--link); outline-offset: 3px; }
+.spots { display: grid; gap: 1.25rem; grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr)); }
+.spot.wide { grid-column: 1 / -1; }
+.spot { display: grid; gap: 0.6rem; align-content: start; min-width: 0; }
+.spot h3 { margin: 0; font-size: 1rem; font-weight: 700; }
+.spot .note { font-size: 0.85rem; color: var(--muted); }
+.mock { border-radius: 18px; border: 1px solid var(--line); overflow: hidden; }
+
+.topbar {
+  display: flex; align-items: center; gap: 1rem; padding: 0.55rem 0.8rem 0.55rem 0.6rem; border-radius: 999px;
+  background: var(--glass); border: 1px solid var(--line); backdrop-filter: blur(16px) saturate(150%);
+  font-size: 0.9rem; min-width: 0; width: fit-content; max-width: 100%;
+}
+.topbar .brand { display: flex; align-items: center; gap: 0.5rem; font-weight: 800; letter-spacing: -0.01em; }
+.topbar nav { display: flex; gap: 0.8rem; color: var(--ink-2); font-weight: 600; font-size: 0.85rem; overflow: hidden; }
+.topbar-stage { padding: 1.25rem 0.9rem; background: var(--bg); }
+
+.hero { background: #07070b; padding: 1.4rem; display: flex; align-items: center; gap: 1rem; color: #eceef3; }
+.hero .name {
+  font-size: 2.4rem; font-weight: 900; line-height: 1; letter-spacing: -0.045em;
+  background: linear-gradient(90deg, #7a5cff 0%, #ff2e7e 55%, #ff8a3d 100%);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+.hero .sub { font-size: 0.85rem; color: #c9ccd6; margin-top: 0.4rem; }
+
+.tabs { background: var(--surface-2); padding: 0.6rem 0.6rem 0; }
+.tab {
+  display: flex; align-items: center; gap: 0.5rem; width: min(100%, 15rem); padding: 0.5rem 0.75rem;
+  border-radius: 10px 10px 0 0; background: var(--bg); font-size: 0.8rem; white-space: nowrap; overflow: hidden;
+}
+.tab span:last-child { overflow: hidden; text-overflow: ellipsis; }
+.urlbar { background: var(--bg); padding: 0.5rem 0.75rem 0.9rem; font-size: 0.8rem; color: var(--muted); }
+
+.why { display: grid; gap: 0.75rem; max-width: 70ch; }
+.why p { margin: 0; color: var(--ink-2); }
+.why b { color: var(--ink); }
+
+@media (max-width: 600px) {
+  body { padding-block: 2rem 3rem; }
+  .concept, .place { padding: 1.25rem; border-radius: 22px; }
+  .gh-pair { grid-template-columns: 1fr; }
+  .hero .name { font-size: 2rem; }
+}
+</style>
+
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>Avatar concepts</h1>
+    <p class="intro">Mockup for #40, repo only. Concept 3 was chosen; see spec section 6.9. Four ideas for the <b>ahakkar</b> avatar in the portfolio's colours. You upload a square and GitHub crops it to a circle, so every mark stays inside the circle. GitHub shows avatars as small as 20 px, so each concept is previewed in GitHub's light and dark themes at that size. The AH letters are optically centred: moved left and up so their ink, not their bounding box, is centred.</p>
+  </header>
+
+  <h2 class="section-label">Concepts</h2>
+  <div class="grid">
+      <article class="concept c1" aria-labelledby="t1">
+        <header class="concept-head">
+          <h2 id="t1"><span class="num">1</span>Sunset tile</h2>
+
+        </header>
+        <div class="shots">
+          <figure>
+            <span class="av round" style="--s:184px" role="img" aria-label="Sunset tile avatar, cropped round"></span>
+            <figcaption>Profile, 460 px on GitHub</figcaption>
+          </figure>
+          <figure>
+            <span class="av square" style="--s:96px" role="img" aria-label="Sunset tile avatar, uploaded square"></span>
+            <figcaption>The square you upload</figcaption>
+          </figure>
+        </div>
+        <div class="gh-pair">
+          <div class="gh gh-light">
+            <span class="gh-label">GitHub light</span>
+            <div class="gh-row"><span class="av" style="--s:40px"></span><span class="gh-name">ahakkar</span></div>
+            <div class="gh-row small"><span class="av" style="--s:20px"></span><span class="gh-name">ahakkar</span></div>
+          </div>
+          <div class="gh gh-dark">
+            <span class="gh-label">GitHub dark</span>
+            <div class="gh-row"><span class="av" style="--s:40px"></span><span class="gh-name">ahakkar</span></div>
+            <div class="gh-row small"><span class="av" style="--s:20px"></span><span class="gh-name">ahakkar</span></div>
+          </div></div>
+        <p class="what">The accent gradient as the background, with near-black letters, like the link buttons on the site.</p>
+        <p class="verdict">Easiest to read at 20 px, and it stands out in GitHub's light and dark themes.</p>
+      </article>
+      <article class="concept c2" aria-labelledby="t2">
+        <header class="concept-head">
+          <h2 id="t2"><span class="num">2</span>Neon night</h2>
+
+        </header>
+        <div class="shots">
+          <figure>
+            <span class="av round" style="--s:184px" role="img" aria-label="Neon night avatar, cropped round"></span>
+            <figcaption>Profile, 460 px on GitHub</figcaption>
+          </figure>
+          <figure>
+            <span class="av square" style="--s:96px" role="img" aria-label="Neon night avatar, uploaded square"></span>
+            <figcaption>The square you upload</figcaption>
+          </figure>
+        </div>
+        <div class="gh-pair">
+          <div class="gh gh-light">
+            <span class="gh-label">GitHub light</span>
+            <div class="gh-row"><span class="av" style="--s:40px"></span><span class="gh-name">ahakkar</span></div>
+            <div class="gh-row small"><span class="av" style="--s:20px"></span><span class="gh-name">ahakkar</span></div>
+          </div>
+          <div class="gh gh-dark">
+            <span class="gh-label">GitHub dark</span>
+            <div class="gh-row"><span class="av" style="--s:40px"></span><span class="gh-name">ahakkar</span></div>
+            <div class="gh-row small"><span class="av" style="--s:20px"></span><span class="gh-name">ahakkar</span></div>
+          </div></div>
+        <p class="what">The page's near-black background and sunset glows, with gradient letters like the name in the hero.</p>
+        <p class="verdict">Closest to the site's look, but at 20 px it is a dark dot with faint letters, especially in GitHub's dark theme.</p>
+      </article>
+      <article class="concept c3" aria-labelledby="t3">
+        <header class="concept-head">
+          <h2 id="t3"><span class="num">3</span>Gradient ring</h2>
+          <span class="rec">Chosen</span>
+        </header>
+        <div class="shots">
+          <figure>
+            <span class="av round" style="--s:184px" role="img" aria-label="Gradient ring avatar, cropped round"></span>
+            <figcaption>Profile, 460 px on GitHub</figcaption>
+          </figure>
+          <figure>
+            <span class="av square" style="--s:96px" role="img" aria-label="Gradient ring avatar, uploaded square"></span>
+            <figcaption>The square you upload</figcaption>
+          </figure>
+        </div>
+        <div class="gh-pair">
+          <div class="gh gh-light">
+            <span class="gh-label">GitHub light</span>
+            <div class="gh-row"><span class="av" style="--s:40px"></span><span class="gh-name">ahakkar</span></div>
+            <div class="gh-row small"><span class="av" style="--s:20px"></span><span class="gh-name">ahakkar</span></div>
+          </div>
+          <div class="gh gh-dark">
+            <span class="gh-label">GitHub dark</span>
+            <div class="gh-row"><span class="av" style="--s:40px"></span><span class="gh-name">ahakkar</span></div>
+            <div class="gh-row small"><span class="av" style="--s:20px"></span><span class="gh-name">ahakkar</span></div>
+          </div></div>
+        <p class="what">A dark disc with a gradient ring like the tech tag borders, and light letters.</p>
+        <p class="verdict">Clear letters and a recognisable ring. The ring gets thin at 20 px.</p>
+      </article>
+      <article class="concept c4" aria-labelledby="t4">
+        <header class="concept-head">
+          <h2 id="t4"><span class="num">4</span>Single A</h2>
+
+        </header>
+        <div class="shots">
+          <figure>
+            <span class="av round" style="--s:184px" role="img" aria-label="Single A avatar, cropped round"></span>
+            <figcaption>Profile, 460 px on GitHub</figcaption>
+          </figure>
+          <figure>
+            <span class="av square" style="--s:96px" role="img" aria-label="Single A avatar, uploaded square"></span>
+            <figcaption>The square you upload</figcaption>
+          </figure>
+        </div>
+        <div class="gh-pair">
+          <div class="gh gh-light">
+            <span class="gh-label">GitHub light</span>
+            <div class="gh-row"><span class="av" style="--s:40px"></span><span class="gh-name">ahakkar</span></div>
+            <div class="gh-row small"><span class="av" style="--s:20px"></span><span class="gh-name">ahakkar</span></div>
+          </div>
+          <div class="gh gh-dark">
+            <span class="gh-label">GitHub dark</span>
+            <div class="gh-row"><span class="av" style="--s:40px"></span><span class="gh-name">ahakkar</span></div>
+            <div class="gh-row small"><span class="av" style="--s:20px"></span><span class="gh-name">ahakkar</span></div>
+          </div></div>
+        <p class="what">The sunset tile with one large letter.</p>
+        <p class="verdict">The boldest at tiny sizes, but a lone A is common and says less about who you are.</p>
+      </article>
+  </div>
+
+  <h2 class="section-label">On the portfolio</h2>
+  <section class="place" aria-labelledby="place-title">
+    <h2 id="place-title">Where the site could show it</h2>
+    <p>Three candidate spots, using your current header and colours. Pick a concept to preview it in each spot.</p>
+    <fieldset class="picker">
+      <legend>Preview concept</legend>
+      <label><input type="radio" name="pick" id="pick-1" value="1"> 1 · Sunset tile</label><label><input type="radio" name="pick" id="pick-2" value="2"> 2 · Neon night</label><label><input type="radio" name="pick" id="pick-3" value="3" checked> 3 · Gradient ring</label><label><input type="radio" name="pick" id="pick-4" value="4"> 4 · Single A</label>
+    </fieldset>
+    <div class="spots c3" id="spots">
+      <div class="spot wide">
+        <h3>Top bar (chosen)</h3>
+        <div class="mock topbar-stage">
+          <div class="topbar"><span class="brand"><span class="av" style="--s:28px"></span>ahakkar</span><nav><span>GitHub</span><span>LinkedIn</span><span>Telegram</span></nav></div>
+        </div>
+        <span class="note">Replaces the glowing dot next to the handle, like the avatar in GitHub's own header.</span>
+      </div>
+      <div class="spot">
+        <h3>Hero, next to the name</h3>
+        <div class="mock hero">
+          <span class="av" style="--s:72px"></span>
+          <div><div class="name">Antti H</div><div class="sub">CS student at Tampere University</div></div>
+        </div>
+        <span class="note">More visible, but it repeats the name right beside it.</span>
+      </div>
+      <div class="spot">
+        <h3>Browser tab icon (chosen)</h3>
+        <div class="mock">
+          <div class="tabs"><div class="tab"><span class="av" style="--s:16px"></span><span>Antti H | Portfolio</span></div></div>
+          <div class="urlbar">ahakkar.github.io</div>
+        </div>
+        <span class="note">Before #40 the site had no favicon, so the tab showed a blank page icon.</span>
+      </div>
+    </div>
+  </section>
+
+  <h2 class="section-label">Why no font</h2>
+  <section class="why">
+    <p><b>The letters are drawn as shapes, not typed in a font.</b> They are a heavy geometric sans, close to the weight-900 system font of the name on the site. Drawn letters look the same on every device, and there's no font licence to worry about. Installed fonts such as Aptos are licensed for documents, not logos.</p>
+    <p><b>For GitHub</b> the avatar is exported as a 1024 × 1024 PNG. <b>On the site</b> it is a small SVG in <code>img/</code>, so it stays sharp at any size.</p>
+  </section>
+</div>
+
+<script>
+  const spots = document.getElementById('spots');
+  document.querySelectorAll('input[name="pick"]').forEach((input) => {
+    input.addEventListener('change', () => { spots.className = 'spots c' + input.value; });
+  });
+</script>
+</body>
+</html>
